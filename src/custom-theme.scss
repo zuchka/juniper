@@ -1,6 +1,7 @@
 // Custom Dark Theme for Angular Material matching Figma design
 
 @use "@angular/material" as mat;
+@use "sass:map";
 
 // Include the common styles for Angular Material
 @include mat.core();
@@ -127,8 +128,8 @@ $dark-theme: mat.m2-define-dark-theme(
 );
 
 // Override background colors to match Figma design
-$dark-background: map-get($dark-theme, background);
-$dark-background: map_merge(
+$dark-background: map.get($dark-theme, background);
+$dark-background: map.merge(
   $dark-background,
   (
     status-bar: #171821,
@@ -154,7 +155,7 @@ $dark-background: map_merge(
   )
 );
 
-$dark-theme: map_merge(
+$dark-theme: map.merge(
   $dark-theme,
   (
     background: $dark-background,
@@ -162,8 +163,8 @@ $dark-theme: map_merge(
 );
 
 // Override foreground colors
-$dark-foreground: map-get($dark-theme, foreground);
-$dark-foreground: map_merge(
+$dark-foreground: map.get($dark-theme, foreground);
+$dark-foreground: map.merge(
   $dark-foreground,
   (
     base: #ffffff,
@@ -184,7 +185,7 @@ $dark-foreground: map_merge(
   )
 );
 
-$dark-theme: map_merge(
+$dark-theme: map.merge(
   $dark-theme,
   (
     foreground: $dark-foreground,
