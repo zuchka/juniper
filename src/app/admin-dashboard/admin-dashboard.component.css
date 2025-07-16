@@ -1,0 +1,280 @@
+/* Dark mode admin dashboard styles matching Figma design */
+.admin-dashboard {
+  font-family:
+    "Inter",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  background-color: #171821;
+  color: #ffffff;
+}
+
+/* Sidebar customizations */
+.admin-dashboard nav > div {
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard nav > div:hover {
+  background-color: rgba(169, 223, 216, 0.1);
+}
+
+/* Card hover effects */
+.admin-dashboard .bg-gray-900 {
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard .bg-gray-900:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress bar animations */
+.admin-dashboard .bg-orange-400,
+.admin-dashboard .bg-teal-400,
+.admin-dashboard .bg-blue-400,
+.admin-dashboard .bg-pink-400 {
+  animation: progressBarFill 1.5s ease-out;
+}
+
+@keyframes progressBarFill {
+  from {
+    width: 0;
+  }
+}
+
+/* Bar chart animations */
+.admin-dashboard .bg-teal-400 {
+  animation: barGrow 1s ease-out;
+}
+
+@keyframes barGrow {
+  from {
+    height: 0;
+  }
+}
+
+/* Input focus styles */
+.admin-dashboard input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #a9dfd8;
+  border-color: #a9dfd8;
+}
+
+/* Button hover effects */
+.admin-dashboard button {
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard button:hover {
+  transform: translateY(-1px);
+}
+
+/* Scrollbar styling for dark mode */
+.admin-dashboard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-dashboard::-webkit-scrollbar-track {
+  background: #2b2b36;
+}
+
+.admin-dashboard::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 3px;
+}
+
+.admin-dashboard::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* SVG icon colors */
+.admin-dashboard svg path {
+  transition: all 0.2s ease;
+}
+
+/* Text color overrides for dark mode */
+.admin-dashboard .text-gray-900 {
+  color: #ffffff !important;
+}
+
+.admin-dashboard .text-gray-800 {
+  color: #f3f4f6 !important;
+}
+
+.admin-dashboard .text-gray-700 {
+  color: #d1d5db !important;
+}
+
+.admin-dashboard .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+.admin-dashboard .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+.admin-dashboard .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+/* Badge and chip styling */
+.admin-dashboard .bg-opacity-20 {
+  backdrop-filter: blur(10px);
+}
+
+/* Search input styling */
+.admin-dashboard input[type="text"] {
+  background-color: #21222d;
+  border: 1px solid #374151;
+}
+
+.admin-dashboard input[type="text"]:focus {
+  border-color: #a9dfd8;
+  box-shadow: 0 0 0 2px rgba(169, 223, 216, 0.2);
+}
+
+/* Progress circle animation */
+.admin-dashboard circle[stroke="#A9DFD8"] {
+  animation: progressCircle 2s ease-out;
+}
+
+@keyframes progressCircle {
+  from {
+    stroke-dashoffset: 314;
+  }
+  to {
+    stroke-dashoffset: 63;
+  }
+}
+
+/* Chart line animation */
+.admin-dashboard svg path[stroke="#A9DFD8"] {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 3s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .admin-dashboard .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-dashboard .w-60 {
+    width: 100%;
+  }
+
+  .admin-dashboard .flex {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard .w-32 {
+    width: 60px;
+  }
+
+  .admin-dashboard .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .admin-dashboard nav span {
+    display: none;
+  }
+}
+
+/* Material Design color overrides for dark theme */
+.admin-dashboard .mat-mdc-card {
+  background-color: #21222d !important;
+  color: #ffffff !important;
+}
+
+.admin-dashboard .mat-mdc-button {
+  color: #ffffff !important;
+}
+
+.admin-dashboard .mat-mdc-raised-button.mat-primary {
+  background-color: #a9dfd8 !important;
+  color: #171821 !important;
+}
+
+.admin-dashboard .mat-mdc-form-field {
+  color: #ffffff !important;
+}
+
+.admin-dashboard .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: #21222d !important;
+}
+
+.admin-dashboard .mat-mdc-table {
+  background-color: #21222d !important;
+  color: #ffffff !important;
+}
+
+.admin-dashboard .mat-mdc-header-cell {
+  color: #9ca3af !important;
+}
+
+.admin-dashboard .mat-mdc-cell {
+  color: #ffffff !important;
+}
+
+/* Loading states */
+.loading-shimmer-dark {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+  animation: shimmerDark 2s infinite;
+}
+
+@keyframes shimmerDark {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Focus indicators for accessibility */
+.admin-dashboard button:focus,
+.admin-dashboard input:focus {
+  outline: 2px solid #a9dfd8;
+  outline-offset: 2px;
+}
+
+/* High contrast text for better readability */
+.admin-dashboard .text-white {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+/* Interactive elements */
+.admin-dashboard .cursor-pointer:hover {
+  background-color: rgba(169, 223, 216, 0.1);
+}
+
+/* Success/error state colors for dark mode */
+.admin-dashboard .text-green-400 {
+  color: #34d399 !important;
+}
+
+.admin-dashboard .text-red-400 {
+  color: #f87171 !important;
+}
+
+.admin-dashboard .text-yellow-400 {
+  color: #fbbf24 !important;
+}
+
+.admin-dashboard .text-blue-400 {
+  color: #60a5fa !important;
+}

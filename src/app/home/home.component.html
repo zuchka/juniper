@@ -1,0 +1,254 @@
+<!-- Dark Mode Demo Application - Tailwind CSS + Angular Material -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+  <!-- Header -->
+  <header class="bg-gray-800 shadow-xl border-b border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-6">
+        <h1 class="text-3xl font-bold text-white">Angular Demo</h1>
+        <p class="text-gray-300">Tailwind CSS + Angular Material</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <section class="text-center mb-16">
+      <h2 class="text-5xl font-extrabold text-white mb-4">
+        Welcome to the Future
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+        This demo application showcases the perfect combination of Angular
+        Material's component library with Tailwind CSS's utility-first approach
+        in dark mode.
+      </p>
+      <div class="space-x-4">
+        <button
+          mat-raised-button
+          color="primary"
+          class="mr-4 bg-teal-400 text-gray-900 hover:bg-teal-300"
+          routerLink="/admin"
+        >
+          <mat-icon class="mr-2">admin_panel_settings</mat-icon>
+          Admin Dashboard
+        </button>
+        <button
+          mat-stroked-button
+          class="text-teal-400 border-teal-400 hover:bg-teal-400 hover:text-gray-900"
+        >
+          Learn More
+        </button>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="mb-16">
+      <h3 class="text-3xl font-bold text-center text-white mb-12">Features</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Feature 1: Material Cards with Tailwind Styling -->
+        <mat-card
+          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
+        >
+          <mat-card-header>
+            <mat-card-title class="text-xl font-semibold text-teal-400">
+              Material Components
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="text-gray-300 leading-relaxed">
+              Angular Material provides pre-built, accessible components
+              following Material Design principles.
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="flex justify-end">
+            <button mat-button class="text-teal-400">Explore</button>
+          </mat-card-actions>
+        </mat-card>
+
+        <!-- Feature 2: Tailwind Utilities -->
+        <mat-card
+          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
+        >
+          <mat-card-header>
+            <mat-card-title class="text-xl font-semibold text-green-400">
+              Tailwind Utilities
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="text-gray-300 leading-relaxed">
+              Tailwind CSS offers utility classes for rapid UI development and
+              consistent design.
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="flex justify-end">
+            <button mat-button class="text-green-400">Learn</button>
+          </mat-card-actions>
+        </mat-card>
+
+        <!-- Feature 3: Best of Both -->
+        <mat-card
+          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
+        >
+          <mat-card-header>
+            <mat-card-title class="text-xl font-semibold text-purple-400">
+              Best of Both
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="text-gray-300 leading-relaxed">
+              Combine Material's components with Tailwind's utilities for
+              powerful, flexible UIs.
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="flex justify-end">
+            <button mat-button class="text-purple-400">Discover</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="mb-16">
+      <h3 class="text-3xl font-bold text-center text-white mb-12">
+        Interactive Demo
+      </h3>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Form Demo -->
+        <div
+          class="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700"
+        >
+          <h4 class="text-2xl font-semibold text-white mb-6">Sample Form</h4>
+
+          <form class="space-y-6">
+            <mat-form-field appearance="outline" class="w-full dark-field">
+              <mat-label class="text-gray-300">Name</mat-label>
+              <input
+                matInput
+                placeholder="Enter your name"
+                class="text-white"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full dark-field">
+              <mat-label class="text-gray-300">Email</mat-label>
+              <input
+                matInput
+                type="email"
+                placeholder="Enter your email"
+                class="text-white"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full dark-field">
+              <mat-label class="text-gray-300">Message</mat-label>
+              <textarea
+                matInput
+                rows="4"
+                placeholder="Your message"
+                class="text-white"
+              ></textarea>
+            </mat-form-field>
+
+            <div class="flex justify-between items-center">
+              <mat-checkbox class="text-gray-300"
+                >Subscribe to newsletter</mat-checkbox
+              >
+              <button
+                mat-raised-button
+                class="bg-teal-400 text-gray-900 hover:bg-teal-300"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Data Display Demo -->
+        <div
+          class="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700"
+        >
+          <h4 class="text-2xl font-semibold text-white mb-6">Data Display</h4>
+
+          <!-- Progress Indicators -->
+          <div class="mb-6">
+            <p class="text-sm font-medium text-gray-300 mb-2">
+              Project Progress
+            </p>
+            <mat-progress-bar
+              mode="determinate"
+              value="75"
+              class="mb-2 dark-progress"
+            ></mat-progress-bar>
+            <p class="text-xs text-gray-400">75% Complete</p>
+          </div>
+
+          <!-- Chips -->
+          <div class="mb-6">
+            <p class="text-sm font-medium text-gray-300 mb-3">Technologies</p>
+            <div class="flex flex-wrap gap-2">
+              <mat-chip-set>
+                <mat-chip class="bg-gray-700 text-white">Angular</mat-chip>
+                <mat-chip class="bg-gray-700 text-white">TypeScript</mat-chip>
+                <mat-chip class="bg-gray-700 text-white">Tailwind CSS</mat-chip>
+                <mat-chip class="bg-gray-700 text-white"
+                  >Material Design</mat-chip
+                >
+              </mat-chip-set>
+            </div>
+          </div>
+
+          <!-- Toggle -->
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-gray-300">Dark Mode</span>
+            <mat-slide-toggle
+              checked="true"
+              class="dark-toggle"
+            ></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section
+      class="bg-gray-800 rounded-lg shadow-xl p-8 mb-16 border border-gray-700"
+    >
+      <h3 class="text-3xl font-bold text-center text-white mb-12">
+        Why This Combination Works
+      </h3>
+
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-4xl font-bold text-teal-400 mb-2">100+</div>
+          <div class="text-gray-300">Material Components</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-green-400 mb-2">500+</div>
+          <div class="text-gray-300">Tailwind Utilities</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-purple-400 mb-2">A11Y</div>
+          <div class="text-gray-300">Accessibility Built-in</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-orange-400 mb-2">∞</div>
+          <div class="text-gray-300">Design Possibilities</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="mb-4">
+        Built with ❤️ using Angular, Tailwind CSS, and Material Design
+      </p>
+      <div class="space-x-4">
+        <button mat-button class="text-teal-400">Documentation</button>
+        <button mat-button class="text-green-400">GitHub</button>
+      </div>
+    </div>
+  </footer>
+</div>
