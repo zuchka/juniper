@@ -480,6 +480,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       next: (customers: Customer[]) => {
         this.customers = customers;
         this.customersDataSource.data = customers;
+
+        // Re-apply sorting if sort is available
+        if (this.customersSort) {
+          this.customersDataSource.sort = this.customersSort;
+        }
+
         this.generateOrdersFromCustomers(customers);
         this.calculateMetricsFromData(customers);
         this.updateChartData(customers);
