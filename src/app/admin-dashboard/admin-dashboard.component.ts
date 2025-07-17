@@ -673,10 +673,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Clear filter methods
-  clearProductFilters() {
-    this.productNameFilter.setValue("");
-    this.productCategoryFilter.setValue("");
-    this.productStatusFilter.setValue("");
+  clearUserFilters() {
+    this.userNameFilter.setValue("");
+    this.userGenderFilter.setValue("");
+    this.userDepartmentFilter.setValue("");
   }
 
   clearCustomerFilters() {
