@@ -842,7 +842,9 @@ button:focus-visible {
 
 /* Chip Styles */
 .category-chip,
-.status-chip {
+.status-chip,
+.gender-chip,
+.department-chip {
   font-size: 12px !important;
   min-height: 24px !important;
   border-radius: 6px !important;
@@ -853,6 +855,18 @@ button:focus-visible {
   background-color: rgba(169, 223, 216, 0.2) !important;
   color: var(--primary-color) !important;
   border: 1px solid var(--primary-color) !important;
+}
+
+.gender-chip {
+  background-color: rgba(96, 165, 250, 0.2) !important;
+  color: #60a5fa !important;
+  border: 1px solid #60a5fa !important;
+}
+
+.department-chip {
+  background-color: rgba(251, 146, 60, 0.2) !important;
+  color: #fb923c !important;
+  border: 1px solid #fb923c !important;
 }
 
 /* Status Chip Colors */
