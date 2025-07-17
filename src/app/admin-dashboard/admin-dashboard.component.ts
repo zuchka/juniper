@@ -137,7 +137,7 @@ interface SalesCard {
   templateUrl: "./admin-dashboard.component.html",
   styleUrls: ["./admin-dashboard.component.css"],
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit, AfterViewInit {
   // Make Math available in template
   Math = Math;
 
@@ -148,6 +148,49 @@ export class AdminDashboardComponent {
   // Form groups
   userForm: FormGroup;
   settingsForm: FormGroup;
+
+  // Table ViewChild references
+  @ViewChild("productsPaginator") productsPaginator!: MatPaginator;
+  @ViewChild("productsSort") productsSort!: MatSort;
+  @ViewChild("customersPaginator") customersPaginator!: MatPaginator;
+  @ViewChild("customersSort") customersSort!: MatSort;
+  @ViewChild("ordersPaginator") ordersPaginator!: MatPaginator;
+  @ViewChild("ordersSort") ordersSort!: MatSort;
+
+  // Data sources for tables
+  productsDataSource!: MatTableDataSource<Product>;
+  customersDataSource!: MatTableDataSource<Customer>;
+  ordersDataSource!: MatTableDataSource<Order>;
+
+  // Filter controls
+  productNameFilter = new FormControl("");
+  productCategoryFilter = new FormControl("");
+  productStatusFilter = new FormControl("");
+
+  customerNameFilter = new FormControl("");
+  customerStatusFilter = new FormControl("");
+
+  orderStatusFilter = new FormControl("");
+  orderCustomerFilter = new FormControl("");
+
+  // Filter options
+  productCategories = [
+    "Electronics",
+    "Fashion",
+    "Home & Garden",
+    "Health & Beauty",
+    "Sports",
+    "Books",
+  ];
+  productStatuses = ["Active", "Inactive", "Out of Stock"];
+  customerStatuses = ["VIP", "Premium", "Active", "New", "Inactive"];
+  orderStatuses = [
+    "Pending",
+    "Processing",
+    "Shipped",
+    "Delivered",
+    "Cancelled",
+  ];
 
   // Dummy data
   metricCards: MetricCard[] = [
