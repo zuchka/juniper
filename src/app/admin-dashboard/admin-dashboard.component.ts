@@ -178,9 +178,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   isLoadingMetrics = signal(true);
 
   // Filter controls
-  productNameFilter = new FormControl("");
-  productCategoryFilter = new FormControl("");
-  productStatusFilter = new FormControl("");
+  userNameFilter = new FormControl("");
+  userGenderFilter = new FormControl("");
+  userDepartmentFilter = new FormControl("");
 
   customerNameFilter = new FormControl("");
   customerStatusFilter = new FormControl("");
