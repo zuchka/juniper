@@ -796,14 +796,14 @@ button:focus-visible {
   margin-top: 16px;
 }
 
-.products-table,
+.users-table,
 .customers-table,
 .orders-table {
   width: 100%;
   background-color: var(--background-secondary) !important;
 }
 
-.products-table .mat-mdc-header-cell,
+.users-table .mat-mdc-header-cell,
 .customers-table .mat-mdc-header-cell,
 .orders-table .mat-mdc-header-cell {
   background-color: #374151 !important;
@@ -812,7 +812,7 @@ button:focus-visible {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.products-table .mat-mdc-cell,
+.users-table .mat-mdc-cell,
 .customers-table .mat-mdc-cell,
 .orders-table .mat-mdc-cell {
   color: #ffffff !important;
@@ -820,7 +820,7 @@ button:focus-visible {
   padding: 12px 16px;
 }
 
-.products-table .mat-mdc-row:hover,
+.users-table .mat-mdc-row:hover,
 .customers-table .mat-mdc-row:hover,
 .orders-table .mat-mdc-row:hover {
   background-color: rgba(169, 223, 216, 0.05) !important;
