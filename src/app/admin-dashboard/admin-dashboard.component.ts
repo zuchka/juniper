@@ -348,73 +348,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  // Sample products data
-  products: Product[] = [
-    {
-      id: 1,
-      name: "Home Decore Range",
-      popularity: 46,
-      sales: 46,
-      category: "Home & Garden",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Disney Princess Dress",
-      popularity: 17,
-      sales: 17,
-      category: "Fashion",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Bathroom Essentials",
-      popularity: 19,
-      sales: 19,
-      category: "Home & Garden",
-      status: "Active",
-    },
-    {
-      id: 4,
-      name: "Apple Smartwatch",
-      popularity: 29,
-      sales: 29,
-      category: "Electronics",
-      status: "Active",
-    },
-    {
-      id: 5,
-      name: "Wireless Headphones",
-      popularity: 35,
-      sales: 35,
-      category: "Electronics",
-      status: "Active",
-    },
-    {
-      id: 6,
-      name: "Yoga Mat Premium",
-      popularity: 22,
-      sales: 22,
-      category: "Sports",
-      status: "Out of Stock",
-    },
-    {
-      id: 7,
-      name: "Coffee Maker Deluxe",
-      popularity: 41,
-      sales: 41,
-      category: "Home & Garden",
-      status: "Active",
-    },
-    {
-      id: 8,
-      name: "Running Shoes Pro",
-      popularity: 38,
-      sales: 38,
-      category: "Sports",
-      status: "Active",
-    },
-  ];
+  // Users data from API
+  users: User[] = [];
 
   // Sample orders data
   orders: Order[] = [
