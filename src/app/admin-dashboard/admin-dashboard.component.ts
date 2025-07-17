@@ -800,4 +800,207 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
         return "status-chip";
     }
   }
+
+  // Generate orders based on customer data
+  generateOrdersFromCustomers(customers: Customer[]) {
+    const orderStatuses = [
+      "Pending",
+      "Processing",
+      "Shipped",
+      "Delivered",
+      "Cancelled",
+    ];
+    const products = this.products.map((p) => p.name);
+
+    this.orders = [];
+    let orderId = 12891;
+
+    customers.forEach((customer) => {
+      // Generate 1-3 orders per customer
+      const numOrders = Math.floor(Math.random() * 3) + 1;
+
+      for (let i = 0; i < numOrders; i++) {
+        const randomProduct =
+          products[Math.floor(Math.random() * products.length)];
+        const randomStatus =
+          orderStatuses[Math.floor(Math.random() * orderStatuses.length)];
+        const randomAmount = Math.floor(Math.random() * 500) + 50; // $50-$550
+
+        // Generate random date within last 30 days
+        const randomDate = new Date();
+        randomDate.setDate(
+          randomDate.getDate() - Math.floor(Math.random() * 30),
+        );
+
+        this.orders.push({
+          id: orderId++,
+          customer: customer.name,
+          product: randomProduct,
+          amount: randomAmount,
+          status: randomStatus,
+          date: randomDate,
+        });
+      }
+    });
+
+    this.ordersDataSource.data = this.orders;
+  }
+
+  // Calculate real metrics from customer data
+  calculateMetricsFromData(customers: Customer[]) {
+    // Calculate total revenue from customers
+    const totalRevenue = customers.reduce(
+      (sum, customer) => sum + customer.totalSpent,
+      0,
+    );
+
+    // Count active customers (not inactive)
+    const activeCustomersCount = customers.filter(
+      (customer) => customer.status !== "Inactive",
+    ).length;
+
+    // Calculate total orders
+    const totalOrders = customers.reduce(
+      (sum, customer) => sum + customer.totalOrders,
+      0,
+    );
+
+    // Calculate average spent per customer for conversion rate simulation
+    const avgSpent = customers.length > 0 ? totalRevenue / customers.length : 0;
+    const conversionRate = Math.min((avgSpent / 1000) * 10, 15); // Simulate conversion rate
+
+    // Update metric cards with real data
+    this.metricCards = [
+      {
+        title: "Total Revenue",
+        value: `$${totalRevenue.toLocaleString()}`,
+        change: this.calculateGrowthRate(totalRevenue),
+        icon: "monetization_on",
+        color: "text-green-600",
+      },
+      {
+        title: "Active Customers",
+        value: activeCustomersCount.toString(),
+        change: this.calculateGrowthRate(activeCustomersCount),
+        icon: "people",
+        color: "text-blue-600",
+      },
+      {
+        title: "Total Orders",
+        value: totalOrders.toString(),
+        change: this.calculateGrowthRate(totalOrders),
+        icon: "shopping_cart",
+        color: "text-purple-600",
+      },
+      {
+        title: "Avg Spent per Customer",
+        value: `$${Math.round(avgSpent)}`,
+        change: this.calculateGrowthRate(avgSpent),
+        icon: "trending_up",
+        color: "text-orange-600",
+      },
+    ];
+
+    // Update sales cards with real data
+    this.salesCards = [
+      {
+        title: "Total Sales",
+        value: `$${Math.round(totalRevenue / 1000)}k`,
+        change: `+${Math.round(this.calculateGrowthRate(totalRevenue))}% from yesterday`,
+        icon: "sales",
+        color: "text-orange-400",
+      },
+      {
+        title: "Total Order",
+        value: totalOrders.toString(),
+        change: `+${Math.round(this.calculateGrowthRate(totalOrders))}% from yesterday`,
+        icon: "order",
+        color: "text-teal-400",
+      },
+      {
+        title: "VIP Customers",
+        value: customers.filter((c) => c.status === "VIP").length.toString(),
+        change: `+${Math.round(Math.random() * 5 + 1)}% from yesterday`,
+        icon: "product",
+        color: "text-pink-400",
+      },
+      {
+        title: "New Customer",
+        value: customers.filter((c) => c.status === "New").length.toString(),
+        change: `+${Math.round(Math.random() * 10 + 2)}% from yesterday`,
+        icon: "customer",
+        color: "text-blue-400",
+      },
+    ];
+  }
+
+  // Calculate a simulated growth rate based on data
+  private calculateGrowthRate(value: number): number {
+    // Simulate growth rate based on the value
+    const baseGrowth = Math.random() * 20; // 0-20%
+    const modifier = value > 1000 ? 1.2 : value > 500 ? 1.1 : 1.0;
+    return Math.round(baseGrowth * modifier * 100) / 100;
+  }
+
+  // Update chart data based on customer data
+  updateChartData(customers: Customer[]) {
+    // Group customers by city for chart data
+    const cityData = customers.reduce(
+      (acc, customer) => {
+        acc[customer.city] = (acc[customer.city] || 0) + customer.totalSpent;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    // Get top 6 cities by revenue
+    const sortedCities = Object.entries(cityData)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 6);
+
+    this.chartData = sortedCities.map(([city, revenue]) => ({
+      label: city,
+      value: revenue,
+    }));
+
+    // Update task progress based on customer statuses
+    const statusCounts = customers.reduce(
+      (acc, customer) => {
+        acc[customer.status] = (acc[customer.status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    this.taskProgress = [
+      {
+        name: "VIP Customers",
+        progress: Math.round(
+          ((statusCounts["VIP"] || 0) / customers.length) * 100,
+        ),
+        color: "primary",
+      },
+      {
+        name: "Premium Customers",
+        progress: Math.round(
+          ((statusCounts["Premium"] || 0) / customers.length) * 100,
+        ),
+        color: "accent",
+      },
+      {
+        name: "Active Customers",
+        progress: Math.round(
+          ((statusCounts["Active"] || 0) / customers.length) * 100,
+        ),
+        color: "primary",
+      },
+      {
+        name: "New Customers",
+        progress: Math.round(
+          ((statusCounts["New"] || 0) / customers.length) * 100,
+        ),
+        color: "primary",
+      },
+    ];
+  }
 }
