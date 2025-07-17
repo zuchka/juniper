@@ -1,4 +1,10 @@
-import { Component, signal } from "@angular/core";
+import {
+  Component,
+  signal,
+  ViewChild,
+  OnInit,
+  AfterViewInit,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 // Angular Material Imports
