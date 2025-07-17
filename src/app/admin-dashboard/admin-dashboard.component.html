@@ -247,27 +247,11 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Gender</mat-label>
-                  <mat-select [formControl]="userGenderFilter">
-                    <mat-option value="">All Genders</mat-option>
-                    <mat-option
-                      *ngFor="let gender of userGenders"
-                      [value]="gender"
-                    >
-                      {{ gender | titlecase }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Department</mat-label>
-                  <mat-select [formControl]="userDepartmentFilter">
-                    <mat-option value="">All Departments</mat-option>
-                    <mat-option
-                      *ngFor="let department of userDepartments"
-                      [value]="department"
-                    >
-                      {{ department }}
+                  <mat-label>City</mat-label>
+                  <mat-select [formControl]="userCityFilter">
+                    <mat-option value="">All Cities</mat-option>
+                    <mat-option *ngFor="let city of userCities" [value]="city">
+                      {{ city }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
