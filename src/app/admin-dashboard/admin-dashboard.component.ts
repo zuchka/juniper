@@ -520,8 +520,56 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     this.customersDataSource.paginator = this.customersPaginator;
     this.customersDataSource.sort = this.customersSort;
 
+    // Custom sorting for customers table
+    this.customersDataSource.sortingDataAccessor = (
+      data: Customer,
+      sortHeaderId: string,
+    ) => {
+      switch (sortHeaderId) {
+        case "name":
+          return data.name.toLowerCase();
+        case "email":
+          return data.email.toLowerCase();
+        case "phone":
+          return data.phone;
+        case "city":
+          return data.city.toLowerCase();
+        case "totalOrders":
+          return data.totalOrders;
+        case "totalSpent":
+          return data.totalSpent;
+        case "status":
+          return data.status.toLowerCase();
+        case "lastOrder":
+          return data.lastOrder.getTime();
+        default:
+          return (data as any)[sortHeaderId];
+      }
+    };
+
     this.ordersDataSource.paginator = this.ordersPaginator;
     this.ordersDataSource.sort = this.ordersSort;
+
+    // Custom sorting for orders table
+    this.ordersDataSource.sortingDataAccessor = (
+      data: Order,
+      sortHeaderId: string,
+    ) => {
+      switch (sortHeaderId) {
+        case "customer":
+          return data.customer.toLowerCase();
+        case "product":
+          return data.product.toLowerCase();
+        case "amount":
+          return data.amount;
+        case "status":
+          return data.status.toLowerCase();
+        case "date":
+          return data.date.getTime();
+        default:
+          return (data as any)[sortHeaderId];
+      }
+    };
   }
 
   toggleSidenav() {
