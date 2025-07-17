@@ -610,15 +610,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
           .toLowerCase()
           .includes(this.userNameFilter.value.toLowerCase());
 
-      const genderMatch =
-        !this.userGenderFilter.value ||
-        data.gender === this.userGenderFilter.value;
+      const cityMatch =
+        !this.userCityFilter.value || data.city === this.userCityFilter.value;
 
-      const departmentMatch =
-        !this.userDepartmentFilter.value ||
-        data.department === this.userDepartmentFilter.value;
-
-      return nameMatch && genderMatch && departmentMatch;
+      return nameMatch && cityMatch;
     };
 
     this.usersDataSource.filter = "trigger";
