@@ -439,12 +439,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // Set up filter listeners
-    this.setupProductFilters();
+    this.setupUserFilters();
     this.setupCustomerFilters();
     this.setupOrderFilters();
 
     // Load real data
-    this.loadCustomersData();
+    this.loadUsersData();
   }
 
   loadCustomersData() {
