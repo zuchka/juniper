@@ -432,7 +432,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     });
 
     // Initialize data sources
-    this.productsDataSource = new MatTableDataSource(this.products);
+    this.usersDataSource = new MatTableDataSource(this.users);
     this.customersDataSource = new MatTableDataSource(this.customers);
     this.ordersDataSource = new MatTableDataSource(this.orders);
   }
