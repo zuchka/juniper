@@ -161,8 +161,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   settingsForm: FormGroup;
 
   // Table ViewChild references
-  @ViewChild("productsPaginator") productsPaginator!: MatPaginator;
-  @ViewChild("productsSort") productsSort!: MatSort;
+  @ViewChild("usersPaginator") usersPaginator!: MatPaginator;
+  @ViewChild("usersSort") usersSort!: MatSort;
   @ViewChild("customersPaginator") customersPaginator!: MatPaginator;
   @ViewChild("customersSort") customersSort!: MatSort;
   @ViewChild("ordersPaginator") ordersPaginator!: MatPaginator;
