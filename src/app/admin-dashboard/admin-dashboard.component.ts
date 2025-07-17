@@ -282,13 +282,16 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   ];
 
   // Table columns
-  productsDisplayedColumns: string[] = [
+  usersDisplayedColumns: string[] = [
     "id",
     "name",
-    "category",
-    "popularity",
-    "sales",
-    "status",
+    "email",
+    "phone",
+    "age",
+    "gender",
+    "university",
+    "department",
+    "city",
     "actions",
   ];
   customersDisplayedColumns: string[] = [
