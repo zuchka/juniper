@@ -234,40 +234,40 @@
               <mat-card-title>Users</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <!-- Product Filters -->
+              <!-- User Filters -->
               <div class="filter-container">
                 <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Search Products</mat-label>
+                  <mat-label>Search Users</mat-label>
                   <input
                     matInput
-                    [formControl]="productNameFilter"
+                    [formControl]="userNameFilter"
                     placeholder="Search by name..."
                   />
                   <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Category</mat-label>
-                  <mat-select [formControl]="productCategoryFilter">
-                    <mat-option value="">All Categories</mat-option>
+                  <mat-label>Gender</mat-label>
+                  <mat-select [formControl]="userGenderFilter">
+                    <mat-option value="">All Genders</mat-option>
                     <mat-option
-                      *ngFor="let category of productCategories"
-                      [value]="category"
+                      *ngFor="let gender of userGenders"
+                      [value]="gender"
                     >
-                      {{ category }}
+                      {{ gender | titlecase }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Status</mat-label>
-                  <mat-select [formControl]="productStatusFilter">
-                    <mat-option value="">All Status</mat-option>
+                  <mat-label>Department</mat-label>
+                  <mat-select [formControl]="userDepartmentFilter">
+                    <mat-option value="">All Departments</mat-option>
                     <mat-option
-                      *ngFor="let status of productStatuses"
-                      [value]="status"
+                      *ngFor="let department of userDepartments"
+                      [value]="department"
                     >
-                      {{ status }}
+                      {{ department }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -275,7 +275,7 @@
                 <button
                   mat-raised-button
                   color="accent"
-                  (click)="clearProductFilters()"
+                  (click)="clearUserFilters()"
                   class="clear-filters-btn"
                 >
                   <mat-icon>clear</mat-icon>
