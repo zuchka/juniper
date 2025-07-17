@@ -508,8 +508,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // Set up pagination and sorting
-    this.usersDataSource.paginator = this.productsPaginator;
-    this.usersDataSource.sort = this.productsSort;
+    this.usersDataSource.paginator = this.usersPaginator;
+    this.usersDataSource.sort = this.usersSort;
 
     this.customersDataSource.paginator = this.customersPaginator;
     this.customersDataSource.sort = this.customersSort;
