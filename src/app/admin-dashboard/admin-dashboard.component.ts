@@ -612,4 +612,144 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   getChangeIcon(change: number): string {
     return change >= 0 ? "trending_up" : "trending_down";
   }
+
+  // Filter setup methods
+  setupProductFilters() {
+    this.productNameFilter.valueChanges.subscribe(() => {
+      this.applyProductFilters();
+    });
+
+    this.productCategoryFilter.valueChanges.subscribe(() => {
+      this.applyProductFilters();
+    });
+
+    this.productStatusFilter.valueChanges.subscribe(() => {
+      this.applyProductFilters();
+    });
+  }
+
+  setupCustomerFilters() {
+    this.customerNameFilter.valueChanges.subscribe(() => {
+      this.applyCustomerFilters();
+    });
+
+    this.customerStatusFilter.valueChanges.subscribe(() => {
+      this.applyCustomerFilters();
+    });
+  }
+
+  setupOrderFilters() {
+    this.orderStatusFilter.valueChanges.subscribe(() => {
+      this.applyOrderFilters();
+    });
+
+    this.orderCustomerFilter.valueChanges.subscribe(() => {
+      this.applyOrderFilters();
+    });
+  }
+
+  // Filter application methods
+  applyProductFilters() {
+    this.productsDataSource.filterPredicate = (
+      data: Product,
+      filter: string,
+    ) => {
+      const nameMatch =
+        !this.productNameFilter.value ||
+        data.name
+          .toLowerCase()
+          .includes(this.productNameFilter.value.toLowerCase());
+
+      const categoryMatch =
+        !this.productCategoryFilter.value ||
+        data.category === this.productCategoryFilter.value;
+
+      const statusMatch =
+        !this.productStatusFilter.value ||
+        data.status === this.productStatusFilter.value;
+
+      return nameMatch && categoryMatch && statusMatch;
+    };
+
+    this.productsDataSource.filter = "trigger";
+  }
+
+  applyCustomerFilters() {
+    this.customersDataSource.filterPredicate = (
+      data: Customer,
+      filter: string,
+    ) => {
+      const nameMatch =
+        !this.customerNameFilter.value ||
+        data.name
+          .toLowerCase()
+          .includes(this.customerNameFilter.value.toLowerCase());
+
+      const statusMatch =
+        !this.customerStatusFilter.value ||
+        data.status === this.customerStatusFilter.value;
+
+      return nameMatch && statusMatch;
+    };
+
+    this.customersDataSource.filter = "trigger";
+  }
+
+  applyOrderFilters() {
+    this.ordersDataSource.filterPredicate = (data: Order, filter: string) => {
+      const statusMatch =
+        !this.orderStatusFilter.value ||
+        data.status === this.orderStatusFilter.value;
+
+      const customerMatch =
+        !this.orderCustomerFilter.value ||
+        data.customer
+          .toLowerCase()
+          .includes(this.orderCustomerFilter.value.toLowerCase());
+
+      return statusMatch && customerMatch;
+    };
+
+    this.ordersDataSource.filter = "trigger";
+  }
+
+  // Clear filter methods
+  clearProductFilters() {
+    this.productNameFilter.setValue("");
+    this.productCategoryFilter.setValue("");
+    this.productStatusFilter.setValue("");
+  }
+
+  clearCustomerFilters() {
+    this.customerNameFilter.setValue("");
+    this.customerStatusFilter.setValue("");
+  }
+
+  clearOrderFilters() {
+    this.orderStatusFilter.setValue("");
+    this.orderCustomerFilter.setValue("");
+  }
+
+  // Action methods
+  editProduct(product: Product) {
+    console.log("Edit product:", product);
+  }
+
+  deleteProduct(productId: number) {
+    this.products = this.products.filter((p) => p.id !== productId);
+    this.productsDataSource.data = this.products;
+  }
+
+  viewOrder(order: Order) {
+    console.log("View order:", order);
+  }
+
+  editOrder(order: Order) {
+    console.log("Edit order:", order);
+  }
+
+  deleteOrder(orderId: number) {
+    this.orders = this.orders.filter((o) => o.id !== orderId);
+    this.ordersDataSource.data = this.orders;
+  }
 }
