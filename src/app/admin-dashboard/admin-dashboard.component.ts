@@ -757,6 +757,18 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getAgeChipClass(age: number): string {
+    if (age <= 25) {
+      return "age-chip young";
+    } else if (age <= 35) {
+      return "age-chip adult";
+    } else if (age <= 50) {
+      return "age-chip middle";
+    } else {
+      return "age-chip senior";
+    }
+  }
+
   // Generate orders based on customer data
   generateOrdersFromCustomers(customers: Customer[]) {
     const orderStatuses = [
