@@ -15,11 +15,7 @@
       <nav class="sidebar-nav">
         <div *ngFor="let item of menuItems" class="nav-item">
           <div
-            [class]="
-              item.name === 'Dashboard'
-                ? 'nav-link active'
-                : 'nav-link'
-            "
+            [class]="item.name === 'Dashboard' ? 'nav-link active' : 'nav-link'"
           >
             <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
             <span class="nav-text">{{ item.name }}</span>
@@ -48,7 +44,9 @@
           <div class="header-actions">
             <!-- Notifications -->
             <button mat-icon-button class="notification-button">
-              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small"
+                >notifications</mat-icon
+              >
             </button>
 
             <!-- Profile -->
@@ -164,7 +162,9 @@
                   <div class="metric-details">
                     <div class="metric-value">{{ card.value }}</div>
                     <div class="metric-title">{{ card.title }}</div>
-                    <div [class]="'metric-change ' + card.color">{{ card.change }}</div>
+                    <div [class]="'metric-change ' + card.color">
+                      {{ card.change }}
+                    </div>
                   </div>
                 </mat-card>
               </div>
@@ -228,117 +228,120 @@
 
         <!-- Products & Customer Section -->
         <div class="data-row">
-          <!-- Top Products -->
-          <mat-card class="products-card">
+          <!-- Users -->
+          <mat-card class="users-card">
             <mat-card-header>
-              <mat-card-title>Top Products</mat-card-title>
+              <mat-card-title>Users</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <!-- Table Header -->
-              <div class="table-header">
-                <div class="header-cell">#</div>
-                <div class="header-cell">Name</div>
-                <div class="header-cell">Popularity</div>
-                <div class="header-cell">Sales</div>
-              </div>
+              <!-- Users Table -->
+              <div class="table-container">
+                <table
+                  mat-table
+                  [dataSource]="usersDataSource"
+                  class="users-table"
+                  matSort
+                  #usersSort="matSort"
+                >
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      ID
+                    </th>
+                    <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+                  </ng-container>
 
-              <!-- Product Rows -->
-              <div class="table-body">
-                <div class="table-row">
-                  <div class="table-cell">01</div>
-                  <div class="table-cell">Home Decore Range</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="46" class="progress-orange"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip orange">46%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Name
+                    </th>
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.firstName }} {{ user.lastName }}
+                    </td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">02</div>
-                  <div class="table-cell">Disney Princess Dress</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="17" class="progress-teal"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip teal">17%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Email Column -->
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Email
+                    </th>
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.email }}
+                    </td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">03</div>
-                  <div class="table-cell">Bathroom Essentials</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="19" class="progress-blue"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip blue">19%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Phone Column -->
+                  <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Phone
+                    </th>
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.phone }}
+                    </td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">04</div>
-                  <div class="table-cell">Apple Smartwatch</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="29" class="progress-pink"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip pink">29%</mat-chip>
-                  </div>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
+                  <!-- Age Column -->
+                  <ng-container matColumnDef="age">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Age
+                    </th>
+                    <td mat-cell *matCellDef="let user">
+                      <mat-chip [ngClass]="getAgeChipClass(user.age)">{{
+                        user.age
+                      }}</mat-chip>
+                    </td>
+                  </ng-container>
 
-          <!-- Customer Fulfillment Chart -->
-          <mat-card class="fulfillment-card">
-            <mat-card-header>
-              <mat-card-title>Customer Fulfilment</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <!-- Chart Area -->
-              <div class="chart-area">
-                <svg viewBox="0 0 215 106" class="fulfillment-chart">
-                  <path
-                    d="M2.00012 9.02717C11.5542 13.8053 31.0064 23.3614 32.3822 23.3614C33.758 23.3614 40.5987 23.3614 43.8471 23.3614L71.9362 15.3342L96.0125 30.2418H109.77L133.847 13.0408L145.885 17.0543L182.573 42.2826L191.171 38.269L212.381 1"
-                    stroke="#A9DFD8"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <path
-                    d="M2.00012 52.7894L18.6243 51.0693L40.9809 40.1753L70.7897 71.1372H102.318L138.433 60.2432L184.292 63.1101L212.381 43.0421"
-                    stroke="#F2C8ED"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                </svg>
-              </div>
+                  <!-- City Column -->
+                  <ng-container matColumnDef="city">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      City
+                    </th>
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.city }}
+                    </td>
+                  </ng-container>
 
-              <!-- Legend -->
-              <div class="fulfillment-legend">
-                <div class="fulfillment-legend-item">
-                  <div class="legend-indicator">
-                    <div class="legend-dot teal"></div>
-                    <span>Last Month</span>
-                  </div>
-                  <span class="legend-value">$4,087</span>
-                </div>
-                <div class="fulfillment-legend-item">
-                  <div class="legend-indicator">
-                    <div class="legend-dot pink"></div>
-                    <span>This Month</span>
-                  </div>
-                  <span class="legend-value">$5,506</span>
-                </div>
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let user">
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="editUser(user)"
+                        matTooltip="Edit User"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="deleteUser(user.id)"
+                        matTooltip="Delete User"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="usersDisplayedColumns"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: usersDisplayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  #usersPaginator="matPaginator"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  showFirstLastButtons
+                >
+                </mat-paginator>
               </div>
             </mat-card-content>
           </mat-card>
@@ -409,7 +412,13 @@
                     fill="none"
                   />
                   <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <linearGradient
+                      id="gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
                       <stop
                         offset="0%"
                         style="stop-color: #a9dfd8; stop-opacity: 0.3"
@@ -441,6 +450,373 @@
                 <span>Oct</span>
                 <span>Nov</span>
                 <span>Dec</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Customers Table Section -->
+        <div class="data-section">
+          <mat-card class="data-table-card">
+            <mat-card-header>
+              <mat-card-title>Customers</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Customer Filters -->
+              <div class="filter-container">
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Search Customers</mat-label>
+                  <input
+                    matInput
+                    [formControl]="customerNameFilter"
+                    placeholder="Search by name..."
+                  />
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Status</mat-label>
+                  <mat-select [formControl]="customerStatusFilter">
+                    <mat-option value="">All Status</mat-option>
+                    <mat-option
+                      *ngFor="let status of customerStatuses"
+                      [value]="status"
+                    >
+                      {{ status }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="clearCustomerFilters()"
+                  class="clear-filters-btn"
+                >
+                  <mat-icon>clear</mat-icon>
+                  Clear Filters
+                </button>
+              </div>
+
+              <!-- Loading State for Customers -->
+              <div *ngIf="isLoadingCustomers()" class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Loading customers...</p>
+              </div>
+
+              <!-- Customers Table -->
+              <div class="table-container" *ngIf="!isLoadingCustomers()">
+                <table
+                  mat-table
+                  [dataSource]="customersDataSource"
+                  class="customers-table"
+                  matSort
+                  #customersSort="matSort"
+                >
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      ID
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.id }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Name
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      <div class="customer-info">
+                        <div class="customer-avatar">{{ customer.avatar }}</div>
+                        <span>{{ customer.name }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <!-- Email Column -->
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Email
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.email }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Phone Column -->
+                  <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Phone
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.phone }}
+                    </td>
+                  </ng-container>
+
+                  <!-- City Column -->
+                  <ng-container matColumnDef="city">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      City
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.city }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Total Orders Column -->
+                  <ng-container matColumnDef="totalOrders">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Orders
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.totalOrders }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Total Spent Column -->
+                  <ng-container matColumnDef="totalSpent">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Total Spent
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      ${{ customer.totalSpent | number: "1.2-2" }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Status Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Status
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      <mat-chip [ngClass]="getStatusColor(customer.status)">{{
+                        customer.status
+                      }}</mat-chip>
+                    </td>
+                  </ng-container>
+
+                  <!-- Last Order Column -->
+                  <ng-container matColumnDef="lastOrder">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Last Order
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                      {{ customer.lastOrder | date: "short" }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let customer">
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="editCustomer(customer)"
+                        matTooltip="Edit Customer"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="deleteCustomer(customer.id)"
+                        matTooltip="Delete Customer"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="customersDisplayedColumns"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: customersDisplayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  #customersPaginator="matPaginator"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  showFirstLastButtons
+                >
+                </mat-paginator>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Orders Table Section -->
+        <div class="data-section">
+          <mat-card class="data-table-card">
+            <mat-card-header>
+              <mat-card-title>Recent Orders</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Order Filters -->
+              <div class="filter-container">
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Search Customer</mat-label>
+                  <input
+                    matInput
+                    [formControl]="orderCustomerFilter"
+                    placeholder="Search by customer..."
+                  />
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Status</mat-label>
+                  <mat-select [formControl]="orderStatusFilter">
+                    <mat-option value="">All Status</mat-option>
+                    <mat-option
+                      *ngFor="let status of orderStatuses"
+                      [value]="status"
+                    >
+                      {{ status }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="clearOrderFilters()"
+                  class="clear-filters-btn"
+                >
+                  <mat-icon>clear</mat-icon>
+                  Clear Filters
+                </button>
+              </div>
+
+              <!-- Loading State for Orders -->
+              <div *ngIf="isLoadingCustomers()" class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Loading orders...</p>
+              </div>
+
+              <!-- Orders Table -->
+              <div class="table-container" *ngIf="!isLoadingCustomers()">
+                <table
+                  mat-table
+                  [dataSource]="ordersDataSource"
+                  class="orders-table"
+                  matSort
+                  #ordersSort="matSort"
+                >
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Order ID
+                    </th>
+                    <td mat-cell *matCellDef="let order">#{{ order.id }}</td>
+                  </ng-container>
+
+                  <!-- Customer Column -->
+                  <ng-container matColumnDef="customer">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Customer
+                    </th>
+                    <td mat-cell *matCellDef="let order">
+                      {{ order.customer }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Product Column -->
+                  <ng-container matColumnDef="product">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Product
+                    </th>
+                    <td mat-cell *matCellDef="let order">
+                      {{ order.product }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Amount Column -->
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Amount
+                    </th>
+                    <td mat-cell *matCellDef="let order">
+                      ${{ order.amount | number: "1.2-2" }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Status Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Status
+                    </th>
+                    <td mat-cell *matCellDef="let order">
+                      <mat-chip [ngClass]="getOrderStatusClass(order.status)">{{
+                        order.status
+                      }}</mat-chip>
+                    </td>
+                  </ng-container>
+
+                  <!-- Date Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Date
+                    </th>
+                    <td mat-cell *matCellDef="let order">
+                      {{ order.date | date: "short" }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let order">
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="viewOrder(order)"
+                        matTooltip="View Order"
+                      >
+                        <mat-icon>visibility</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="accent"
+                        (click)="editOrder(order)"
+                        matTooltip="Edit Order"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="deleteOrder(order.id)"
+                        matTooltip="Delete Order"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="ordersDisplayedColumns"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: ordersDisplayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  #ordersPaginator="matPaginator"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  showFirstLastButtons
+                >
+                </mat-paginator>
               </div>
             </mat-card-content>
           </mat-card>

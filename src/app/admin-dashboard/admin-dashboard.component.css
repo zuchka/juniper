@@ -367,7 +367,7 @@
   margin-bottom: 24px;
 }
 
-.products-card {
+.users-card {
   flex: 1;
   background-color: var(--background-secondary) !important;
 }
@@ -739,4 +739,387 @@
 button:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+/* Filter Container Styles */
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-field {
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.filter-field .mat-mdc-form-field-wrapper {
+  background-color: #374151 !important;
+  border-radius: 8px;
+}
+
+.filter-field .mat-mdc-text-field-wrapper {
+  background-color: #374151 !important;
+  border-radius: 8px;
+}
+
+.filter-field .mat-mdc-form-field-outline {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.filter-field .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+.filter-field .mat-mdc-form-field-label {
+  color: #9ca3af !important;
+}
+
+.filter-field input,
+.filter-field .mat-mdc-select-value {
+  color: #ffffff !important;
+}
+
+.clear-filters-btn {
+  background-color: var(--primary-color) !important;
+  color: var(--background-primary) !important;
+  font-weight: 600;
+}
+
+/* Table Container Styles */
+.table-container {
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.users-table,
+.customers-table,
+.orders-table {
+  width: 100%;
+  background-color: var(--background-secondary) !important;
+}
+
+.users-table .mat-mdc-header-cell,
+.customers-table .mat-mdc-header-cell,
+.orders-table .mat-mdc-header-cell {
+  background-color: #374151 !important;
+  color: #9ca3af !important;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.users-table .mat-mdc-cell,
+.customers-table .mat-mdc-cell,
+.orders-table .mat-mdc-cell {
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px 16px;
+}
+
+.users-table .mat-mdc-row:hover,
+.customers-table .mat-mdc-row:hover,
+.orders-table .mat-mdc-row:hover {
+  background-color: rgba(169, 223, 216, 0.05) !important;
+}
+
+/* Progress Bar Styles for Products Table */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 120px;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #9ca3af;
+  min-width: 30px;
+}
+
+/* Chip Styles */
+.category-chip,
+.status-chip,
+.gender-chip,
+.department-chip,
+.age-chip {
+  font-size: 12px !important;
+  min-height: 24px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+}
+
+.category-chip {
+  background-color: rgba(169, 223, 216, 0.2) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+.gender-chip {
+  background-color: rgba(96, 165, 250, 0.2) !important;
+  color: #60a5fa !important;
+  border: 1px solid #60a5fa !important;
+}
+
+.department-chip {
+  background-color: rgba(251, 146, 60, 0.2) !important;
+  color: #fb923c !important;
+  border: 1px solid #fb923c !important;
+}
+
+/* Age Chip Colors */
+.age-chip.young {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  color: #22c55e !important;
+  border: 1px solid #22c55e !important;
+}
+
+.age-chip.adult {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  color: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+}
+
+.age-chip.middle {
+  background-color: rgba(251, 191, 36, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid #fbbf24 !important;
+}
+
+.age-chip.senior {
+  background-color: rgba(147, 51, 234, 0.2) !important;
+  color: #9333ea !important;
+  border: 1px solid #9333ea !important;
+}
+
+/* Status Chip Colors */
+.status-chip.active {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  color: #10b981 !important;
+  border: 1px solid #10b981 !important;
+}
+
+.status-chip.out-of-stock {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+  border: 1px solid #ef4444 !important;
+}
+
+.status-chip.inactive {
+  background-color: rgba(156, 163, 175, 0.2) !important;
+  color: #9ca3af !important;
+  border: 1px solid #9ca3af !important;
+}
+
+.status-chip.vip {
+  background-color: rgba(147, 51, 234, 0.2) !important;
+  color: #9333ea !important;
+  border: 1px solid #9333ea !important;
+}
+
+.status-chip.premium {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  color: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+}
+
+.status-chip.new {
+  background-color: rgba(251, 191, 36, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid #fbbf24 !important;
+}
+
+.status-chip.delivered {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  color: #10b981 !important;
+  border: 1px solid #10b981 !important;
+}
+
+.status-chip.shipped {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  color: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+}
+
+.status-chip.processing {
+  background-color: rgba(251, 191, 36, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid #fbbf24 !important;
+}
+
+.status-chip.pending {
+  background-color: rgba(156, 163, 175, 0.2) !important;
+  color: #9ca3af !important;
+  border: 1px solid #9ca3af !important;
+}
+
+.status-chip.cancelled {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+  border: 1px solid #ef4444 !important;
+}
+
+/* Customer Info Styles */
+.customer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customer-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--background-primary);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Data Section Styles */
+.data-section {
+  margin-bottom: 24px;
+}
+
+.data-table-card {
+  background-color: var(--background-secondary) !important;
+  width: 100%;
+}
+
+/* Paginator Styles */
+.mat-mdc-paginator {
+  background-color: #374151 !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mat-mdc-paginator .mat-mdc-select-value,
+.mat-mdc-paginator .mat-mdc-select-arrow,
+.mat-mdc-paginator .mat-mdc-button {
+  color: #ffffff !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button[disabled] {
+  color: #6b7280 !important;
+}
+
+/* Sort Header Styles */
+.mat-sort-header-arrow {
+  color: var(--primary-color) !important;
+}
+
+.mat-sort-header-sorted {
+  color: var(--primary-color) !important;
+}
+
+/* Action Button Styles */
+.mat-mdc-icon-button {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.mat-mdc-icon-button .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Responsive adjustments for tables */
+@media (max-width: 1024px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-field {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .users-table,
+  .customers-table,
+  .orders-table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    gap: 12px;
+  }
+
+  .clear-filters-btn {
+    width: 100%;
+  }
+
+  .data-section {
+    margin-bottom: 16px;
+  }
+
+  .users-table .mat-mdc-cell,
+  .customers-table .mat-mdc-cell,
+  .orders-table .mat-mdc-cell {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .customer-info {
+    gap: 8px;
+  }
+
+  .customer-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+}
+
+/* Material Select Panel Styling */
+.mat-mdc-select-panel {
+  background-color: #374151 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mat-mdc-option {
+  color: #ffffff !important;
+}
+
+.mat-mdc-option:hover {
+  background-color: rgba(169, 223, 216, 0.1) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected {
+  background-color: rgba(169, 223, 216, 0.2) !important;
+  color: var(--primary-color) !important;
+}
+
+/* Loading Container Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: #9ca3af;
+  gap: 16px;
+}
+
+.loading-container .mat-mdc-progress-spinner circle {
+  stroke: var(--primary-color) !important;
+}
+
+.loading-container p {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af;
 }
