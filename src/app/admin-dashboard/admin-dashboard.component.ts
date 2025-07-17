@@ -183,6 +183,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   orderStatusFilter = new FormControl("");
   orderCustomerFilter = new FormControl("");
 
+  userSearchFilter = new FormControl("");
+
   customerStatuses = ["VIP", "Premium", "Active", "New", "Inactive"];
   orderStatuses = [
     "Pending",
