@@ -15,11 +15,7 @@
       <nav class="sidebar-nav">
         <div *ngFor="let item of menuItems" class="nav-item">
           <div
-            [class]="
-              item.name === 'Dashboard'
-                ? 'nav-link active'
-                : 'nav-link'
-            "
+            [class]="item.name === 'Dashboard' ? 'nav-link active' : 'nav-link'"
           >
             <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
             <span class="nav-text">{{ item.name }}</span>
@@ -48,7 +44,9 @@
           <div class="header-actions">
             <!-- Notifications -->
             <button mat-icon-button class="notification-button">
-              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small"
+                >notifications</mat-icon
+              >
             </button>
 
             <!-- Profile -->
@@ -164,7 +162,9 @@
                   <div class="metric-details">
                     <div class="metric-value">{{ card.value }}</div>
                     <div class="metric-title">{{ card.title }}</div>
-                    <div [class]="'metric-change ' + card.color">{{ card.change }}</div>
+                    <div [class]="'metric-change ' + card.color">
+                      {{ card.change }}
+                    </div>
                   </div>
                 </mat-card>
               </div>
@@ -231,70 +231,180 @@
           <!-- Top Products -->
           <mat-card class="products-card">
             <mat-card-header>
-              <mat-card-title>Top Products</mat-card-title>
+              <mat-card-title>Products</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <!-- Table Header -->
-              <div class="table-header">
-                <div class="header-cell">#</div>
-                <div class="header-cell">Name</div>
-                <div class="header-cell">Popularity</div>
-                <div class="header-cell">Sales</div>
+              <!-- Product Filters -->
+              <div class="filter-container">
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Search Products</mat-label>
+                  <input
+                    matInput
+                    [formControl]="productNameFilter"
+                    placeholder="Search by name..."
+                  />
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Category</mat-label>
+                  <mat-select [formControl]="productCategoryFilter">
+                    <mat-option value="">All Categories</mat-option>
+                    <mat-option
+                      *ngFor="let category of productCategories"
+                      [value]="category"
+                    >
+                      {{ category }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Status</mat-label>
+                  <mat-select [formControl]="productStatusFilter">
+                    <mat-option value="">All Status</mat-option>
+                    <mat-option
+                      *ngFor="let status of productStatuses"
+                      [value]="status"
+                    >
+                      {{ status }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="clearProductFilters()"
+                  class="clear-filters-btn"
+                >
+                  <mat-icon>clear</mat-icon>
+                  Clear Filters
+                </button>
               </div>
 
-              <!-- Product Rows -->
-              <div class="table-body">
-                <div class="table-row">
-                  <div class="table-cell">01</div>
-                  <div class="table-cell">Home Decore Range</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="46" class="progress-orange"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip orange">46%</mat-chip>
-                  </div>
-                </div>
+              <!-- Products Table -->
+              <div class="table-container">
+                <table
+                  mat-table
+                  [dataSource]="productsDataSource"
+                  class="products-table"
+                  matSort
+                  #productsSort="matSort"
+                >
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      ID
+                    </th>
+                    <td mat-cell *matCellDef="let product">{{ product.id }}</td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">02</div>
-                  <div class="table-cell">Disney Princess Dress</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="17" class="progress-teal"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip teal">17%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Name
+                    </th>
+                    <td mat-cell *matCellDef="let product">
+                      {{ product.name }}
+                    </td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">03</div>
-                  <div class="table-cell">Bathroom Essentials</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="19" class="progress-blue"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip blue">19%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Category Column -->
+                  <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Category
+                    </th>
+                    <td mat-cell *matCellDef="let product">
+                      <mat-chip class="category-chip">{{
+                        product.category
+                      }}</mat-chip>
+                    </td>
+                  </ng-container>
 
-                <div class="table-row">
-                  <div class="table-cell">04</div>
-                  <div class="table-cell">Apple Smartwatch</div>
-                  <div class="table-cell">
-                    <div class="progress-container">
-                      <mat-progress-bar mode="determinate" value="29" class="progress-pink"></mat-progress-bar>
-                    </div>
-                  </div>
-                  <div class="table-cell">
-                    <mat-chip class="sales-chip pink">29%</mat-chip>
-                  </div>
-                </div>
+                  <!-- Popularity Column -->
+                  <ng-container matColumnDef="popularity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Popularity
+                    </th>
+                    <td mat-cell *matCellDef="let product">
+                      <div class="progress-container">
+                        <mat-progress-bar
+                          mode="determinate"
+                          [value]="product.popularity"
+                          [ngClass]="getProgressBarClass(product.popularity)"
+                        ></mat-progress-bar>
+                        <span class="progress-text"
+                          >{{ product.popularity }}%</span
+                        >
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <!-- Sales Column -->
+                  <ng-container matColumnDef="sales">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Sales
+                    </th>
+                    <td mat-cell *matCellDef="let product">
+                      <mat-chip [ngClass]="getSalesChipClass(product.sales)"
+                        >{{ product.sales }}%</mat-chip
+                      >
+                    </td>
+                  </ng-container>
+
+                  <!-- Status Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Status
+                    </th>
+                    <td mat-cell *matCellDef="let product">
+                      <mat-chip
+                        [ngClass]="getStatusChipClass(product.status)"
+                        >{{ product.status }}</mat-chip
+                      >
+                    </td>
+                  </ng-container>
+
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let product">
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="editProduct(product)"
+                        matTooltip="Edit Product"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="deleteProduct(product.id)"
+                        matTooltip="Delete Product"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="productsDisplayedColumns"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: productsDisplayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  #productsPaginator="matPaginator"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  showFirstLastButtons
+                >
+                </mat-paginator>
               </div>
             </mat-card-content>
           </mat-card>
@@ -409,7 +519,13 @@
                     fill="none"
                   />
                   <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <linearGradient
+                      id="gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
                       <stop
                         offset="0%"
                         style="stop-color: #a9dfd8; stop-opacity: 0.3"
