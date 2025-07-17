@@ -420,10 +420,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       dataRetention: [30],
     });
 
-    // Initialize data sources
-    this.usersDataSource = new MatTableDataSource(this.users);
-    this.customersDataSource = new MatTableDataSource(this.customers);
-    this.ordersDataSource = new MatTableDataSource(this.orders);
+    // Initialize data sources with empty arrays
+    this.usersDataSource = new MatTableDataSource<User>([]);
+    this.customersDataSource = new MatTableDataSource<Customer>([]);
+    this.ordersDataSource = new MatTableDataSource<Order>([]);
   }
 
   ngOnInit() {
