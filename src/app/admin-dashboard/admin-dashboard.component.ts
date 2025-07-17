@@ -179,8 +179,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   // Filter controls
   userNameFilter = new FormControl("");
-  userGenderFilter = new FormControl("");
-  userDepartmentFilter = new FormControl("");
+  userCityFilter = new FormControl("");
 
   customerNameFilter = new FormControl("");
   customerStatusFilter = new FormControl("");
