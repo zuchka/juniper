@@ -466,10 +466,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
         this.usersDataSource.data = this.users;
 
-        // Extract unique departments for filter
-        this.userDepartments = [
-          ...new Set(this.users.map((u) => u.department)),
-        ].sort();
+        // Extract unique cities for filter
+        this.userCities = [...new Set(this.users.map((u) => u.city))].sort();
 
         // Also load customers data
         this.loadCustomersData();
