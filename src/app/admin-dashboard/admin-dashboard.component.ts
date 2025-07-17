@@ -805,7 +805,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
       for (let i = 0; i < numOrders; i++) {
         const randomProduct =
-          products[Math.floor(Math.random() * products.length)];
+          productNames[Math.floor(Math.random() * productNames.length)];
         const randomStatus =
           orderStatuses[Math.floor(Math.random() * orderStatuses.length)];
         const randomAmount = Math.floor(Math.random() * 500) + 50; // $50-$550
