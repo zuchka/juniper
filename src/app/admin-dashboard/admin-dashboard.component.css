@@ -162,6 +162,32 @@
   }
 }
 
+/* Sales grid layout updates */
+.admin-dashboard .grid.grid-cols-4 {
+  gap: 10px;
+}
+
+/* Sales metric card styling updates */
+.admin-dashboard .bg-gray-700.rounded-lg.p-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.admin-dashboard .bg-gray-700.rounded-lg.p-3 .space-y-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-dashboard .bg-gray-700.rounded-lg.p-3 .text-lg.font-bold {
+  margin: 0 auto;
+}
+
+.admin-dashboard .bg-gray-700.rounded-lg.p-3 .text-xs {
+  margin: 4px auto 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .admin-dashboard .grid-cols-4 {
