@@ -490,86 +490,94 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Set up pagination and sorting
-    this.usersDataSource.paginator = this.usersPaginator;
-    this.usersDataSource.sort = this.usersSort;
+    // Set up pagination and sorting for users table
+    if (this.usersPaginator && this.usersSort) {
+      this.usersDataSource.paginator = this.usersPaginator;
+      this.usersDataSource.sort = this.usersSort;
 
-    // Custom sorting for computed name field
-    this.usersDataSource.sortingDataAccessor = (
-      data: User,
-      sortHeaderId: string,
-    ) => {
-      switch (sortHeaderId) {
-        case "name":
-          return `${data.firstName} ${data.lastName}`.toLowerCase();
-        case "id":
-          return data.id;
-        case "email":
-          return data.email.toLowerCase();
-        case "phone":
-          return data.phone;
-        case "age":
-          return data.age;
-        case "city":
-          return data.city.toLowerCase();
-        default:
-          return (data as any)[sortHeaderId];
-      }
-    };
+      // Custom sorting for computed name field
+      this.usersDataSource.sortingDataAccessor = (
+        data: User,
+        sortHeaderId: string,
+      ) => {
+        switch (sortHeaderId) {
+          case "name":
+            return `${data.firstName} ${data.lastName}`.toLowerCase();
+          case "id":
+            return data.id;
+          case "email":
+            return data.email.toLowerCase();
+          case "phone":
+            return data.phone;
+          case "age":
+            return data.age;
+          case "city":
+            return data.city.toLowerCase();
+          default:
+            return (data as any)[sortHeaderId];
+        }
+      };
+    }
 
-    this.customersDataSource.paginator = this.customersPaginator;
-    this.customersDataSource.sort = this.customersSort;
+    // Set up pagination and sorting for customers table
+    if (this.customersPaginator && this.customersSort) {
+      this.customersDataSource.paginator = this.customersPaginator;
+      this.customersDataSource.sort = this.customersSort;
 
-    // Custom sorting for customers table
-    this.customersDataSource.sortingDataAccessor = (
-      data: Customer,
-      sortHeaderId: string,
-    ) => {
-      switch (sortHeaderId) {
-        case "name":
-          return data.name.toLowerCase();
-        case "email":
-          return data.email.toLowerCase();
-        case "phone":
-          return data.phone;
-        case "city":
-          return data.city.toLowerCase();
-        case "totalOrders":
-          return data.totalOrders;
-        case "totalSpent":
-          return data.totalSpent;
-        case "status":
-          return data.status.toLowerCase();
-        case "lastOrder":
-          return data.lastOrder.getTime();
-        default:
-          return (data as any)[sortHeaderId];
-      }
-    };
+      // Custom sorting for customers table
+      this.customersDataSource.sortingDataAccessor = (
+        data: Customer,
+        sortHeaderId: string,
+      ) => {
+        switch (sortHeaderId) {
+          case "name":
+            return data.name.toLowerCase();
+          case "email":
+            return data.email.toLowerCase();
+          case "phone":
+            return data.phone;
+          case "city":
+            return data.city.toLowerCase();
+          case "totalOrders":
+            return data.totalOrders;
+          case "totalSpent":
+            return data.totalSpent;
+          case "status":
+            return data.status.toLowerCase();
+          case "lastOrder":
+            return data.lastOrder.getTime();
+          default:
+            return (data as any)[sortHeaderId];
+        }
+      };
+    }
 
-    this.ordersDataSource.paginator = this.ordersPaginator;
-    this.ordersDataSource.sort = this.ordersSort;
+    // Set up pagination and sorting for orders table
+    if (this.ordersPaginator && this.ordersSort) {
+      this.ordersDataSource.paginator = this.ordersPaginator;
+      this.ordersDataSource.sort = this.ordersSort;
 
-    // Custom sorting for orders table
-    this.ordersDataSource.sortingDataAccessor = (
-      data: Order,
-      sortHeaderId: string,
-    ) => {
-      switch (sortHeaderId) {
-        case "customer":
-          return data.customer.toLowerCase();
-        case "product":
-          return data.product.toLowerCase();
-        case "amount":
-          return data.amount;
-        case "status":
-          return data.status.toLowerCase();
-        case "date":
-          return data.date.getTime();
-        default:
-          return (data as any)[sortHeaderId];
-      }
-    };
+      // Custom sorting for orders table
+      this.ordersDataSource.sortingDataAccessor = (
+        data: Order,
+        sortHeaderId: string,
+      ) => {
+        switch (sortHeaderId) {
+          case "customer":
+            return data.customer.toLowerCase();
+          case "product":
+            return data.product.toLowerCase();
+          case "amount":
+            return data.amount;
+          case "status":
+            return data.status.toLowerCase();
+          case "date":
+            return data.date.getTime();
+          default:
+            return (data as any)[sortHeaderId];
+        }
+      };
+    }
   }
 
   toggleSidenav() {
