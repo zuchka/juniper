@@ -86,10 +86,14 @@
 
           <!-- Sales Metric Cards -->
           <div class="grid grid-cols-4 gap-5">
-            <!-- Total Sales Card -->
-            <div class="bg-gray-700 rounded-lg p-3">
+            <div
+              *ngFor="let card of salesCards; let i = index"
+              class="bg-gray-700 rounded-lg p-3"
+            >
               <div class="mb-3">
+                <!-- Total Sales Icon -->
                 <svg
+                  *ngIf="i === 0"
                   class="w-7 h-7"
                   viewBox="0 0 27 26"
                   fill="none"
@@ -109,18 +113,9 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-              </div>
-              <div class="space-y-1">
-                <div class="text-white text-lg font-bold">$5k</div>
-                <div class="text-gray-300 text-xs">Total Sales</div>
-                <div class="text-orange-400 text-xs">+10% from yesterday</div>
-              </div>
-            </div>
-
-            <!-- Total Order Card -->
-            <div class="bg-gray-700 rounded-lg p-3">
-              <div class="mb-3">
+                <!-- Total Order Icon -->
                 <svg
+                  *ngIf="i === 1"
                   class="w-7 h-7"
                   viewBox="0 0 27 26"
                   fill="none"
@@ -140,18 +135,9 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-              </div>
-              <div class="space-y-1">
-                <div class="text-white text-lg font-bold">500</div>
-                <div class="text-gray-300 text-xs">Total Order</div>
-                <div class="text-teal-400 text-xs">+8% from yesterday</div>
-              </div>
-            </div>
-
-            <!-- Product Sold Card -->
-            <div class="bg-gray-700 rounded-lg p-3">
-              <div class="mb-3">
+                <!-- Product Sold Icon -->
                 <svg
+                  *ngIf="i === 2"
                   class="w-7 h-7"
                   viewBox="0 0 23 25"
                   fill="none"
@@ -162,18 +148,9 @@
                     fill="#F2C8ED"
                   />
                 </svg>
-              </div>
-              <div class="space-y-1">
-                <div class="text-white text-lg font-bold">9</div>
-                <div class="text-gray-300 text-xs">Product Sold</div>
-                <div class="text-pink-400 text-xs">+2% from yesterday</div>
-              </div>
-            </div>
-
-            <!-- New Customer Card -->
-            <div class="bg-gray-700 rounded-lg p-3">
-              <div class="mb-3">
+                <!-- New Customer Icon -->
                 <svg
+                  *ngIf="i === 3"
                   class="w-7 h-7"
                   viewBox="0 0 27 26"
                   fill="none"
@@ -194,9 +171,9 @@
                 </svg>
               </div>
               <div class="space-y-1">
-                <div class="text-white text-lg font-bold">12</div>
-                <div class="text-gray-300 text-xs">New Customer</div>
-                <div class="text-blue-400 text-xs">+3% from yesterday</div>
+                <div class="text-white text-lg font-bold">{{ card.value }}</div>
+                <div class="text-gray-300 text-xs">{{ card.title }}</div>
+                <div [class]="card.color + ' text-xs'">{{ card.change }}</div>
               </div>
             </div>
           </div>
