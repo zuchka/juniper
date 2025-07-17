@@ -561,8 +561,14 @@
                 </button>
               </div>
 
+              <!-- Loading State for Customers -->
+              <div *ngIf="isLoadingCustomers()" class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Loading customers...</p>
+              </div>
+
               <!-- Customers Table -->
-              <div class="table-container">
+              <div class="table-container" *ngIf="!isLoadingCustomers()">
                 <table
                   mat-table
                   [dataSource]="customersDataSource"
