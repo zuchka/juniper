@@ -494,6 +494,29 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     this.usersDataSource.paginator = this.usersPaginator;
     this.usersDataSource.sort = this.usersSort;
 
+    // Custom sorting for computed name field
+    this.usersDataSource.sortingDataAccessor = (
+      data: User,
+      sortHeaderId: string,
+    ) => {
+      switch (sortHeaderId) {
+        case "name":
+          return `${data.firstName} ${data.lastName}`.toLowerCase();
+        case "id":
+          return data.id;
+        case "email":
+          return data.email.toLowerCase();
+        case "phone":
+          return data.phone;
+        case "age":
+          return data.age;
+        case "city":
+          return data.city.toLowerCase();
+        default:
+          return (data as any)[sortHeaderId];
+      }
+    };
+
     this.customersDataSource.paginator = this.customersPaginator;
     this.customersDataSource.sort = this.customersSort;
 
