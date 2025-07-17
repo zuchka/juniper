@@ -324,7 +324,17 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     { name: "Inventory Sync", progress: 93, color: "primary" },
   ];
 
-  displayedColumns: string[] = [
+  // Table columns
+  productsDisplayedColumns: string[] = [
+    "id",
+    "name",
+    "category",
+    "popularity",
+    "sales",
+    "status",
+    "actions",
+  ];
+  customersDisplayedColumns: string[] = [
     "id",
     "name",
     "email",
@@ -332,6 +342,15 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     "totalSpent",
     "status",
     "lastOrder",
+    "actions",
+  ];
+  ordersDisplayedColumns: string[] = [
+    "id",
+    "customer",
+    "product",
+    "amount",
+    "status",
+    "date",
     "actions",
   ];
 
