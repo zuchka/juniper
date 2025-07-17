@@ -288,9 +288,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     "email",
     "phone",
     "age",
-    "gender",
-    "university",
-    "department",
     "city",
     "actions",
   ];
