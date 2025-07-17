@@ -169,7 +169,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   @ViewChild("ordersSort") ordersSort!: MatSort;
 
   // Data sources for tables
-  productsDataSource!: MatTableDataSource<Product>;
+  usersDataSource!: MatTableDataSource<User>;
   customersDataSource!: MatTableDataSource<Customer>;
   ordersDataSource!: MatTableDataSource<Order>;
 
