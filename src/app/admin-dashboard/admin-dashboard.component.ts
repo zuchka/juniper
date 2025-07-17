@@ -530,6 +530,30 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       emailAlerts: [false],
       dataRetention: [30],
     });
+
+    // Initialize data sources
+    this.productsDataSource = new MatTableDataSource(this.products);
+    this.customersDataSource = new MatTableDataSource(this.customers);
+    this.ordersDataSource = new MatTableDataSource(this.orders);
+  }
+
+  ngOnInit() {
+    // Set up filter listeners
+    this.setupProductFilters();
+    this.setupCustomerFilters();
+    this.setupOrderFilters();
+  }
+
+  ngAfterViewInit() {
+    // Set up pagination and sorting
+    this.productsDataSource.paginator = this.productsPaginator;
+    this.productsDataSource.sort = this.productsSort;
+
+    this.customersDataSource.paginator = this.customersPaginator;
+    this.customersDataSource.sort = this.customersSort;
+
+    this.ordersDataSource.paginator = this.ordersPaginator;
+    this.ordersDataSource.sort = this.ordersSort;
   }
 
   toggleSidenav() {
