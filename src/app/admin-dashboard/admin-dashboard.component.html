@@ -320,22 +320,13 @@
                     </td>
                   </ng-container>
 
-                  <!-- Popularity Column -->
-                  <ng-container matColumnDef="popularity">
+                  <!-- Phone Column -->
+                  <ng-container matColumnDef="phone">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Popularity
+                      Phone
                     </th>
-                    <td mat-cell *matCellDef="let product">
-                      <div class="progress-container">
-                        <mat-progress-bar
-                          mode="determinate"
-                          [value]="product.popularity"
-                          [ngClass]="getProgressBarClass(product.popularity)"
-                        ></mat-progress-bar>
-                        <span class="progress-text"
-                          >{{ product.popularity }}%</span
-                        >
-                      </div>
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.phone }}
                     </td>
                   </ng-container>
 
