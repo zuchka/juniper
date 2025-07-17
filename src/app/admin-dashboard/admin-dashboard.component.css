@@ -1040,7 +1040,7 @@ button:focus-visible {
     margin-bottom: 16px;
   }
 
-  .products-table .mat-mdc-cell,
+  .users-table .mat-mdc-cell,
   .customers-table .mat-mdc-cell,
   .orders-table .mat-mdc-cell {
     padding: 8px 12px;
