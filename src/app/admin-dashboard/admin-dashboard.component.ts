@@ -661,8 +661,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   // Clear filter methods
   clearUserFilters() {
     this.userNameFilter.setValue("");
-    this.userGenderFilter.setValue("");
-    this.userDepartmentFilter.setValue("");
+    this.userCityFilter.setValue("");
   }
 
   clearCustomerFilters() {
