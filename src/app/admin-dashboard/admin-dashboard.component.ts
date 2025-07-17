@@ -6,6 +6,7 @@ import {
   AfterViewInit,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ApiService, Customer as ApiCustomer } from "../services/api.service";
 
 // Angular Material Imports
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -55,6 +56,10 @@ interface Customer {
   status: string;
   lastOrder: Date;
   avatar: string;
+  phone: string;
+  city: string;
+  age: number;
+  department: string;
 }
 
 interface MetricCard {
@@ -162,6 +167,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   customersDataSource!: MatTableDataSource<Customer>;
   ordersDataSource!: MatTableDataSource<Order>;
 
+  // Loading states
+  isLoadingCustomers = signal(true);
+  isLoadingMetrics = signal(true);
+
   // Filter controls
   productNameFilter = new FormControl("");
   productCategoryFilter = new FormControl("");
@@ -224,58 +233,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  customers: Customer[] = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      email: "sarah.j@example.com",
-      totalOrders: 23,
-      totalSpent: 2847.5,
-      status: "Premium",
-      lastOrder: new Date("2024-01-15"),
-      avatar: "SJ",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      email: "michael.chen@example.com",
-      totalOrders: 12,
-      totalSpent: 1205.3,
-      status: "Active",
-      lastOrder: new Date("2024-01-14"),
-      avatar: "MC",
-    },
-    {
-      id: 3,
-      name: "Emma Williams",
-      email: "emma.w@example.com",
-      totalOrders: 8,
-      totalSpent: 674.2,
-      status: "Active",
-      lastOrder: new Date("2024-01-10"),
-      avatar: "EW",
-    },
-    {
-      id: 4,
-      name: "David Rodriguez",
-      email: "david.r@example.com",
-      totalOrders: 31,
-      totalSpent: 4523.75,
-      status: "VIP",
-      lastOrder: new Date("2024-01-16"),
-      avatar: "DR",
-    },
-    {
-      id: 5,
-      name: "Lisa Anderson",
-      email: "lisa.a@example.com",
-      totalOrders: 5,
-      totalSpent: 289.4,
-      status: "New",
-      lastOrder: new Date("2024-01-12"),
-      avatar: "LA",
-    },
-  ];
+  customers: Customer[] = [];
 
   chartData: ChartData[] = [
     { label: "Jan", value: 45000 },
@@ -514,7 +472,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private apiService: ApiService,
+  ) {
     this.userForm = this.fb.group({
       name: [""],
       email: [""],
