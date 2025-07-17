@@ -330,15 +330,13 @@
                     </td>
                   </ng-container>
 
-                  <!-- Sales Column -->
-                  <ng-container matColumnDef="sales">
+                  <!-- Age Column -->
+                  <ng-container matColumnDef="age">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Sales
+                      Age
                     </th>
-                    <td mat-cell *matCellDef="let product">
-                      <mat-chip [ngClass]="getSalesChipClass(product.sales)"
-                        >{{ product.sales }}%</mat-chip
-                      >
+                    <td mat-cell *matCellDef="let user">
+                      {{ user.age }}
                     </td>
                   </ng-container>
 
