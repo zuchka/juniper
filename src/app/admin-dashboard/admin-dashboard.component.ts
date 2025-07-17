@@ -59,6 +59,14 @@ interface ChartData {
   value: number;
 }
 
+interface SalesCard {
+  title: string;
+  value: string;
+  change: string;
+  icon: string;
+  color: string;
+}
+
 @Component({
   selector: "app-admin-dashboard",
   standalone: true,
