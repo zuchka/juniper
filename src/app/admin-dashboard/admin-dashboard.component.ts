@@ -386,6 +386,134 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     },
   ];
 
+  // Sample products data
+  products: Product[] = [
+    {
+      id: 1,
+      name: "Home Decore Range",
+      popularity: 46,
+      sales: 46,
+      category: "Home & Garden",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Disney Princess Dress",
+      popularity: 17,
+      sales: 17,
+      category: "Fashion",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Bathroom Essentials",
+      popularity: 19,
+      sales: 19,
+      category: "Home & Garden",
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "Apple Smartwatch",
+      popularity: 29,
+      sales: 29,
+      category: "Electronics",
+      status: "Active",
+    },
+    {
+      id: 5,
+      name: "Wireless Headphones",
+      popularity: 35,
+      sales: 35,
+      category: "Electronics",
+      status: "Active",
+    },
+    {
+      id: 6,
+      name: "Yoga Mat Premium",
+      popularity: 22,
+      sales: 22,
+      category: "Sports",
+      status: "Out of Stock",
+    },
+    {
+      id: 7,
+      name: "Coffee Maker Deluxe",
+      popularity: 41,
+      sales: 41,
+      category: "Home & Garden",
+      status: "Active",
+    },
+    {
+      id: 8,
+      name: "Running Shoes Pro",
+      popularity: 38,
+      sales: 38,
+      category: "Sports",
+      status: "Active",
+    },
+  ];
+
+  // Sample orders data
+  orders: Order[] = [
+    {
+      id: 12891,
+      customer: "Sarah Johnson",
+      product: "Apple Smartwatch",
+      amount: 299.99,
+      status: "Delivered",
+      date: new Date("2024-01-15"),
+    },
+    {
+      id: 12892,
+      customer: "Michael Chen",
+      product: "Wireless Headphones",
+      amount: 159.99,
+      status: "Shipped",
+      date: new Date("2024-01-16"),
+    },
+    {
+      id: 12893,
+      customer: "Emma Williams",
+      product: "Home Decore Range",
+      amount: 89.99,
+      status: "Processing",
+      date: new Date("2024-01-16"),
+    },
+    {
+      id: 12894,
+      customer: "David Rodriguez",
+      product: "Coffee Maker Deluxe",
+      amount: 199.99,
+      status: "Pending",
+      date: new Date("2024-01-17"),
+    },
+    {
+      id: 12895,
+      customer: "Lisa Anderson",
+      product: "Disney Princess Dress",
+      amount: 49.99,
+      status: "Delivered",
+      date: new Date("2024-01-17"),
+    },
+    {
+      id: 12896,
+      customer: "John Smith",
+      product: "Yoga Mat Premium",
+      amount: 79.99,
+      status: "Cancelled",
+      date: new Date("2024-01-18"),
+    },
+    {
+      id: 12897,
+      customer: "Anna Taylor",
+      product: "Running Shoes Pro",
+      amount: 129.99,
+      status: "Processing",
+      date: new Date("2024-01-18"),
+    },
+  ];
+
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       name: [""],
