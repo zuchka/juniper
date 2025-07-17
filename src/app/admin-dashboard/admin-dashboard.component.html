@@ -320,7 +320,9 @@
                       Age
                     </th>
                     <td mat-cell *matCellDef="let user">
-                      {{ user.age }}
+                      <mat-chip [ngClass]="getAgeChipClass(user.age)">{{
+                        user.age
+                      }}</mat-chip>
                     </td>
                   </ng-container>
 
