@@ -296,6 +296,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     "id",
     "name",
     "email",
+    "phone",
+    "city",
     "totalOrders",
     "totalSpent",
     "status",
