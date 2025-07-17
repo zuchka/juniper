@@ -783,7 +783,18 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       "Delivered",
       "Cancelled",
     ];
-    const products = this.products.map((p) => p.name);
+    const productNames = [
+      "MacBook Pro",
+      "iPhone 15",
+      "AirPods Pro",
+      "iPad Air",
+      "Apple Watch",
+      "Samsung Galaxy",
+      "Dell Laptop",
+      "Sony Headphones",
+      "Nike Shoes",
+      "Adidas Jacket",
+    ];
 
     this.orders = [];
     let orderId = 12891;
