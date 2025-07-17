@@ -690,13 +690,13 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Action methods
-  editProduct(product: Product) {
-    console.log("Edit product:", product);
+  editUser(user: User) {
+    console.log("Edit user:", user);
   }
 
-  deleteProduct(productId: number) {
-    this.products = this.products.filter((p) => p.id !== productId);
-    this.productsDataSource.data = this.products;
+  deleteUser(userId: number) {
+    this.users = this.users.filter((u) => u.id !== userId);
+    this.usersDataSource.data = this.users;
   }
 
   viewOrder(order: Order) {
