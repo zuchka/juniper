@@ -1062,3 +1062,24 @@ button:focus-visible {
   background-color: rgba(169, 223, 216, 0.2) !important;
   color: var(--primary-color) !important;
 }
+
+/* Loading Container Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: #9ca3af;
+  gap: 16px;
+}
+
+.loading-container .mat-mdc-progress-spinner circle {
+  stroke: var(--primary-color) !important;
+}
+
+.loading-container p {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
