@@ -391,16 +391,16 @@
 
                   <tr
                     mat-header-row
-                    *matHeaderRowDef="productsDisplayedColumns"
+                    *matHeaderRowDef="usersDisplayedColumns"
                   ></tr>
                   <tr
                     mat-row
-                    *matRowDef="let row; columns: productsDisplayedColumns"
+                    *matRowDef="let row; columns: usersDisplayedColumns"
                   ></tr>
                 </table>
 
                 <mat-paginator
-                  #productsPaginator="matPaginator"
+                  #usersPaginator="matPaginator"
                   [pageSizeOptions]="[5, 10, 25, 100]"
                   showFirstLastButtons
                 >
