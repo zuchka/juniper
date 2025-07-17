@@ -459,6 +459,11 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
         this.usersDataSource.data = this.users;
 
+        // Re-apply sorting if sort is available
+        if (this.usersSort) {
+          this.usersDataSource.sort = this.usersSort;
+        }
+
         // Also load customers data
         this.loadCustomersData();
       },
