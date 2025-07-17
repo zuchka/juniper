@@ -234,6 +234,29 @@
               <mat-card-title>Users</mat-card-title>
             </mat-card-header>
             <mat-card-content>
+              <!-- User Search Filter -->
+              <div class="filter-container">
+                <mat-form-field appearance="outline" class="filter-field">
+                  <mat-label>Search Users</mat-label>
+                  <input
+                    matInput
+                    [formControl]="userSearchFilter"
+                    placeholder="Search by name or email..."
+                  />
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="clearUserFilter()"
+                  class="clear-filters-btn"
+                >
+                  <mat-icon>clear</mat-icon>
+                  Clear Filter
+                </button>
+              </div>
+
               <!-- Users Table -->
               <div class="table-container">
                 <table

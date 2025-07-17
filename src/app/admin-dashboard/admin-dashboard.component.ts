@@ -183,6 +183,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   orderStatusFilter = new FormControl("");
   orderCustomerFilter = new FormControl("");
 
+  userSearchFilter = new FormControl("");
+
   customerStatuses = ["VIP", "Premium", "Active", "New", "Inactive"];
   orderStatuses = [
     "Pending",
@@ -428,6 +430,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // Set up filter listeners
+    this.setupUserFilters();
     this.setupCustomerFilters();
     this.setupOrderFilters();
 
@@ -650,6 +653,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   // Filter setup methods
 
+  setupUserFilters() {
+    this.userSearchFilter.valueChanges.subscribe(() => {
+      this.applyUserFilters();
+    });
+  }
+
   setupCustomerFilters() {
     this.customerNameFilter.valueChanges.subscribe(() => {
       this.applyCustomerFilters();
@@ -671,6 +680,30 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Filter application methods
+
+  applyUserFilters() {
+    this.usersDataSource.filterPredicate = (data: User, filter: string) => {
+      const searchTerm = this.userSearchFilter.value?.toLowerCase() || "";
+
+      if (!searchTerm) {
+        return true;
+      }
+
+      const fullName = `${data.firstName} ${data.lastName}`.toLowerCase();
+      const email = data.email.toLowerCase();
+      const phone = data.phone.toLowerCase();
+      const city = data.city.toLowerCase();
+
+      return (
+        fullName.includes(searchTerm) ||
+        email.includes(searchTerm) ||
+        phone.includes(searchTerm) ||
+        city.includes(searchTerm)
+      );
+    };
+
+    this.usersDataSource.filter = "trigger";
+  }
 
   applyCustomerFilters() {
     this.customersDataSource.filterPredicate = (
@@ -712,6 +745,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Clear filter methods
+
+  clearUserFilter() {
+    this.userSearchFilter.setValue("");
+  }
 
   clearCustomerFilters() {
     this.customerNameFilter.setValue("");
