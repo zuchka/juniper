@@ -367,7 +367,7 @@
   margin-bottom: 24px;
 }
 
-.products-card {
+.users-card {
   flex: 1;
   background-color: var(--background-secondary) !important;
 }
