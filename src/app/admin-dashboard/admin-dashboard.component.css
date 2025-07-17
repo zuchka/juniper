@@ -5,7 +5,12 @@
   height: 100vh;
   display: flex;
   background-color: var(--background-primary);
-  font-family: "Inter", -apple-system, Roboto, Helvetica, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
 }
 
 /* Drawer Container */
@@ -194,7 +199,7 @@
 }
 
 .metric-icon {
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
 }
 
 .icon {
@@ -212,15 +217,18 @@
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
+  margin: 0 auto;
 }
 
 .metric-title {
   color: #d1d5db;
   font-size: 12px;
+  margin: 0 auto;
 }
 
 .metric-change {
   font-size: 12px;
+  margin: 0 auto;
 }
 
 .metric-change.text-orange-400 {
@@ -654,19 +662,19 @@
   .metric-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .stats-row {
     flex-direction: column;
   }
-  
+
   .data-row {
     flex-direction: column;
   }
-  
+
   .insights-row {
     flex-direction: column;
   }
-  
+
   .level-card,
   .fulfillment-card,
   .earnings-card {
@@ -678,15 +686,15 @@
   .dashboard-sidebar {
     width: 60px !important;
   }
-  
+
   .nav-text {
     display: none;
   }
-  
+
   .dashboard-main {
     padding: 16px;
   }
-  
+
   .header-content {
     padding: 0 16px;
     flex-direction: column;
@@ -695,7 +703,7 @@
     padding-bottom: 16px;
     gap: 16px;
   }
-  
+
   .search-container {
     max-width: 100%;
   }
