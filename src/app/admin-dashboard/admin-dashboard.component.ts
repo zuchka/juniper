@@ -611,29 +611,26 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Filter application methods
-  applyProductFilters() {
-    this.productsDataSource.filterPredicate = (
-      data: Product,
-      filter: string,
-    ) => {
+  applyUserFilters() {
+    this.usersDataSource.filterPredicate = (data: User, filter: string) => {
       const nameMatch =
-        !this.productNameFilter.value ||
-        data.name
+        !this.userNameFilter.value ||
+        `${data.firstName} ${data.lastName}`
           .toLowerCase()
-          .includes(this.productNameFilter.value.toLowerCase());
+          .includes(this.userNameFilter.value.toLowerCase());
 
-      const categoryMatch =
-        !this.productCategoryFilter.value ||
-        data.category === this.productCategoryFilter.value;
+      const genderMatch =
+        !this.userGenderFilter.value ||
+        data.gender === this.userGenderFilter.value;
 
-      const statusMatch =
-        !this.productStatusFilter.value ||
-        data.status === this.productStatusFilter.value;
+      const departmentMatch =
+        !this.userDepartmentFilter.value ||
+        data.department === this.userDepartmentFilter.value;
 
-      return nameMatch && categoryMatch && statusMatch;
+      return nameMatch && genderMatch && departmentMatch;
     };
 
-    this.productsDataSource.filter = "trigger";
+    this.usersDataSource.filter = "trigger";
   }
 
   applyCustomerFilters() {
