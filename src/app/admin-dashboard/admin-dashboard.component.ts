@@ -447,10 +447,47 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     this.loadUsersData();
   }
 
-  loadCustomersData() {
+  loadUsersData() {
     this.isLoadingCustomers.set(true);
     this.isLoadingMetrics.set(true);
 
+    this.apiService.getUsers().subscribe({
+      next: (response) => {
+        // Load raw users data for users table
+        this.users = response.users.map((user) => ({
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phone,
+          age: user.age,
+          gender: user.gender,
+          university: user.university,
+          department: user.company.department,
+          city: user.address.city,
+          country: user.address.country,
+          status: Math.random() > 0.8 ? "Inactive" : "Active",
+        }));
+
+        this.usersDataSource.data = this.users;
+
+        // Extract unique departments for filter
+        this.userDepartments = [
+          ...new Set(this.users.map((u) => u.department)),
+        ].sort();
+
+        // Also load customers data
+        this.loadCustomersData();
+      },
+      error: (error) => {
+        console.error("Error loading users data:", error);
+        this.isLoadingCustomers.set(false);
+        this.isLoadingMetrics.set(false);
+      },
+    });
+  }
+
+  loadCustomersData() {
     this.apiService.getUsersAsCustomers().subscribe({
       next: (customers: Customer[]) => {
         this.customers = customers;
