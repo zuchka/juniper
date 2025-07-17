@@ -874,6 +874,11 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     });
 
     this.ordersDataSource.data = this.orders;
+
+    // Re-apply sorting if sort is available
+    if (this.ordersSort) {
+      this.ordersDataSource.sort = this.ordersSort;
+    }
   }
 
   // Calculate real metrics from customer data
