@@ -576,11 +576,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       this.applyUserFilters();
     });
 
-    this.userGenderFilter.valueChanges.subscribe(() => {
-      this.applyUserFilters();
-    });
-
-    this.userDepartmentFilter.valueChanges.subscribe(() => {
+    this.userCityFilter.valueChanges.subscribe(() => {
       this.applyUserFilters();
     });
   }
