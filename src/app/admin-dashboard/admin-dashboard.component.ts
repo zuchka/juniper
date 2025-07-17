@@ -70,6 +70,24 @@ interface ChartData {
   value: number;
 }
 
+interface Product {
+  id: number;
+  name: string;
+  popularity: number;
+  sales: number;
+  category: string;
+  status: string;
+}
+
+interface Order {
+  id: number;
+  customer: string;
+  product: string;
+  amount: number;
+  status: string;
+  date: Date;
+}
+
 interface SalesCard {
   title: string;
   value: string;
