@@ -75,12 +75,18 @@ interface ChartData {
   value: number;
 }
 
-interface Product {
+interface User {
   id: number;
-  name: string;
-  popularity: number;
-  sales: number;
-  category: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  age: number;
+  gender: string;
+  university: string;
+  department: string;
+  city: string;
+  country: string;
   status: string;
 }
 
