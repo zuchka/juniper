@@ -752,4 +752,66 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     this.orders = this.orders.filter((o) => o.id !== orderId);
     this.ordersDataSource.data = this.orders;
   }
+
+  // Helper methods for styling
+  getProgressBarClass(popularity: number): string {
+    if (popularity >= 40) return "progress-orange";
+    if (popularity >= 30) return "progress-pink";
+    if (popularity >= 20) return "progress-blue";
+    return "progress-teal";
+  }
+
+  getSalesChipClass(sales: number): string {
+    if (sales >= 40) return "sales-chip orange";
+    if (sales >= 30) return "sales-chip pink";
+    if (sales >= 20) return "sales-chip blue";
+    return "sales-chip teal";
+  }
+
+  getStatusChipClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case "active":
+        return "status-chip active";
+      case "out of stock":
+        return "status-chip out-of-stock";
+      case "inactive":
+        return "status-chip inactive";
+      default:
+        return "status-chip";
+    }
+  }
+
+  getCustomerStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case "vip":
+        return "status-chip vip";
+      case "premium":
+        return "status-chip premium";
+      case "active":
+        return "status-chip active";
+      case "new":
+        return "status-chip new";
+      case "inactive":
+        return "status-chip inactive";
+      default:
+        return "status-chip";
+    }
+  }
+
+  getOrderStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case "delivered":
+        return "status-chip delivered";
+      case "shipped":
+        return "status-chip shipped";
+      case "processing":
+        return "status-chip processing";
+      case "pending":
+        return "status-chip pending";
+      case "cancelled":
+        return "status-chip cancelled";
+      default:
+        return "status-chip";
+    }
+  }
 }
