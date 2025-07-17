@@ -229,6 +229,8 @@
 .metric-change {
   font-size: 12px;
   margin: 0 auto;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .metric-change.text-orange-400 {
