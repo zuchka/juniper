@@ -214,6 +214,37 @@ export class AdminDashboardComponent {
     { label: "Jun", value: 67000 },
   ];
 
+  salesCards: SalesCard[] = [
+    {
+      title: "Total Sales",
+      value: "$5k",
+      change: "+10% from yesterday",
+      icon: "sales",
+      color: "text-orange-400",
+    },
+    {
+      title: "Total Order",
+      value: "500",
+      change: "+8% from yesterday",
+      icon: "order",
+      color: "text-teal-400",
+    },
+    {
+      title: "Product Sold",
+      value: "9",
+      change: "+2% from yesterday",
+      icon: "product",
+      color: "text-pink-400",
+    },
+    {
+      title: "New Customer",
+      value: "12",
+      change: "+3% from yesterday",
+      icon: "customer",
+      color: "text-blue-400",
+    },
+  ];
+
   taskProgress = [
     { name: "Holiday Campaign", progress: 85, color: "primary" },
     { name: "Mobile Checkout", progress: 62, color: "accent" },
