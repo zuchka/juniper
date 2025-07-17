@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatCheckboxModule,
     MatProgressBarModule,
     MatChipsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatToolbarModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

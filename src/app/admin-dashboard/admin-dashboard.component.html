@@ -1,482 +1,451 @@
-<div class="admin-dashboard h-screen flex bg-gray-900">
+<div class="dashboard-container">
   <!-- Sidebar Navigation -->
-  <div class="w-32 bg-gray-800 border-r border-gray-700 flex flex-col">
-    <!-- Sidebar Header with macOS-style dots -->
-    <div class="p-6 border-b border-gray-700">
-      <div class="flex space-x-2 mb-4">
-        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-      </div>
-    </div>
-
-    <!-- Navigation Menu -->
-    <nav class="flex-1 pt-4">
-      <div *ngFor="let item of menuItems" class="px-2 mb-1">
-        <div
-          [class]="
-            item.name === 'Dashboard'
-              ? 'bg-teal-400 text-gray-900 font-semibold rounded-md p-3 flex flex-col items-center text-xs'
-              : 'text-gray-400 hover:text-white p-3 flex flex-col items-center text-xs cursor-pointer'
-          "
-        >
-          <mat-icon class="text-sm mb-1">{{ item.icon }}</mat-icon>
-          <span>{{ item.name }}</span>
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer mode="side" opened class="dashboard-sidebar">
+      <!-- Sidebar Header with macOS-style dots -->
+      <div class="sidebar-header">
+        <div class="macos-dots">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
         </div>
       </div>
-    </nav>
-  </div>
 
-  <!-- Main Content -->
-  <div class="flex-1 flex flex-col">
-    <!-- Top Header -->
-    <header class="bg-gray-800 px-6 py-4 border-b border-gray-700">
-      <div class="flex items-center justify-between">
-        <!-- Search Bar -->
-        <div class="flex-1 max-w-md">
-          <div class="relative">
-            <div
-              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-            >
-              <mat-icon class="text-gray-400 text-sm">search</mat-icon>
-            </div>
-            <input
-              type="text"
-              class="bg-gray-700 text-gray-200 rounded-lg pl-10 pr-4 py-2 w-full text-sm placeholder-gray-400 border-none outline-none focus:ring-2 focus:ring-teal-400"
-              placeholder="Search here..."
-            />
-          </div>
-        </div>
-
-        <!-- Right side icons -->
-        <div class="flex items-center space-x-4">
-          <!-- Notifications -->
-          <button class="relative">
-            <mat-icon class="text-white">notifications</mat-icon>
-            <div
-              class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
-            ></div>
-          </button>
-
-          <!-- Profile -->
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div *ngFor="let item of menuItems" class="nav-item">
           <div
-            class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm"
+            [class]="
+              item.name === 'Dashboard'
+                ? 'nav-link active'
+                : 'nav-link'
+            "
           >
-            U
+            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+            <span class="nav-text">{{ item.name }}</span>
           </div>
-
-          <!-- Dropdown -->
-          <button>
-            <mat-icon class="text-white">keyboard_arrow_down</mat-icon>
-          </button>
         </div>
-      </div>
-    </header>
+      </nav>
+    </mat-drawer>
 
-    <!-- Dashboard Content -->
-    <div class="flex-1 p-6 bg-gray-900 overflow-auto">
-      <!-- Sales Statistics Section -->
-      <div class="flex gap-4 mb-6">
-        <!-- Today's Sales Card -->
-        <div class="flex-1 bg-gray-800 rounded-lg p-4">
-          <div class="mb-5">
-            <h3 class="text-white text-lg font-semibold">Today's Sales</h3>
-            <p class="text-gray-400 text-xs">Sales Summary</p>
+    <mat-drawer-content class="dashboard-content">
+      <!-- Top Header -->
+      <mat-toolbar class="dashboard-header">
+        <div class="header-content">
+          <!-- Search Bar -->
+          <div class="search-container">
+            <mat-form-field appearance="outline" class="search-field">
+              <mat-icon matPrefix class="search-icon">search</mat-icon>
+              <input
+                matInput
+                placeholder="Search here..."
+                class="search-input"
+              />
+            </mat-form-field>
           </div>
 
-          <!-- Sales Metric Cards -->
-          <div class="grid grid-cols-4 gap-5">
-            <div
-              *ngFor="let card of salesCards; let i = index"
-              class="bg-gray-700 rounded-lg p-3"
-            >
-              <div class="mb-3">
-                <!-- Total Sales Icon -->
-                <svg
-                  *ngIf="i === 0"
-                  class="w-7 h-7"
-                  viewBox="0 0 27 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+          <!-- Right side icons -->
+          <div class="header-actions">
+            <!-- Notifications -->
+            <button mat-icon-button class="notification-button">
+              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+            </button>
+
+            <!-- Profile -->
+            <div class="profile-avatar">
+              <span>U</span>
+            </div>
+
+            <!-- Dropdown -->
+            <button mat-icon-button>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-main">
+        <!-- Sales Statistics Section -->
+        <div class="stats-row">
+          <!-- Today's Sales Card -->
+          <mat-card class="sales-card">
+            <mat-card-header>
+              <mat-card-title>Today's Sales</mat-card-title>
+              <mat-card-subtitle>Sales Summary</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Sales Metric Cards -->
+              <div class="metric-cards-grid">
+                <mat-card
+                  *ngFor="let card of salesCards; let i = index"
+                  class="metric-card"
                 >
+                  <div class="metric-icon">
+                    <!-- Total Sales Icon -->
+                    <svg
+                      *ngIf="i === 0"
+                      class="icon"
+                      viewBox="0 0 27 26"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M23.7034 6.95138L13.7277 1.08333L3.75201 6.95138V18.6875L13.7277 24.5555L23.7034 18.6875V6.95138Z"
+                        stroke="#FEB95A"
+                        stroke-width="1.95"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M9.03326 13.993V16.3403M13.7277 11.6458V16.3403V11.6458ZM18.4222 9.2986V16.3403V9.2986Z"
+                        stroke="#FEB95A"
+                        stroke-width="1.95"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <!-- Total Order Icon -->
+                    <svg
+                      *ngIf="i === 1"
+                      class="icon"
+                      viewBox="0 0 27 26"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.4987 3.69315H21.2645C21.5609 3.69315 21.8451 3.81204 22.0547 4.02367C22.2643 4.2353 22.382 4.52233 22.382 4.82163V23.4415C22.382 23.7408 22.2643 24.0279 22.0547 24.2395C21.8451 24.4511 21.5609 24.57 21.2645 24.57H5.61951C5.32313 24.57 5.03889 24.4511 4.82932 24.2395C4.61975 24.0279 4.50201 23.7408 4.50201 23.4415V4.82163C4.50201 4.52233 4.61975 4.2353 4.82932 4.02367C5.03889 3.81204 5.32313 3.69315 5.61951 3.69315H9.53076V5.38587H17.3533V3.69315H18.4987Z"
+                        stroke="#A9DFD8"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M15.1187 10.4636L10.6487 14.9781H16.2384L11.7662 19.492M9.53117 2H17.3537V5.38544H9.53117V2Z"
+                        stroke="#A9DFD8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <!-- Product Sold Icon -->
+                    <svg
+                      *ngIf="i === 2"
+                      class="icon"
+                      viewBox="0 0 23 25"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.3006 6.24477H20.9059C21.1239 6.24499 21.3342 6.32613 21.4958 6.47249C21.6574 6.61885 21.759 6.81999 21.7808 7.03696L22.3177 12.4062H20.5468L20.1067 8.00519H17.3006V10.6458C17.3006 10.8793 17.2078 11.1031 17.0427 11.2682C16.8777 11.4333 16.6538 11.526 16.4203 11.526C16.1869 11.526 15.963 11.4333 15.7979 11.2682C15.6329 11.1031 15.5401 10.8793 15.5401 10.6458V8.00519H8.49847V10.6458C8.49847 10.8793 8.40574 11.1031 8.24066 11.2682C8.07559 11.4333 7.85171 11.526 7.61826 11.526C7.38482 11.526 7.16093 11.4333 6.99586 11.2682C6.83079 11.1031 6.73805 10.8793 6.73805 10.6458V8.00519H3.93019L2.52186 22.0885H12.0193V23.8489H1.54835C1.42541 23.8488 1.30385 23.8229 1.19152 23.773C1.07919 23.723 0.97857 23.6501 0.896143 23.5589C0.813717 23.4677 0.751314 23.3602 0.712953 23.2434C0.674592 23.1266 0.661124 23.003 0.673419 22.8807L2.25779 7.03696C2.2796 6.81999 2.38116 6.61885 2.54281 6.47249C2.70445 6.32613 2.91466 6.24499 3.13272 6.24477H6.73805V5.63039C6.73805 2.57782 9.08997 0.083313 12.0193 0.083313C14.9486 0.083313 17.3006 2.57782 17.3006 5.63039V6.24653V6.24477ZM15.5401 6.24477V5.63039C15.5401 3.52845 13.9522 1.84373 12.0193 1.84373C10.0864 1.84373 8.49847 3.52845 8.49847 5.63039V6.24653H15.5401V6.24477ZM21.0802 19.3423C21.1605 19.2549 21.2576 19.1847 21.3657 19.1358C21.4739 19.0869 21.5907 19.0604 21.7094 19.0579C21.828 19.0554 21.9459 19.0768 22.0561 19.121C22.1662 19.1652 22.2662 19.2312 22.3502 19.3151C22.4342 19.3989 22.5003 19.4989 22.5447 19.6089C22.589 19.719 22.6106 19.8369 22.6083 19.9555C22.6059 20.0741 22.5796 20.1911 22.5308 20.2993C22.4821 20.4075 22.412 20.5047 22.3248 20.5851L18.8039 24.106C18.6389 24.271 18.415 24.3637 18.1816 24.3637C17.9482 24.3637 17.7244 24.271 17.5593 24.106L14.0385 20.5851C13.9544 20.5039 13.8874 20.4068 13.8412 20.2994C13.7951 20.192 13.7708 20.0765 13.7698 19.9597C13.7688 19.8428 13.7911 19.7269 13.8353 19.6187C13.8796 19.5105 13.9449 19.4122 14.0276 19.3296C14.1102 19.247 14.2085 19.1816 14.3167 19.1373C14.4249 19.0931 14.5408 19.0708 14.6576 19.0718C14.7745 19.0728 14.89 19.0971 14.9974 19.1433C15.1048 19.1894 15.2019 19.2564 15.2831 19.3405L17.3006 21.3597V15.0469C17.3006 14.8134 17.3933 14.5895 17.5584 14.4245C17.7234 14.2594 17.9473 14.1666 18.1808 14.1666C18.4142 14.1666 18.6381 14.2594 18.8032 14.4245C18.9682 14.5895 19.061 14.8134 19.061 15.0469V21.3597L21.0802 19.3405V19.3423Z"
+                        fill="#F2C8ED"
+                      />
+                    </svg>
+                    <!-- New Customer Icon -->
+                    <svg
+                      *ngIf="i === 3"
+                      class="icon"
+                      viewBox="0 0 27 26"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.3482 13C16.3821 13 18.8416 10.5749 18.8416 7.58332C18.8416 4.59178 16.3821 2.16666 13.3482 2.16666C10.3142 2.16666 7.85472 4.59178 7.85472 7.58332C7.85472 10.5749 10.3142 13 13.3482 13Z"
+                        stroke="#20AEF3"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M17.7432 17.3333H24.3353M18.8419 23.8333H5.94987C5.63826 23.8334 5.33021 23.7681 5.04614 23.6418C4.76208 23.5155 4.5085 23.3311 4.30225 23.1008C4.096 22.8704 3.94178 22.5995 3.84984 22.3059C3.7579 22.0124 3.73033 21.7029 3.76897 21.398L4.19746 18.0136C4.29711 17.2274 4.68464 16.5041 5.28718 15.9798C5.88972 15.4555 6.66575 15.1663 7.46936 15.1666H7.855L18.8419 23.8333ZM21.0393 14.0833V20.5833V14.0833Z"
+                        stroke="#20AEF3"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="metric-details">
+                    <div class="metric-value">{{ card.value }}</div>
+                    <div class="metric-title">{{ card.title }}</div>
+                    <div [class]="'metric-change ' + card.color">{{ card.change }}</div>
+                  </div>
+                </mat-card>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Level Chart -->
+          <mat-card class="level-card">
+            <mat-card-header>
+              <mat-card-title>Level</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Bar Chart -->
+              <div class="bar-chart">
+                <!-- Bar 1 -->
+                <div class="bar-container">
+                  <div class="bar-background"></div>
+                  <div class="bar-fill bar-1"></div>
+                </div>
+                <!-- Bar 2 -->
+                <div class="bar-container">
+                  <div class="bar-background bar-tall"></div>
+                  <div class="bar-fill bar-2"></div>
+                </div>
+                <!-- Bar 3 -->
+                <div class="bar-container">
+                  <div class="bar-background"></div>
+                  <div class="bar-fill bar-3"></div>
+                </div>
+                <!-- Bar 4 -->
+                <div class="bar-container">
+                  <div class="bar-background bar-medium"></div>
+                  <div class="bar-fill bar-4"></div>
+                </div>
+                <!-- Bar 5 -->
+                <div class="bar-container">
+                  <div class="bar-background bar-short"></div>
+                  <div class="bar-fill bar-5"></div>
+                </div>
+                <!-- Bar 6 -->
+                <div class="bar-container">
+                  <div class="bar-background"></div>
+                  <div class="bar-fill bar-6"></div>
+                </div>
+              </div>
+
+              <!-- Legend -->
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <div class="legend-dot primary"></div>
+                  <span>Volume</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot secondary"></div>
+                  <span>Service</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Products & Customer Section -->
+        <div class="data-row">
+          <!-- Top Products -->
+          <mat-card class="products-card">
+            <mat-card-header>
+              <mat-card-title>Top Products</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Table Header -->
+              <div class="table-header">
+                <div class="header-cell">#</div>
+                <div class="header-cell">Name</div>
+                <div class="header-cell">Popularity</div>
+                <div class="header-cell">Sales</div>
+              </div>
+
+              <!-- Product Rows -->
+              <div class="table-body">
+                <div class="table-row">
+                  <div class="table-cell">01</div>
+                  <div class="table-cell">Home Decore Range</div>
+                  <div class="table-cell">
+                    <div class="progress-container">
+                      <mat-progress-bar mode="determinate" value="46" class="progress-orange"></mat-progress-bar>
+                    </div>
+                  </div>
+                  <div class="table-cell">
+                    <mat-chip class="sales-chip orange">46%</mat-chip>
+                  </div>
+                </div>
+
+                <div class="table-row">
+                  <div class="table-cell">02</div>
+                  <div class="table-cell">Disney Princess Dress</div>
+                  <div class="table-cell">
+                    <div class="progress-container">
+                      <mat-progress-bar mode="determinate" value="17" class="progress-teal"></mat-progress-bar>
+                    </div>
+                  </div>
+                  <div class="table-cell">
+                    <mat-chip class="sales-chip teal">17%</mat-chip>
+                  </div>
+                </div>
+
+                <div class="table-row">
+                  <div class="table-cell">03</div>
+                  <div class="table-cell">Bathroom Essentials</div>
+                  <div class="table-cell">
+                    <div class="progress-container">
+                      <mat-progress-bar mode="determinate" value="19" class="progress-blue"></mat-progress-bar>
+                    </div>
+                  </div>
+                  <div class="table-cell">
+                    <mat-chip class="sales-chip blue">19%</mat-chip>
+                  </div>
+                </div>
+
+                <div class="table-row">
+                  <div class="table-cell">04</div>
+                  <div class="table-cell">Apple Smartwatch</div>
+                  <div class="table-cell">
+                    <div class="progress-container">
+                      <mat-progress-bar mode="determinate" value="29" class="progress-pink"></mat-progress-bar>
+                    </div>
+                  </div>
+                  <div class="table-cell">
+                    <mat-chip class="sales-chip pink">29%</mat-chip>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Customer Fulfillment Chart -->
+          <mat-card class="fulfillment-card">
+            <mat-card-header>
+              <mat-card-title>Customer Fulfilment</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Chart Area -->
+              <div class="chart-area">
+                <svg viewBox="0 0 215 106" class="fulfillment-chart">
                   <path
-                    d="M23.7034 6.95138L13.7277 1.08333L3.75201 6.95138V18.6875L13.7277 24.5555L23.7034 18.6875V6.95138Z"
-                    stroke="#FEB95A"
-                    stroke-width="1.95"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9.03326 13.993V16.3403M13.7277 11.6458V16.3403V11.6458ZM18.4222 9.2986V16.3403V9.2986Z"
-                    stroke="#FEB95A"
-                    stroke-width="1.95"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <!-- Total Order Icon -->
-                <svg
-                  *ngIf="i === 1"
-                  class="w-7 h-7"
-                  viewBox="0 0 27 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.4987 3.69315H21.2645C21.5609 3.69315 21.8451 3.81204 22.0547 4.02367C22.2643 4.2353 22.382 4.52233 22.382 4.82163V23.4415C22.382 23.7408 22.2643 24.0279 22.0547 24.2395C21.8451 24.4511 21.5609 24.57 21.2645 24.57H5.61951C5.32313 24.57 5.03889 24.4511 4.82932 24.2395C4.61975 24.0279 4.50201 23.7408 4.50201 23.4415V4.82163C4.50201 4.52233 4.61975 4.2353 4.82932 4.02367C5.03889 3.81204 5.32313 3.69315 5.61951 3.69315H9.53076V5.38587H17.3533V3.69315H18.4987Z"
+                    d="M2.00012 9.02717C11.5542 13.8053 31.0064 23.3614 32.3822 23.3614C33.758 23.3614 40.5987 23.3614 43.8471 23.3614L71.9362 15.3342L96.0125 30.2418H109.77L133.847 13.0408L145.885 17.0543L182.573 42.2826L191.171 38.269L212.381 1"
                     stroke="#A9DFD8"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
+                    stroke-width="2"
+                    fill="none"
                   />
                   <path
-                    d="M15.1187 10.4636L10.6487 14.9781H16.2384L11.7662 19.492M9.53117 2H17.3537V5.38544H9.53117V2Z"
+                    d="M2.00012 52.7894L18.6243 51.0693L40.9809 40.1753L70.7897 71.1372H102.318L138.433 60.2432L184.292 63.1101L212.381 43.0421"
+                    stroke="#F2C8ED"
+                    stroke-width="2"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+
+              <!-- Legend -->
+              <div class="fulfillment-legend">
+                <div class="fulfillment-legend-item">
+                  <div class="legend-indicator">
+                    <div class="legend-dot teal"></div>
+                    <span>Last Month</span>
+                  </div>
+                  <span class="legend-value">$4,087</span>
+                </div>
+                <div class="fulfillment-legend-item">
+                  <div class="legend-indicator">
+                    <div class="legend-dot pink"></div>
+                    <span>This Month</span>
+                  </div>
+                  <span class="legend-value">$5,506</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Earnings & Visitor Section -->
+        <div class="insights-row">
+          <!-- Earnings -->
+          <mat-card class="earnings-card">
+            <mat-card-header>
+              <mat-card-title>Earnings</mat-card-title>
+              <mat-card-subtitle>Total Expense</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="earnings-amount">$6078.76</div>
+              <p class="earnings-subtitle">
+                Profit is 48% More than last Month
+              </p>
+
+              <!-- Semi-circle progress -->
+              <div class="progress-circle">
+                <svg class="circle-chart" viewBox="0 0 120 120">
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="50"
+                    stroke="var(--background-tertiary)"
+                    stroke-width="8"
+                    fill="none"
+                  />
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="50"
+                    stroke="var(--primary-color)"
+                    stroke-width="8"
+                    fill="none"
+                    stroke-dasharray="251"
+                    stroke-dashoffset="63"
+                    stroke-linecap="round"
+                    class="progress-arc"
+                  />
+                </svg>
+                <div class="progress-percentage">
+                  <span>80%</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Visitor Insights -->
+          <mat-card class="visitor-card">
+            <mat-card-header class="visitor-header">
+              <mat-card-title>Visitor Insights</mat-card-title>
+              <mat-chip class="visitor-chip">
+                <div class="chip-indicator"></div>
+                New Visitors
+              </mat-chip>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Chart -->
+              <div class="visitor-chart">
+                <svg viewBox="0 0 421 133" class="insights-chart">
+                  <path
+                    d="M1.46582 127L5.96085 117L14.4515 127L18.447 120.5L24.4404 127L30.4338 120.5L39.9233 127H52.4095L68.8912 92.5L81.3774 24L89.868 79L103.353 86L111.844 79L122.332 90L134.818 86L143.309 57L149.802 66.5L161.289 1.00002L166.783 17L180.767 28L189.258 19.5L194.253 5.50001L200.246 19.5L212.732 28L226.217 74.5L235.707 35.5L246.695 24L258.182 35.5L266.672 17L272.166 28L287.15 38.5L304.131 35.5L316.617 19.5L334.597 79L347.083 86L357.572 66.5L363.565 79L376.551 86L382.045 104L390.036 82L403.521 66.5L411.512 86L419.004 57"
                     stroke="#A9DFD8"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    stroke-width="2"
+                    fill="none"
                   />
-                </svg>
-                <!-- Product Sold Icon -->
-                <svg
-                  *ngIf="i === 2"
-                  class="w-7 h-7"
-                  viewBox="0 0 23 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop
+                        offset="0%"
+                        style="stop-color: #a9dfd8; stop-opacity: 0.3"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #a9dfd8; stop-opacity: 0"
+                      />
+                    </linearGradient>
+                  </defs>
                   <path
-                    d="M17.3006 6.24477H20.9059C21.1239 6.24499 21.3342 6.32613 21.4958 6.47249C21.6574 6.61885 21.759 6.81999 21.7808 7.03696L22.3177 12.4062H20.5468L20.1067 8.00519H17.3006V10.6458C17.3006 10.8793 17.2078 11.1031 17.0427 11.2682C16.8777 11.4333 16.6538 11.526 16.4203 11.526C16.1869 11.526 15.963 11.4333 15.7979 11.2682C15.6329 11.1031 15.5401 10.8793 15.5401 10.6458V8.00519H8.49847V10.6458C8.49847 10.8793 8.40574 11.1031 8.24066 11.2682C8.07559 11.4333 7.85171 11.526 7.61826 11.526C7.38482 11.526 7.16093 11.4333 6.99586 11.2682C6.83079 11.1031 6.73805 10.8793 6.73805 10.6458V8.00519H3.93019L2.52186 22.0885H12.0193V23.8489H1.54835C1.42541 23.8488 1.30385 23.8229 1.19152 23.773C1.07919 23.723 0.97857 23.6501 0.896143 23.5589C0.813717 23.4677 0.751314 23.3602 0.712953 23.2434C0.674592 23.1266 0.661124 23.003 0.673419 22.8807L2.25779 7.03696C2.2796 6.81999 2.38116 6.61885 2.54281 6.47249C2.70445 6.32613 2.91466 6.24499 3.13272 6.24477H6.73805V5.63039C6.73805 2.57782 9.08997 0.083313 12.0193 0.083313C14.9486 0.083313 17.3006 2.57782 17.3006 5.63039V6.24653V6.24477ZM15.5401 6.24477V5.63039C15.5401 3.52845 13.9522 1.84373 12.0193 1.84373C10.0864 1.84373 8.49847 3.52845 8.49847 5.63039V6.24653H15.5401V6.24477ZM21.0802 19.3423C21.1605 19.2549 21.2576 19.1847 21.3657 19.1358C21.4739 19.0869 21.5907 19.0604 21.7094 19.0579C21.828 19.0554 21.9459 19.0768 22.0561 19.121C22.1662 19.1652 22.2662 19.2312 22.3502 19.3151C22.4342 19.3989 22.5003 19.4989 22.5447 19.6089C22.589 19.719 22.6106 19.8369 22.6083 19.9555C22.6059 20.0741 22.5796 20.1911 22.5308 20.2993C22.4821 20.4075 22.412 20.5047 22.3248 20.5851L18.8039 24.106C18.6389 24.271 18.415 24.3637 18.1816 24.3637C17.9482 24.3637 17.7244 24.271 17.5593 24.106L14.0385 20.5851C13.9544 20.5039 13.8874 20.4068 13.8412 20.2994C13.7951 20.192 13.7708 20.0765 13.7698 19.9597C13.7688 19.8428 13.7911 19.7269 13.8353 19.6187C13.8796 19.5105 13.9449 19.4122 14.0276 19.3296C14.1102 19.247 14.2085 19.1816 14.3167 19.1373C14.4249 19.0931 14.5408 19.0708 14.6576 19.0718C14.7745 19.0728 14.89 19.0971 14.9974 19.1433C15.1048 19.1894 15.2019 19.2564 15.2831 19.3405L17.3006 21.3597V15.0469C17.3006 14.8134 17.3933 14.5895 17.5584 14.4245C17.7234 14.2594 17.9473 14.1666 18.1808 14.1666C18.4142 14.1666 18.6381 14.2594 18.8032 14.4245C18.9682 14.5895 19.061 14.8134 19.061 15.0469V21.3597L21.0802 19.3405V19.3423Z"
-                    fill="#F2C8ED"
-                  />
-                </svg>
-                <!-- New Customer Icon -->
-                <svg
-                  *ngIf="i === 3"
-                  class="w-7 h-7"
-                  viewBox="0 0 27 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M13.3482 13C16.3821 13 18.8416 10.5749 18.8416 7.58332C18.8416 4.59178 16.3821 2.16666 13.3482 2.16666C10.3142 2.16666 7.85472 4.59178 7.85472 7.58332C7.85472 10.5749 10.3142 13 13.3482 13Z"
-                    stroke="#20AEF3"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M17.7432 17.3333H24.3353M18.8419 23.8333H5.94987C5.63826 23.8334 5.33021 23.7681 5.04614 23.6418C4.76208 23.5155 4.5085 23.3311 4.30225 23.1008C4.096 22.8704 3.94178 22.5995 3.84984 22.3059C3.7579 22.0124 3.73033 21.7029 3.76897 21.398L4.19746 18.0136C4.29711 17.2274 4.68464 16.5041 5.28718 15.9798C5.88972 15.4555 6.66575 15.1663 7.46936 15.1666H7.855L18.8419 23.8333ZM21.0393 14.0833V20.5833V14.0833Z"
-                    stroke="#20AEF3"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    d="M6.46017 119.5L0.466797 131.5L420.502 132.5V57.5L412.012 90.5L403.022 69.5L391.534 82.5L382.045 107.5L375.552 87L362.566 80L357.572 69.5L347.583 87.5L333.099 80L316.118 22.5L305.13 36.5L286.65 40L271.167 29L266.672 20.5L258.681 38L246.694 26L237.205 36L226.717 79L211.234 29L199.247 20.5L194.252 9.49998L190.756 20L180.767 30L165.784 18L161.788 6.99998L150.801 70L143.808 60.5L135.817 87L121.833 91.5L111.844 81L103.852 87.5L88.869 80L81.3773 32.5L70.3895 93L53.4082 128.5H39.4237L30.4336 122L24.4403 128.5L18.4469 123L14.4513 129L6.46017 119.5Z"
+                    fill="url(#gradient)"
                   />
                 </svg>
               </div>
-              <div class="space-y-1">
-                <div class="text-white text-lg font-bold">{{ card.value }}</div>
-                <div class="text-gray-300 text-xs">{{ card.title }}</div>
-                <div [class]="card.color + ' text-xs'">{{ card.change }}</div>
+
+              <!-- X-axis labels -->
+              <div class="chart-labels">
+                <span>Jan</span>
+                <span>Feb</span>
+                <span>Mar</span>
+                <span>Apr</span>
+                <span>May</span>
+                <span>Jun</span>
+                <span>Jul</span>
+                <span>Aug</span>
+                <span>Sep</span>
+                <span>Oct</span>
+                <span>Nov</span>
+                <span>Dec</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Level Chart -->
-        <div class="w-60 bg-gray-800 rounded-lg p-4">
-          <h3 class="text-white text-lg font-semibold mb-4">Level</h3>
-
-          <!-- Bar Chart -->
-          <div class="flex items-end justify-center space-x-5 h-28 mb-4">
-            <!-- Bar 1 -->
-            <div class="relative">
-              <div class="w-3 h-22 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-11 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-            <!-- Bar 2 -->
-            <div class="relative">
-              <div class="w-3 h-28 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-14 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-            <!-- Bar 3 -->
-            <div class="relative">
-              <div class="w-3 h-22 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-9 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-            <!-- Bar 4 -->
-            <div class="relative">
-              <div class="w-3 h-20 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-6 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-            <!-- Bar 5 -->
-            <div class="relative">
-              <div class="w-3 h-16 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-8 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-            <!-- Bar 6 -->
-            <div class="relative">
-              <div class="w-3 h-17 bg-gray-600 rounded-t"></div>
-              <div
-                class="absolute bottom-0 w-3 h-11 bg-teal-400 rounded-t"
-              ></div>
-            </div>
-          </div>
-
-          <!-- Legend -->
-          <div
-            class="border-t border-gray-700 pt-3 flex items-center justify-between text-xs"
-          >
-            <div class="flex items-center space-x-2">
-              <div class="w-2 h-2 bg-teal-400 rounded-full"></div>
-              <span class="text-gray-400">Volume</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
-              <span class="text-gray-400">Service</span>
-            </div>
-          </div>
+            </mat-card-content>
+          </mat-card>
         </div>
       </div>
-
-      <!-- Products & Customer Section -->
-      <div class="flex gap-4 mb-6">
-        <!-- Top Products -->
-        <div class="flex-1 bg-gray-800 rounded-lg p-4">
-          <h3 class="text-white text-lg font-semibold mb-4">Top Products</h3>
-
-          <!-- Table Header -->
-          <div
-            class="grid grid-cols-4 gap-4 text-gray-400 text-sm border-b border-gray-700 pb-2 mb-3"
-          >
-            <div>#</div>
-            <div>Name</div>
-            <div>Popularity</div>
-            <div>Sales</div>
-          </div>
-
-          <!-- Product Rows -->
-          <div class="space-y-3">
-            <div
-              class="grid grid-cols-4 gap-4 items-center py-2 border-b border-gray-700"
-            >
-              <div class="text-white">01</div>
-              <div class="text-white text-sm">Home Decore Range</div>
-              <div class="flex items-center">
-                <div class="w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
-                  <div class="w-24 h-1 bg-orange-400"></div>
-                </div>
-              </div>
-              <div
-                class="bg-orange-400 bg-opacity-20 border border-orange-400 rounded px-2 py-1 text-orange-400 text-xs text-center"
-              >
-                46%
-              </div>
-            </div>
-
-            <div
-              class="grid grid-cols-4 gap-4 items-center py-2 border-b border-gray-700"
-            >
-              <div class="text-white">02</div>
-              <div class="text-white text-sm">Disney Princess Dress</div>
-              <div class="flex items-center">
-                <div class="w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
-                  <div class="w-20 h-1 bg-teal-400"></div>
-                </div>
-              </div>
-              <div
-                class="bg-teal-400 bg-opacity-20 border border-teal-400 rounded px-2 py-1 text-teal-400 text-xs text-center"
-              >
-                17%
-              </div>
-            </div>
-
-            <div
-              class="grid grid-cols-4 gap-4 items-center py-2 border-b border-gray-700"
-            >
-              <div class="text-white">03</div>
-              <div class="text-white text-sm">Bathroom Essentials</div>
-              <div class="flex items-center">
-                <div class="w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
-                  <div class="w-16 h-1 bg-blue-400"></div>
-                </div>
-              </div>
-              <div
-                class="bg-blue-400 bg-opacity-20 border border-blue-400 rounded px-2 py-1 text-blue-400 text-xs text-center"
-              >
-                19%
-              </div>
-            </div>
-
-            <div class="grid grid-cols-4 gap-4 items-center py-2">
-              <div class="text-white">04</div>
-              <div class="text-white text-sm">Apple Smartwatch</div>
-              <div class="flex items-center">
-                <div class="w-32 h-1 bg-gray-600 rounded-full overflow-hidden">
-                  <div class="w-12 h-1 bg-pink-400"></div>
-                </div>
-              </div>
-              <div
-                class="bg-pink-400 bg-opacity-20 border border-pink-400 rounded px-2 py-1 text-pink-400 text-xs text-center"
-              >
-                29%
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Customer Fulfillment Chart -->
-        <div class="w-60 bg-gray-800 rounded-lg p-4">
-          <h3 class="text-white text-lg font-semibold mb-4">
-            Customer Fulfilment
-          </h3>
-
-          <!-- Chart Area -->
-          <div class="h-24 mb-4 relative">
-            <svg viewBox="0 0 215 106" class="w-full h-full">
-              <path
-                d="M2.00012 9.02717C11.5542 13.8053 31.0064 23.3614 32.3822 23.3614C33.758 23.3614 40.5987 23.3614 43.8471 23.3614L71.9362 15.3342L96.0125 30.2418H109.77L133.847 13.0408L145.885 17.0543L182.573 42.2826L191.171 38.269L212.381 1"
-                stroke="#A9DFD8"
-                stroke-width="2"
-                fill="none"
-              />
-              <path
-                d="M2.00012 52.7894L18.6243 51.0693L40.9809 40.1753L70.7897 71.1372H102.318L138.433 60.2432L184.292 63.1101L212.381 43.0421"
-                stroke="#F2C8ED"
-                stroke-width="2"
-                fill="none"
-              />
-            </svg>
-          </div>
-
-          <!-- Legend -->
-          <div
-            class="border-t border-gray-700 pt-3 flex justify-between text-xs"
-          >
-            <div class="flex flex-col items-center">
-              <div class="flex items-center space-x-1 mb-1">
-                <div class="w-2 h-2 bg-teal-400 rounded-full"></div>
-                <span class="text-gray-400">Last Month</span>
-              </div>
-              <span class="text-white">$4,087</span>
-            </div>
-            <div class="flex flex-col items-center">
-              <div class="flex items-center space-x-1 mb-1">
-                <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-                <span class="text-gray-400">This Month</span>
-              </div>
-              <span class="text-white">$5,506</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Earnings & Visitor Section -->
-      <div class="flex gap-4">
-        <!-- Earnings -->
-        <div class="w-60 bg-gray-800 rounded-lg p-4">
-          <div class="mb-4">
-            <h3 class="text-white text-lg font-semibold">Earnings</h3>
-            <p class="text-gray-400 text-xs">Total Expense</p>
-          </div>
-
-          <div class="text-teal-400 text-2xl font-bold mb-2">$6078.76</div>
-          <p class="text-gray-400 text-sm mb-6">
-            Profit is 48% More than last Month
-          </p>
-
-          <!-- Semi-circle progress -->
-          <div class="relative w-32 h-32 mx-auto">
-            <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke="#2B2B36"
-                stroke-width="8"
-                fill="none"
-              />
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke="#A9DFD8"
-                stroke-width="8"
-                fill="none"
-                stroke-dasharray="251"
-                stroke-dashoffset="63"
-                stroke-linecap="round"
-              />
-            </svg>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-2xl font-bold">80%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Visitor Insights -->
-        <div class="flex-1 bg-gray-800 rounded-lg p-4">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-white text-lg font-semibold">Visitor Insights</h3>
-            <div
-              class="bg-gray-900 rounded px-3 py-1 flex items-center space-x-1"
-            >
-              <div class="w-1 h-1 bg-orange-400 rounded-full"></div>
-              <span class="text-white text-xs">New Visitors</span>
-            </div>
-          </div>
-
-          <!-- Chart -->
-          <div class="h-32 mb-4">
-            <svg viewBox="0 0 421 133" class="w-full h-full">
-              <path
-                d="M1.46582 127L5.96085 117L14.4515 127L18.447 120.5L24.4404 127L30.4338 120.5L39.9233 127H52.4095L68.8912 92.5L81.3774 24L89.868 79L103.353 86L111.844 79L122.332 90L134.818 86L143.309 57L149.802 66.5L161.289 1.00002L166.783 17L180.767 28L189.258 19.5L194.253 5.50001L200.246 19.5L212.732 28L226.217 74.5L235.707 35.5L246.695 24L258.182 35.5L266.672 17L272.166 28L287.15 38.5L304.131 35.5L316.617 19.5L334.597 79L347.083 86L357.572 66.5L363.565 79L376.551 86L382.045 104L390.036 82L403.521 66.5L411.512 86L419.004 57"
-                stroke="#A9DFD8"
-                stroke-width="2"
-                fill="none"
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop
-                    offset="0%"
-                    style="stop-color: #a9dfd8; stop-opacity: 0.3"
-                  />
-                  <stop
-                    offset="100%"
-                    style="stop-color: #a9dfd8; stop-opacity: 0"
-                  />
-                </linearGradient>
-              </defs>
-              <path
-                d="M6.46017 119.5L0.466797 131.5L420.502 132.5V57.5L412.012 90.5L403.022 69.5L391.534 82.5L382.045 107.5L375.552 87L362.566 80L357.572 69.5L347.583 87.5L333.099 80L316.118 22.5L305.13 36.5L286.65 40L271.167 29L266.672 20.5L258.681 38L246.694 26L237.205 36L226.717 79L211.234 29L199.247 20.5L194.252 9.49998L190.756 20L180.767 30L165.784 18L161.788 6.99998L150.801 70L143.808 60.5L135.817 87L121.833 91.5L111.844 81L103.852 87.5L88.869 80L81.3773 32.5L70.3895 93L53.4082 128.5H39.4237L30.4336 122L24.4403 128.5L18.4469 123L14.4513 129L6.46017 119.5Z"
-                fill="url(#gradient)"
-              />
-            </svg>
-          </div>
-
-          <!-- X-axis labels -->
-          <div class="flex justify-between text-white text-xs">
-            <span>Jan</span>
-            <span>Feb</span>
-            <span>Mar</span>
-            <span>Apr</span>
-            <span>May</span>
-            <span>Jun</span>
-            <span>Jul</span>
-            <span>Aug</span>
-            <span>Sep</span>
-            <span>Oct</span>
-            <span>Nov</span>
-            <span>Dec</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

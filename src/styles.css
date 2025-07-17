@@ -1,8 +1,5 @@
-/* Dark Mode Global Styles */
+/* Dark Mode Global Styles - Angular Material Only */
 @import "./custom-theme.scss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* Reset and base styles */
 html,
@@ -17,8 +14,8 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: #171821;
-  color: #ffffff;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   scroll-behavior: smooth;
 }
 
@@ -41,8 +38,8 @@ p {
 
 /* Global dark theme overrides */
 .mat-app-background {
-  background-color: #171821;
-  color: #ffffff;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
 
 /* Form controls dark theme */

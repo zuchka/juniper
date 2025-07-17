@@ -1,54 +1,43 @@
 <!-- Juniper - Next-Generation Ecommerce Platform -->
-<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+<div class="home-container">
   <!-- Header -->
-  <header class="bg-gray-800 shadow-xl border-b border-gray-700">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-6">
-        <div class="flex items-center space-x-4">
-          <!-- Juniper Logo -->
-          <div class="flex items-center space-x-3">
-            <svg
-              class="w-10 h-10 text-teal-400"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-              <path d="M2 17L12 22L22 17" />
-              <path d="M2 12L12 17L22 12" />
-            </svg>
-            <h1 class="text-3xl font-bold text-white">Juniper</h1>
-          </div>
+  <mat-toolbar class="home-header">
+    <div class="header-content">
+      <div class="header-left">
+        <!-- Juniper Logo -->
+        <div class="logo-section">
+          <mat-icon class="logo-icon">layers</mat-icon>
+          <h1 class="logo-text">Juniper</h1>
         </div>
-        <p class="text-gray-300">Next-Generation Ecommerce Platform</p>
       </div>
+      <span class="header-subtitle">Next-Generation Ecommerce Platform</span>
     </div>
-  </header>
+  </mat-toolbar>
 
   <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <main class="main-content">
     <!-- Hero Section -->
-    <section class="text-center mb-16">
-      <h2 class="text-5xl font-extrabold text-white mb-4">
-        Transform Your Business
-      </h2>
-      <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+    <section class="hero-section">
+      <h2 class="hero-title">Transform Your Business</h2>
+      <p class="hero-description">
         Juniper is the all-in-one ecommerce platform that empowers businesses to
         create stunning online stores, manage inventory, process payments, and
         scale globally with ease.
       </p>
-      <div class="space-x-4">
+      <div class="hero-actions">
         <button
           mat-raised-button
           color="primary"
-          class="mr-4 bg-teal-400 text-gray-900 hover:bg-teal-300"
+          class="primary-button"
           routerLink="/admin"
         >
-          <mat-icon class="mr-2">dashboard</mat-icon>
+          <mat-icon>dashboard</mat-icon>
           Store Dashboard
         </button>
         <button
           mat-stroked-button
-          class="text-teal-400 border-teal-400 hover:bg-teal-400 hover:text-gray-900"
+          color="primary"
+          class="secondary-button"
         >
           Start Free Trial
         </button>
@@ -56,232 +45,195 @@
     </section>
 
     <!-- Features Grid -->
-    <section class="mb-16">
-      <h3 class="text-3xl font-bold text-center text-white mb-12">
-        Why Choose Juniper?
-      </h3>
-      <div class="grid md:grid-cols-3 gap-8">
+    <section class="features-section">
+      <h3 class="section-title">Why Choose Juniper?</h3>
+      <div class="features-grid">
         <!-- Feature 1: Easy Store Setup -->
-        <mat-card
-          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
-        >
-          <mat-card-header>
-            <div class="flex items-center space-x-2">
-              <mat-icon class="text-teal-400">storefront</mat-icon>
-              <mat-card-title class="text-xl font-semibold text-teal-400">
-                Easy Store Setup
-              </mat-card-title>
-            </div>
+        <mat-card class="feature-card">
+          <mat-card-header class="feature-header">
+            <mat-icon mat-card-avatar class="feature-icon teal-icon">storefront</mat-icon>
+            <mat-card-title class="feature-title teal-text">
+              Easy Store Setup
+            </mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <p class="text-gray-300 leading-relaxed">
+          <mat-card-content class="feature-content">
+            <p>
               Launch your online store in minutes with our intuitive
               drag-and-drop builder and professional templates.
             </p>
           </mat-card-content>
-          <mat-card-actions class="flex justify-end">
-            <button mat-button class="text-teal-400">Get Started</button>
+          <mat-card-actions class="feature-actions">
+            <button mat-button class="feature-button teal-text">Get Started</button>
           </mat-card-actions>
         </mat-card>
 
         <!-- Feature 2: Advanced Analytics -->
-        <mat-card
-          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
-        >
-          <mat-card-header>
-            <div class="flex items-center space-x-2">
-              <mat-icon class="text-green-400">analytics</mat-icon>
-              <mat-card-title class="text-xl font-semibold text-green-400">
-                Advanced Analytics
-              </mat-card-title>
-            </div>
+        <mat-card class="feature-card">
+          <mat-card-header class="feature-header">
+            <mat-icon mat-card-avatar class="feature-icon green-icon">analytics</mat-icon>
+            <mat-card-title class="feature-title green-text">
+              Advanced Analytics
+            </mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <p class="text-gray-300 leading-relaxed">
+          <mat-card-content class="feature-content">
+            <p>
               Track sales, monitor customer behavior, and optimize your store
               performance with real-time insights and reporting.
             </p>
           </mat-card-content>
-          <mat-card-actions class="flex justify-end">
-            <button mat-button class="text-green-400">View Demo</button>
+          <mat-card-actions class="feature-actions">
+            <button mat-button class="feature-button green-text">View Demo</button>
           </mat-card-actions>
         </mat-card>
 
         <!-- Feature 3: Global Payments -->
-        <mat-card
-          class="transform hover:scale-105 transition-transform duration-300 bg-gray-800 border border-gray-700"
-        >
-          <mat-card-header>
-            <div class="flex items-center space-x-2">
-              <mat-icon class="text-purple-400">payment</mat-icon>
-              <mat-card-title class="text-xl font-semibold text-purple-400">
-                Global Payments
-              </mat-card-title>
-            </div>
+        <mat-card class="feature-card">
+          <mat-card-header class="feature-header">
+            <mat-icon mat-card-avatar class="feature-icon purple-icon">payment</mat-icon>
+            <mat-card-title class="feature-title purple-text">
+              Global Payments
+            </mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <p class="text-gray-300 leading-relaxed">
+          <mat-card-content class="feature-content">
+            <p>
               Accept payments worldwide with support for 100+ currencies,
               multiple payment gateways, and fraud protection.
             </p>
           </mat-card-content>
-          <mat-card-actions class="flex justify-end">
-            <button mat-button class="text-purple-400">Learn More</button>
+          <mat-card-actions class="feature-actions">
+            <button mat-button class="feature-button purple-text">Learn More</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </section>
 
     <!-- Interactive Demo Section -->
-    <section class="mb-16">
-      <h3 class="text-3xl font-bold text-center text-white mb-12">
-        Experience Juniper
-      </h3>
+    <section class="demo-section">
+      <h3 class="section-title">Experience Juniper</h3>
 
-      <div class="grid lg:grid-cols-2 gap-12">
+      <div class="demo-grid">
         <!-- Form Demo -->
-        <div
-          class="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700"
-        >
-          <h4 class="text-2xl font-semibold text-white mb-6">
-            Quick Store Setup
-          </h4>
+        <mat-card class="demo-card">
+          <mat-card-header>
+            <mat-card-title class="demo-title">Quick Store Setup</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form class="demo-form">
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Store Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Enter your store name"
+                />
+              </mat-form-field>
 
-          <form class="space-y-6">
-            <mat-form-field appearance="outline" class="w-full dark-field">
-              <mat-label class="text-gray-300">Store Name</mat-label>
-              <input
-                matInput
-                placeholder="Enter your store name"
-                class="text-white"
-              />
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Business Email</mat-label>
+                <input
+                  matInput
+                  type="email"
+                  placeholder="Enter your business email"
+                />
+              </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-full dark-field">
-              <mat-label class="text-gray-300">Business Email</mat-label>
-              <input
-                matInput
-                type="email"
-                placeholder="Enter your business email"
-                class="text-white"
-              />
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Store Description</mat-label>
+                <textarea
+                  matInput
+                  rows="4"
+                  placeholder="Describe your business and products"
+                ></textarea>
+              </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-full dark-field">
-              <mat-label class="text-gray-300">Store Description</mat-label>
-              <textarea
-                matInput
-                rows="4"
-                placeholder="Describe your business and products"
-                class="text-white"
-              ></textarea>
-            </mat-form-field>
-
-            <div class="flex justify-between items-center">
-              <mat-checkbox class="text-gray-300"
-                >Enable inventory management</mat-checkbox
-              >
-              <button
-                mat-raised-button
-                class="bg-teal-400 text-gray-900 hover:bg-teal-300"
-              >
-                Create Store
-              </button>
-            </div>
-          </form>
-        </div>
+              <div class="form-actions">
+                <mat-checkbox class="form-checkbox">Enable inventory management</mat-checkbox>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="form-submit"
+                >
+                  Create Store
+                </button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
 
         <!-- Data Display Demo -->
-        <div
-          class="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700"
-        >
-          <h4 class="text-2xl font-semibold text-white mb-6">Store Metrics</h4>
+        <mat-card class="demo-card">
+          <mat-card-header>
+            <mat-card-title class="demo-title">Store Metrics</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- Progress Indicators -->
+            <div class="metrics-section">
+              <p class="metrics-label">Monthly Sales Goal</p>
+              <mat-progress-bar
+                mode="determinate"
+                value="75"
+                class="progress-bar"
+              ></mat-progress-bar>
+              <p class="progress-text">$75,000 / $100,000</p>
+            </div>
 
-          <!-- Progress Indicators -->
-          <div class="mb-6">
-            <p class="text-sm font-medium text-gray-300 mb-2">
-              Monthly Sales Goal
-            </p>
-            <mat-progress-bar
-              mode="determinate"
-              value="75"
-              class="mb-2 dark-progress"
-            ></mat-progress-bar>
-            <p class="text-xs text-gray-400">$75,000 / $100,000</p>
-          </div>
-
-          <!-- Chips -->
-          <div class="mb-6">
-            <p class="text-sm font-medium text-gray-300 mb-3">
-              Product Categories
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <mat-chip-set>
-                <mat-chip class="bg-gray-700 text-white">Electronics</mat-chip>
-                <mat-chip class="bg-gray-700 text-white">Fashion</mat-chip>
-                <mat-chip class="bg-gray-700 text-white"
-                  >Home & Garden</mat-chip
-                >
-                <mat-chip class="bg-gray-700 text-white"
-                  >Sports & Outdoors</mat-chip
-                >
+            <!-- Chips -->
+            <div class="categories-section">
+              <p class="metrics-label">Product Categories</p>
+              <mat-chip-set class="category-chips">
+                <mat-chip>Electronics</mat-chip>
+                <mat-chip>Fashion</mat-chip>
+                <mat-chip>Home & Garden</mat-chip>
+                <mat-chip>Sports & Outdoors</mat-chip>
               </mat-chip-set>
             </div>
-          </div>
 
-          <!-- Toggle -->
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-300"
-              >Auto-fulfill Orders</span
-            >
-            <mat-slide-toggle
-              checked="true"
-              class="dark-toggle"
-            ></mat-slide-toggle>
-          </div>
-        </div>
+            <!-- Toggle -->
+            <div class="toggle-section">
+              <span class="toggle-label">Auto-fulfill Orders</span>
+              <mat-slide-toggle checked="true"></mat-slide-toggle>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
     </section>
 
     <!-- Stats Section -->
-    <section
-      class="bg-gray-800 rounded-lg shadow-xl p-8 mb-16 border border-gray-700"
-    >
-      <h3 class="text-3xl font-bold text-center text-white mb-12">
-        Trusted by Thousands of Businesses
-      </h3>
+    <mat-card class="stats-section">
+      <mat-card-content>
+        <h3 class="section-title">Trusted by Thousands of Businesses</h3>
 
-      <div class="grid md:grid-cols-4 gap-8 text-center">
-        <div>
-          <div class="text-4xl font-bold text-teal-400 mb-2">50K+</div>
-          <div class="text-gray-300">Active Stores</div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value teal-text">50K+</div>
+            <div class="stat-label">Active Stores</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value green-text">$2.4B+</div>
+            <div class="stat-label">Sales Processed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value purple-text">99.9%</div>
+            <div class="stat-label">Uptime Guarantee</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value orange-text">24/7</div>
+            <div class="stat-label">Expert Support</div>
+          </div>
         </div>
-        <div>
-          <div class="text-4xl font-bold text-green-400 mb-2">$2.4B+</div>
-          <div class="text-gray-300">Sales Processed</div>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-purple-400 mb-2">99.9%</div>
-          <div class="text-gray-300">Uptime Guarantee</div>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-orange-400 mb-2">24/7</div>
-          <div class="text-gray-300">Expert Support</div>
-        </div>
-      </div>
-    </section>
+      </mat-card-content>
+    </mat-card>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8 border-t border-gray-700">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="mb-4">
+  <footer class="home-footer">
+    <div class="footer-content">
+      <p class="footer-text">
         Juniper - Empowering businesses to succeed online since 2024
       </p>
-      <div class="space-x-4">
-        <button mat-button class="text-teal-400">Help Center</button>
-        <button mat-button class="text-green-400">API Docs</button>
-        <button mat-button class="text-purple-400">Contact Sales</button>
+      <div class="footer-actions">
+        <button mat-button class="footer-button teal-text">Help Center</button>
+        <button mat-button class="footer-button green-text">API Docs</button>
+        <button mat-button class="footer-button purple-text">Contact Sales</button>
       </div>
     </div>
   </footer>
