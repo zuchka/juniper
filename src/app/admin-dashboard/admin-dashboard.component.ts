@@ -503,6 +503,31 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     this.setupProductFilters();
     this.setupCustomerFilters();
     this.setupOrderFilters();
+
+    // Load real data
+    this.loadCustomersData();
+  }
+
+  loadCustomersData() {
+    this.isLoadingCustomers.set(true);
+    this.isLoadingMetrics.set(true);
+
+    this.apiService.getUsersAsCustomers().subscribe({
+      next: (customers: Customer[]) => {
+        this.customers = customers;
+        this.customersDataSource.data = customers;
+        this.generateOrdersFromCustomers(customers);
+        this.calculateMetricsFromData(customers);
+        this.updateChartData(customers);
+        this.isLoadingCustomers.set(false);
+        this.isLoadingMetrics.set(false);
+      },
+      error: (error) => {
+        console.error("Error loading customer data:", error);
+        this.isLoadingCustomers.set(false);
+        this.isLoadingMetrics.set(false);
+      },
+    });
   }
 
   ngAfterViewInit() {
