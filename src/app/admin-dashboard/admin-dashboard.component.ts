@@ -4,12 +4,14 @@ import {
   ViewChild,
   OnInit,
   AfterViewInit,
+  OnDestroy,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ApiService, Customer as ApiCustomer } from "../services/api.service";
 
 // Angular Material Imports
-import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSidenavModule, MatSidenav } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -46,6 +48,8 @@ import {
   FormGroup,
   FormControl,
 } from "@angular/forms";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Customer {
   id: number;
@@ -148,13 +152,17 @@ interface SalesCard {
   templateUrl: "./admin-dashboard.component.html",
   styleUrls: ["./admin-dashboard.component.css"],
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit {
+export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   // Make Math available in template
   Math = Math;
 
   // Signals for reactive data
   sidenavOpen = signal(true);
   selectedTabIndex = signal(0);
+  isMobile = signal(false);
+  sidenavMode = signal<'side' | 'over'>('side');
+
+  private destroy$ = new Subject<void>();
 
   // Form groups
   userForm: FormGroup;
@@ -167,6 +175,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   @ViewChild("customersSort") customersSort!: MatSort;
   @ViewChild("ordersPaginator") ordersPaginator!: MatPaginator;
   @ViewChild("ordersSort") ordersSort!: MatSort;
+  @ViewChild("sidenav") sidenav!: MatSidenav;
 
   // Data sources for tables
   usersDataSource!: MatTableDataSource<User>;
@@ -405,6 +414,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.userForm = this.fb.group({
       name: [""],
@@ -429,6 +439,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    // Set up responsive behavior
+    this.setupResponsiveBehavior();
+
     // Set up filter listeners
     this.setupUserFilters();
     this.setupCustomerFilters();
@@ -436,6 +449,29 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
     // Load real data
     this.loadUsersData();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  setupResponsiveBehavior() {
+    this.breakpointObserver
+      .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
+        const isMobile = result.matches;
+        this.isMobile.set(isMobile);
+
+        if (isMobile) {
+          this.sidenavMode.set('over');
+          this.sidenavOpen.set(false);
+        } else {
+          this.sidenavMode.set('side');
+          this.sidenavOpen.set(true);
+        }
+      });
   }
 
   loadUsersData() {
@@ -595,7 +631,11 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   toggleSidenav() {
-    this.sidenavOpen.set(!this.sidenavOpen());
+    if (this.isMobile()) {
+      this.sidenav.toggle();
+    } else {
+      this.sidenavOpen.set(!this.sidenavOpen());
+    }
   }
 
   onTabChange(index: number) {
