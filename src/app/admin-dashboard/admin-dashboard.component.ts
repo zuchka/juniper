@@ -478,7 +478,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit - ordersPaginator:', !!this.ordersPaginator, 'ordersSort:', !!this.ordersSort);
     // Set up pagination and sorting for orders table
     this.setupOrdersTable();
   }
