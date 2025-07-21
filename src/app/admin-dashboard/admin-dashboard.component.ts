@@ -51,6 +51,7 @@ import {
 } from "@angular/forms";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { ThemeToggleComponent } from "../components/theme-toggle/theme-toggle.component";
 
 interface Customer {
   id: number;
@@ -150,6 +151,7 @@ interface SalesCard {
     MatTooltipModule,
     MatDividerModule,
     MatStepperModule,
+    ThemeToggleComponent,
   ],
   templateUrl: "./admin-dashboard.component.html",
   styleUrls: ["./admin-dashboard.component.css"],

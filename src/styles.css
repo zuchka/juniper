@@ -1,4 +1,4 @@
-/* Dark Mode Global Styles - Angular Material Only */
+/* Theme Aware Global Styles - Angular Material */
 @import "./custom-theme.scss";
 
 /* Reset and base styles */
@@ -28,12 +28,12 @@ h5,
 h6 {
   font-weight: 600;
   line-height: 1.2;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 p {
   line-height: 1.6;
-  color: #d1d5db;
+  color: var(--text-secondary);
 }
 
 /* Global dark theme overrides */
@@ -42,122 +42,123 @@ p {
   color: var(--text-primary);
 }
 
-/* Form controls dark theme */
+/* Form controls theme-aware */
 .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
-  color: #6b7280;
+  color: var(--border-color);
 }
 
 .mat-mdc-form-field-appearance-outline.mat-focused
   .mat-mdc-form-field-outline-thick {
-  color: #a9dfd8;
+  color: var(--primary-color);
 }
 
 .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
-  color: #a9dfd8;
+  color: var(--primary-color);
 }
 
 .mat-mdc-input-element {
-  color: #ffffff;
-  caret-color: #a9dfd8;
+  color: var(--text-primary);
+  caret-color: var(--primary-color);
 }
 
 .mat-mdc-input-element::placeholder {
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 /* Button enhancements */
 .mat-mdc-raised-button.mat-primary {
-  background-color: #a9dfd8;
-  color: #171821;
+  background-color: var(--primary-color);
+  color: var(--background-primary);
   font-weight: 600;
 }
 
 .mat-mdc-raised-button.mat-primary:hover {
-  background-color: #7dd3c0;
+  background-color: var(--primary-color);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(169, 223, 216, 0.3);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  filter: brightness(0.9);
 }
 
 .mat-mdc-outlined-button {
-  border-color: #a9dfd8;
-  color: #a9dfd8;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .mat-mdc-outlined-button:hover {
-  background-color: rgba(169, 223, 216, 0.1);
-  border-color: #a9dfd8;
+  background-color: var(--hover-color);
+  border-color: var(--primary-color);
 }
 
 .mat-mdc-text-button {
-  color: #a9dfd8;
+  color: var(--primary-color);
 }
 
 .mat-mdc-text-button:hover {
-  background-color: rgba(169, 223, 216, 0.1);
+  background-color: var(--hover-color);
 }
 
 /* Icon button improvements */
 .mat-mdc-icon-button {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .mat-mdc-icon-button:hover {
-  background-color: rgba(169, 223, 216, 0.1);
+  background-color: var(--hover-color);
 }
 
 /* Card enhancements */
 .mat-mdc-card {
-  background-color: #21222d;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px var(--shadow-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mat-mdc-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  border-color: rgba(169, 223, 216, 0.2);
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border-color: var(--primary-color);
 }
 
 .mat-mdc-card-title {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .mat-mdc-card-subtitle {
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 .mat-mdc-card-content {
-  color: #d1d5db;
+  color: var(--text-primary);
 }
 
 /* Progress indicators */
 .mat-mdc-progress-bar .mdc-linear-progress__bar-inner {
-  border-color: #a9dfd8;
+  border-color: var(--primary-color);
 }
 
 .mat-mdc-progress-bar .mdc-linear-progress__buffer {
-  background-color: #374151;
+  background-color: var(--background-tertiary);
 }
 
 .mat-mdc-progress-spinner circle {
-  stroke: #a9dfd8;
+  stroke: var(--primary-color);
 }
 
 /* Toggle controls */
 .mat-mdc-slide-toggle.mat-checked .mdc-switch__track {
-  background-color: #a9dfd8;
+  background-color: var(--primary-color);
 }
 
 .mat-mdc-slide-toggle.mat-checked .mdc-switch__handle {
-  background-color: #ffffff;
+  background-color: var(--background-primary);
 }
 
 .mat-mdc-slide-toggle:not(.mat-checked) .mdc-switch__track {
-  background-color: #6b7280;
+  background-color: var(--text-secondary);
 }
 
 /* Checkbox styling */
@@ -507,8 +508,8 @@ select {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: #a9dfd8;
-  color: #171821;
+  background: var(--primary-color);
+  color: var(--background-primary);
   padding: 8px;
   text-decoration: none;
   border-radius: 4px;
@@ -517,4 +518,116 @@ select {
 
 .skip-link:focus {
   top: 6px;
+}
+
+/* Light Theme Global Overrides */
+.light-theme {
+  /* Ensure all hardcoded colors are overridden for light theme */
+
+  /* Selection colors specific to light theme */
+  ::selection {
+    background-color: var(--primary-color);
+    color: var(--background-primary);
+  }
+
+  ::-moz-selection {
+    background-color: var(--primary-color);
+    color: var(--background-primary);
+  }
+
+  /* Scrollbar for light theme */
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--text-secondary);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-primary);
+  }
+
+  /* Override any remaining hardcoded Material colors */
+  .mat-mdc-table {
+    background-color: var(--background-secondary) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .mat-mdc-header-cell {
+    color: var(--text-secondary) !important;
+    background-color: var(--background-tertiary) !important;
+  }
+
+  .mat-mdc-cell {
+    color: var(--text-primary) !important;
+  }
+
+  .mat-toolbar {
+    background-color: var(--background-secondary) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .mat-drawer {
+    background-color: var(--background-secondary) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .mat-drawer-content {
+    background-color: var(--background-primary) !important;
+  }
+
+  /* Chip improvements for light theme */
+  .mat-mdc-chip {
+    background-color: var(--background-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+
+  /* Menu improvements for light theme */
+  .mat-mdc-menu-panel {
+    background-color: var(--background-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 16px var(--shadow-color) !important;
+  }
+
+  .mat-mdc-menu-item {
+    color: var(--text-primary) !important;
+  }
+
+  .mat-mdc-menu-item:hover {
+    background-color: var(--hover-color) !important;
+  }
+
+  /* Form field improvements for light theme */
+  .mat-mdc-form-field input {
+    color: var(--text-primary) !important;
+  }
+
+  .mat-mdc-form-field .mat-mdc-form-field-label {
+    color: var(--text-secondary) !important;
+  }
+
+  /* Badge improvements for light theme */
+  .mat-badge-content {
+    background-color: #ef4444 !important;
+    color: white !important;
+  }
+
+  /* Progress improvements for light theme */
+  .mat-mdc-progress-bar {
+    --mdc-linear-progress-track-color: var(--background-tertiary) !important;
+  }
+
+  /* Divider improvements for light theme */
+  .mat-divider {
+    border-top-color: var(--border-color) !important;
+  }
+
+  /* Focus indicators */
+  .mat-mdc-button:focus-visible,
+  .mat-mdc-raised-button:focus-visible,
+  .mat-mdc-outlined-button:focus-visible,
+  .mat-mdc-text-button:focus-visible,
+  .mat-mdc-icon-button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // Angular Material Imports
@@ -12,6 +12,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
+// Components and Services
+import { ThemeToggleComponent } from '../components/theme-toggle/theme-toggle.component';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +31,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatProgressBarModule,
     MatChipsModule,
     MatSlideToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ThemeToggleComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   protected readonly title = signal('angular-demo');
-} 
+  private themeService = inject(ThemeService);
+  
+  get currentTheme() {
+    return this.themeService.currentTheme();
+  }
+}
