@@ -761,16 +761,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     console.log('Generated', this.orders.length, 'orders total');
     this.ordersDataSource.data = this.orders;
 
-    // Re-apply sorting and pagination if available
-    if (this.ordersSort) {
-      this.ordersDataSource.sort = this.ordersSort;
-    }
-    if (this.ordersPaginator) {
-      this.ordersDataSource.paginator = this.ordersPaginator;
-      console.log('Paginator connected, total items:', this.ordersPaginator.length);
-    } else {
-      console.log('Paginator not available yet');
-    }
+    // Re-setup the table with new data
+    this.setupOrdersTable();
   }
 
   // Calculate real metrics from customer data
