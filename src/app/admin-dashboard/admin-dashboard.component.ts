@@ -473,68 +473,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit() {
-    // Set up pagination and sorting for users table
-    if (this.usersPaginator && this.usersSort) {
-      this.usersDataSource.paginator = this.usersPaginator;
-      this.usersDataSource.sort = this.usersSort;
-
-      // Custom sorting for computed name field
-      this.usersDataSource.sortingDataAccessor = (
-        data: User,
-        sortHeaderId: string,
-      ) => {
-        switch (sortHeaderId) {
-          case "name":
-            return `${data.firstName} ${data.lastName}`.toLowerCase();
-          case "id":
-            return data.id;
-          case "email":
-            return data.email.toLowerCase();
-          case "phone":
-            return data.phone;
-          case "age":
-            return data.age;
-          case "city":
-            return data.city.toLowerCase();
-          default:
-            return (data as any)[sortHeaderId];
-        }
-      };
-    }
-
-    // Set up pagination and sorting for customers table
-    if (this.customersPaginator && this.customersSort) {
-      this.customersDataSource.paginator = this.customersPaginator;
-      this.customersDataSource.sort = this.customersSort;
-
-      // Custom sorting for customers table
-      this.customersDataSource.sortingDataAccessor = (
-        data: Customer,
-        sortHeaderId: string,
-      ) => {
-        switch (sortHeaderId) {
-          case "name":
-            return data.name.toLowerCase();
-          case "email":
-            return data.email.toLowerCase();
-          case "phone":
-            return data.phone;
-          case "city":
-            return data.city.toLowerCase();
-          case "totalOrders":
-            return data.totalOrders;
-          case "totalSpent":
-            return data.totalSpent;
-          case "status":
-            return data.status.toLowerCase();
-          case "lastOrder":
-            return data.lastOrder.getTime();
-          default:
-            return (data as any)[sortHeaderId];
-        }
-      };
-    }
-
     // Set up pagination and sorting for orders table
     if (this.ordersPaginator && this.ordersSort) {
       this.ordersDataSource.paginator = this.ordersPaginator;
@@ -575,15 +513,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     this.selectedTabIndex.set(index);
   }
 
-  editCustomer(customer: Customer) {
-    this.userForm.patchValue(customer);
-  }
 
-  deleteCustomer(customerId: number) {
-    this.customers = this.customers.filter(
-      (customer) => customer.id !== customerId,
-    );
-  }
 
   onUserFormSubmit() {
     if (this.userForm.valid) {
@@ -626,22 +556,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
 
   // Filter setup methods
 
-  setupUserFilters() {
-    this.userSearchFilter.valueChanges.subscribe(() => {
-      this.applyUserFilters();
-    });
-  }
-
-  setupCustomerFilters() {
-    this.customerNameFilter.valueChanges.subscribe(() => {
-      this.applyCustomerFilters();
-    });
-
-    this.customerStatusFilter.valueChanges.subscribe(() => {
-      this.applyCustomerFilters();
-    });
-  }
-
   setupOrderFilters() {
     this.orderStatusFilter.valueChanges.subscribe(() => {
       this.applyOrderFilters();
@@ -653,51 +567,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   // Filter application methods
-
-  applyUserFilters() {
-    this.usersDataSource.filterPredicate = (data: User, filter: string) => {
-      const searchTerm = this.userSearchFilter.value?.toLowerCase() || "";
-
-      if (!searchTerm) {
-        return true;
-      }
-
-      const fullName = `${data.firstName} ${data.lastName}`.toLowerCase();
-      const email = data.email.toLowerCase();
-      const phone = data.phone.toLowerCase();
-      const city = data.city.toLowerCase();
-
-      return (
-        fullName.includes(searchTerm) ||
-        email.includes(searchTerm) ||
-        phone.includes(searchTerm) ||
-        city.includes(searchTerm)
-      );
-    };
-
-    this.usersDataSource.filter = "trigger";
-  }
-
-  applyCustomerFilters() {
-    this.customersDataSource.filterPredicate = (
-      data: Customer,
-      filter: string,
-    ) => {
-      const nameMatch =
-        !this.customerNameFilter.value ||
-        data.name
-          .toLowerCase()
-          .includes(this.customerNameFilter.value.toLowerCase());
-
-      const statusMatch =
-        !this.customerStatusFilter.value ||
-        data.status === this.customerStatusFilter.value;
-
-      return nameMatch && statusMatch;
-    };
-
-    this.customersDataSource.filter = "trigger";
-  }
 
   applyOrderFilters() {
     this.ordersDataSource.filterPredicate = (data: Order, filter: string) => {
@@ -719,29 +588,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
 
   // Clear filter methods
 
-  clearUserFilter() {
-    this.userSearchFilter.setValue("");
-  }
-
-  clearCustomerFilters() {
-    this.customerNameFilter.setValue("");
-    this.customerStatusFilter.setValue("");
-  }
-
   clearOrderFilters() {
     this.orderStatusFilter.setValue("");
     this.orderCustomerFilter.setValue("");
   }
 
   // Action methods
-  editUser(user: User) {
-    console.log("Edit user:", user);
-  }
-
-  deleteUser(userId: number) {
-    this.users = this.users.filter((u) => u.id !== userId);
-    this.usersDataSource.data = this.users;
-  }
 
   viewOrder(order: Order) {
     console.log("View order:", order);
