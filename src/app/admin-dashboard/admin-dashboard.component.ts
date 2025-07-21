@@ -118,6 +118,7 @@ interface SalesCard {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    LayoutModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
