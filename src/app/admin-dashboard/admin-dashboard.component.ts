@@ -479,8 +479,14 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setupOrdersTable() {
-    if (this.ordersPaginator && this.ordersSort) {
+    console.log('setupOrdersTable called - paginator available:', !!this.ordersPaginator, 'sort available:', !!this.ordersSort);
+
+    if (this.ordersPaginator) {
       this.ordersDataSource.paginator = this.ordersPaginator;
+      console.log('Paginator connected');
+    }
+
+    if (this.ordersSort) {
       this.ordersDataSource.sort = this.ordersSort;
 
       // Custom sorting for orders table
@@ -503,8 +509,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
             return (data as any)[sortHeaderId];
         }
       };
-      console.log('Orders table setup complete with', this.ordersDataSource.data.length, 'items');
+      console.log('Sort connected');
     }
+
+    console.log('Orders table setup with', this.ordersDataSource.data.length, 'items');
   }
 
   toggleSidenav() {
