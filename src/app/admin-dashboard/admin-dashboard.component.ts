@@ -708,8 +708,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     let orderId = 12891;
 
     customers.forEach((customer) => {
-      // Generate 1-3 orders per customer
-      const numOrders = Math.floor(Math.random() * 3) + 1;
+      // Generate 3-8 orders per customer to ensure enough data for pagination
+      const numOrders = Math.floor(Math.random() * 6) + 3;
 
       for (let i = 0; i < numOrders; i++) {
         const randomProduct =
