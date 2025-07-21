@@ -752,6 +752,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
       }
     });
 
+    console.log('Generated', this.orders.length, 'orders total');
     this.ordersDataSource.data = this.orders;
 
     // Re-apply sorting and pagination if available
@@ -760,6 +761,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     }
     if (this.ordersPaginator) {
       this.ordersDataSource.paginator = this.ordersPaginator;
+      console.log('Paginator connected, total items:', this.ordersPaginator.length);
+    } else {
+      console.log('Paginator not available yet');
     }
   }
 
