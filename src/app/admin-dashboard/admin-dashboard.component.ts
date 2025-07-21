@@ -171,32 +171,20 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   settingsForm: FormGroup;
 
   // Table ViewChild references
-  @ViewChild("usersPaginator") usersPaginator!: MatPaginator;
-  @ViewChild("usersSort") usersSort!: MatSort;
-  @ViewChild("customersPaginator") customersPaginator!: MatPaginator;
-  @ViewChild("customersSort") customersSort!: MatSort;
   @ViewChild("ordersPaginator") ordersPaginator!: MatPaginator;
   @ViewChild("ordersSort") ordersSort!: MatSort;
   @ViewChild("sidenav") sidenav!: MatSidenav;
 
   // Data sources for tables
-  usersDataSource!: MatTableDataSource<User>;
-  customersDataSource!: MatTableDataSource<Customer>;
   ordersDataSource!: MatTableDataSource<Order>;
 
   // Loading states
   isLoadingCustomers = signal(true);
   isLoadingMetrics = signal(true);
 
-  customerNameFilter = new FormControl("");
-  customerStatusFilter = new FormControl("");
-
   orderStatusFilter = new FormControl("");
   orderCustomerFilter = new FormControl("");
 
-  userSearchFilter = new FormControl("");
-
-  customerStatuses = ["VIP", "Premium", "Active", "New", "Inactive"];
   orderStatuses = [
     "Pending",
     "Processing",
@@ -287,27 +275,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   ];
 
   // Table columns
-  usersDisplayedColumns: string[] = [
-    "id",
-    "name",
-    "email",
-    "phone",
-    "age",
-    "city",
-    "actions",
-  ];
-  customersDisplayedColumns: string[] = [
-    "id",
-    "name",
-    "email",
-    "phone",
-    "city",
-    "totalOrders",
-    "totalSpent",
-    "status",
-    "lastOrder",
-    "actions",
-  ];
   ordersDisplayedColumns: string[] = [
     "id",
     "customer",
@@ -435,8 +402,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     });
 
     // Initialize data sources with empty arrays
-    this.usersDataSource = new MatTableDataSource<User>([]);
-    this.customersDataSource = new MatTableDataSource<Customer>([]);
     this.ordersDataSource = new MatTableDataSource<Order>([]);
   }
 
@@ -445,8 +410,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     this.setupResponsiveBehavior();
 
     // Set up filter listeners
-    this.setupUserFilters();
-    this.setupCustomerFilters();
     this.setupOrderFilters();
 
     // Load real data
