@@ -400,8 +400,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
       dataRetention: [30],
     });
 
-    // Initialize data sources with empty arrays
-    this.ordersDataSource = new MatTableDataSource<Order>([]);
+    // Initialize data sources with sample orders
+    this.ordersDataSource = new MatTableDataSource<Order>(this.orders);
   }
 
   ngOnInit() {
