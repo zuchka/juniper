@@ -1,1 +1,8 @@
 /* Component styles handled by Tailwind CSS */
+
+/* Ensure full background coverage */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--background-primary);
+}

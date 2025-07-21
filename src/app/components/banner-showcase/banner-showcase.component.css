@@ -1,0 +1,221 @@
+.banner-showcase {
+  min-height: 100vh;
+  background: var(--background-primary);
+  padding: 20px;
+}
+
+.showcase-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 32px 0 8px 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  text-transform: capitalize;
+}
+
+p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0 0 24px 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.banner-section {
+  margin-bottom: 48px;
+}
+
+.banner-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.banner-item {
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-tertiary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.usage-examples {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.example {
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-tertiary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Code expansion panel styles */
+.code-expansion-panel {
+  margin-top: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: none;
+  background: transparent;
+}
+
+.code-expansion-panel .mat-expansion-panel-header {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: var(--background-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.code-expansion-panel .mat-expansion-panel-header:hover {
+  background: var(--hover-color);
+}
+
+.code-expansion-panel .mat-expansion-panel-content {
+  padding: 0;
+}
+
+.code-expansion-panel .mat-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.code-expansion-panel .mat-panel-title mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.code-container {
+  background: var(--background-tertiary);
+  border-top: 1px solid var(--border-color);
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.code-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copy-button {
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+}
+
+.copy-button:hover {
+  background: var(--hover-color);
+  color: var(--text-primary);
+}
+
+.copy-button mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.code-block {
+  margin: 0;
+  padding: 16px;
+  background: var(--background-tertiary);
+  border: none;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.code-block code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .banner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .showcase-container {
+    padding: 48px;
+  }
+  
+  .banner-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .usage-examples {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-showcase {
+    padding: 16px;
+  }
+  
+  .showcase-container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+}

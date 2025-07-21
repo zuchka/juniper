@@ -1,0 +1,99 @@
+<div class="banner" [class]="'banner-' + type">
+  <div class="banner-icon">
+    <!-- Info Icon -->
+    <svg *ngIf="iconName === 'info'" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_info)">
+        <path d="M2.25 9C2.25 9.88642 2.42459 10.7642 2.76381 11.5831C3.10303 12.4021 3.60023 13.1462 4.22703 13.773C4.85382 14.3998 5.59794 14.897 6.41689 15.2362C7.23583 15.5754 8.11358 15.75 9 15.75C9.88642 15.75 10.7642 15.5754 11.5831 15.2362C12.4021 14.897 13.1462 14.3998 13.773 13.773C14.3998 13.1462 14.897 12.4021 15.2362 11.5831C15.5754 10.7642 15.75 9.88642 15.75 9C15.75 7.20979 15.0388 5.4929 13.773 4.22703C12.5071 2.96116 10.7902 2.25 9 2.25C7.20979 2.25 5.4929 2.96116 4.22703 4.22703C2.96116 5.4929 2.25 7.20979 2.25 9Z" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 6.75H9.0075" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 9V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_info">
+          <rect width="18" height="18" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <!-- Error Icon -->
+    <svg *ngIf="iconName === 'error'" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_error)">
+        <path d="M2.25 9C2.25 9.88642 2.42459 10.7642 2.76381 11.5831C3.10303 12.4021 3.60023 13.1462 4.22703 13.773C4.85382 14.3998 5.59794 14.897 6.41689 15.2362C7.23583 15.5754 8.11358 15.75 9 15.75C9.88642 15.75 10.7642 15.5754 11.5831 15.2362C12.4021 14.897 13.1462 14.3998 13.773 13.773C14.3998 13.1462 14.897 12.4021 15.2362 11.5831C15.5754 10.7642 15.75 9.88642 15.75 9C15.75 8.11358 15.5754 7.23583 15.2362 6.41689C14.897 5.59794 14.3998 4.85382 13.773 4.22703C13.1462 3.60023 12.4021 3.10303 11.5831 2.76381C10.7642 2.42459 9.88642 2.25 9 2.25C8.11358 2.25 7.23583 2.42459 6.41689 2.76381C5.59794 3.10303 4.85382 3.60023 4.22703 4.22703C3.60023 4.85382 3.10303 5.59794 2.76381 6.41689C2.42459 7.23583 2.25 8.11358 2.25 9Z" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 6.75V9.75" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 12V12.0075" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_error">
+          <rect width="18" height="18" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <!-- Warning Icon -->
+    <svg *ngIf="iconName === 'warning'" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_warning)">
+        <path d="M9 6.75L9 9M9 11.25V11.2575" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.74999 14.25H14.25C14.4947 14.2483 14.7353 14.1867 14.9508 14.0707C15.1663 13.9546 15.3501 13.7876 15.4861 13.5842C15.6222 13.3808 15.7065 13.1472 15.7316 12.9037C15.7566 12.6603 15.7218 12.4144 15.63 12.1875L10.305 3.00001C10.1753 2.76556 9.98512 2.57013 9.7543 2.43405C9.52349 2.29797 9.26043 2.2262 8.99249 2.2262C8.72454 2.2262 8.46149 2.29797 8.23068 2.43405C7.99986 2.57013 7.80971 2.76556 7.67999 3.00001L2.35499 12.1875C2.26495 12.4092 2.22924 12.6492 2.25085 12.8875C2.27247 13.1258 2.35077 13.3554 2.47923 13.5573C2.60769 13.7592 2.78257 13.9274 2.98928 14.0479C3.196 14.1684 3.42854 14.2377 3.66749 14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_warning">
+          <rect width="18" height="18" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <!-- Success Icon -->
+    <svg *ngIf="iconName === 'check_circle'" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_success)">
+        <path d="M2.25 9C2.25 9.88642 2.42459 10.7642 2.76381 11.5831C3.10303 12.4021 3.60023 13.1462 4.22703 13.773C4.85382 14.3998 5.59794 14.897 6.41689 15.2362C7.23583 15.5754 8.11358 15.75 9 15.75C9.88642 15.75 10.7642 15.5754 11.5831 15.2362C12.4021 14.897 13.1462 14.3998 13.773 13.773C14.3998 13.1462 14.897 12.4021 15.2362 11.5831C15.5754 10.7642 15.75 9.88642 15.75 9C15.75 8.11358 15.5754 7.23583 15.2362 6.41689C14.897 5.59794 14.3998 4.85382 13.773 4.22703C13.1462 3.60023 12.4021 3.10303 11.5831 2.76381C10.7642 2.42459 9.88642 2.25 9 2.25C8.11358 2.25 7.23583 2.42459 6.41689 2.76381C5.59794 3.10303 4.85382 3.60023 4.22703 4.22703C3.60023 4.85382 3.10303 5.59794 2.76381 6.41689C2.42459 7.23583 2.25 8.11358 2.25 9Z" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6.75 9L8.25 10.5L11.25 7.5" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_success">
+          <rect width="18" height="18" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="banner-content">
+    <div *ngIf="!isInline" class="banner-text">
+      <div *ngIf="showHeading && heading" class="banner-heading">{{ heading }}</div>
+      <div class="banner-message">{{ message }}</div>
+    </div>
+    
+    <div *ngIf="isInline" class="banner-inline-content">
+      <div class="banner-message">{{ message }}</div>
+      <div class="banner-actions" *ngIf="showPrimaryAction">
+        <button mat-stroked-button class="banner-primary-action" (click)="onPrimaryAction()">
+          {{ primaryActionText }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="!isInline && (showPrimaryAction || showSecondaryAction)" class="banner-actions">
+      <button *ngIf="showPrimaryAction" mat-stroked-button class="banner-primary-action" (click)="onPrimaryAction()">
+        {{ primaryActionText }}
+      </button>
+      <button *ngIf="showSecondaryAction" mat-button class="banner-secondary-action" (click)="onSecondaryAction()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 2.91666V11.0833M2.91667 6.99999H11.0833" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ secondaryActionText }}
+      </button>
+    </div>
+  </div>
+
+  <button *ngIf="showDismiss" mat-icon-button class="banner-dismiss" (click)="onDismiss()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_dismiss)">
+        <path d="M15.75 8.25L8.25 15.75" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8.25 8.25L15.75 15.75" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_dismiss">
+          <rect width="24" height="24" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  </button>
+</div>

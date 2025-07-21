@@ -1,0 +1,379 @@
+<div class="design-system-container">
+  <!-- Header -->
+  <div class="design-system-header">
+    <div class="header-top">
+      <div class="header-content">
+        <h1 class="page-title">Design System</h1>
+        <p class="page-description">
+          Explore and demo our comprehensive design system components
+        </p>
+      </div>
+      <div class="header-actions">
+        <app-theme-toggle></app-theme-toggle>
+      </div>
+    </div>
+  </div>
+
+  <!-- Component Tabs -->
+  <mat-tab-group 
+    class="component-tabs" 
+    animationDuration="300ms"
+    (selectedTabChange)="onTabChange($event.index)"
+  >
+    <!-- Banners Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">campaign</mat-icon>
+        <span class="tab-label">Banners</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Banner Components</h2>
+          <p class="section-description">
+            All banner variants based on the Figma design with Angular Material
+          </p>
+        </div>
+
+        <!-- Inline Banners Section -->
+        <div class="banner-section">
+          <h3 class="subsection-title">Inline Banners</h3>
+          <p class="subsection-description">Single-line banners with minimal content and action buttons</p>
+
+          <div class="banner-grid">
+            <div *ngFor="let banner of inlineBanners" class="banner-demo-item">
+              <div class="banner-demo-header">
+                <h4 class="banner-type-title">{{ banner.type | titlecase }}</h4>
+              </div>
+              <app-banner
+                [type]="banner.type"
+                [message]="banner.message"
+                [primaryActionText]="'Primary Action'"
+                (primaryAction)="onPrimaryAction(banner.type)"
+                (secondaryAction)="onSecondaryAction(banner.type)"
+                (dismiss)="onDismiss(banner.type)">
+              </app-banner>
+
+              <mat-expansion-panel class="code-expansion-panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>code</mat-icon>
+                    View Code
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-title">Angular Template</span>
+                    <button mat-icon-button
+                            class="copy-button"
+                            (click)="copyToClipboard(getInlineBannerCode(banner))"
+                            [attr.aria-label]="'Copy code for ' + banner.type + ' banner'">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </div>
+                  <pre class="code-block"><code>{{ getInlineBannerCode(banner) }}</code></pre>
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expanded Banners Section -->
+        <div class="banner-section">
+          <h3 class="subsection-title">Expanded Banners</h3>
+          <p class="subsection-description">Multi-line banners with heading, body text, and action buttons</p>
+
+          <div class="banner-grid">
+            <div *ngFor="let banner of expandedBanners" class="banner-demo-item">
+              <div class="banner-demo-header">
+                <h4 class="banner-type-title">{{ banner.type | titlecase }}</h4>
+              </div>
+              <app-banner
+                [type]="banner.type"
+                [heading]="banner.heading || ''"
+                [message]="banner.message"
+                [showHeading]="banner.showHeading || false"
+                [showSecondaryAction]="banner.showSecondaryAction || false"
+                [primaryActionText]="'Primary Action'"
+                [secondaryActionText]="banner.secondaryActionText || 'Secondary Action'"
+                (primaryAction)="onPrimaryAction(banner.type)"
+                (secondaryAction)="onSecondaryAction(banner.type)"
+                (dismiss)="onDismiss(banner.type)">
+              </app-banner>
+
+              <mat-expansion-panel class="code-expansion-panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>code</mat-icon>
+                    View Code
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-title">Angular Template</span>
+                    <button mat-icon-button
+                            class="copy-button"
+                            (click)="copyToClipboard(getExpandedBannerCode(banner))"
+                            [attr.aria-label]="'Copy code for ' + banner.type + ' banner'">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </div>
+                  <pre class="code-block"><code>{{ getExpandedBannerCode(banner) }}</code></pre>
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usage Examples Section -->
+        <div class="banner-section">
+          <h3 class="subsection-title">Usage Examples</h3>
+          <div class="usage-examples">
+            <div class="example-item">
+              <h4 class="example-title">System Maintenance</h4>
+              <app-banner
+                type="warning"
+                heading="System Maintenance Scheduled"
+                message="We will be performing maintenance on Sunday at 2:00 AM EST. The system will be unavailable for approximately 1 hour."
+                [showHeading]="true"
+                [showSecondaryAction]="true"
+                primaryActionText="Learn More"
+                secondaryActionText="Schedule Reminder"
+                (primaryAction)="onPrimaryAction('custom-warning')"
+                (secondaryAction)="onSecondaryAction('custom-warning')"
+                (dismiss)="onDismiss('custom-warning')">
+              </app-banner>
+
+              <mat-expansion-panel class="code-expansion-panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>code</mat-icon>
+                    View Code
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-title">Angular Template</span>
+                    <button mat-icon-button
+                            class="copy-button"
+                            (click)="copyToClipboard(getCustomWarningCode())"
+                            aria-label="Copy code for custom warning banner">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </div>
+                  <pre class="code-block"><code>{{ getCustomWarningCode() }}</code></pre>
+                </div>
+              </mat-expansion-panel>
+            </div>
+
+            <div class="example-item">
+              <h4 class="example-title">Success Notification</h4>
+              <app-banner
+                type="inline-success"
+                message="Your changes have been saved successfully!"
+                primaryActionText="View Changes"
+                (primaryAction)="onPrimaryAction('success-notification')"
+                (dismiss)="onDismiss('success-notification')">
+              </app-banner>
+
+              <mat-expansion-panel class="code-expansion-panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>code</mat-icon>
+                    View Code
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-title">Angular Template</span>
+                    <button mat-icon-button
+                            class="copy-button"
+                            (click)="copyToClipboard(getSuccessNotificationCode())"
+                            aria-label="Copy code for success notification banner">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </div>
+                  <pre class="code-block"><code>{{ getSuccessNotificationCode() }}</code></pre>
+                </div>
+              </mat-expansion-panel>
+            </div>
+
+            <div class="example-item">
+              <h4 class="example-title">Error Alert</h4>
+              <app-banner
+                type="error"
+                heading="Unable to Process Request"
+                message="There was an error processing your request. Please check your internet connection and try again."
+                [showHeading]="true"
+                primaryActionText="Retry"
+                (primaryAction)="onPrimaryAction('error-alert')"
+                (dismiss)="onDismiss('error-alert')">
+              </app-banner>
+
+              <mat-expansion-panel class="code-expansion-panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>code</mat-icon>
+                    View Code
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-title">Angular Template</span>
+                    <button mat-icon-button
+                            class="copy-button"
+                            (click)="copyToClipboard(getErrorAlertCode())"
+                            aria-label="Copy code for error alert banner">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </div>
+                  <pre class="code-block"><code>{{ getErrorAlertCode() }}</code></pre>
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- Buttons Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">smart_button</mat-icon>
+        <span class="tab-label">Buttons</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Button Components</h2>
+          <p class="section-description">
+            Button variations and styles (Coming Soon)
+          </p>
+        </div>
+        
+        <mat-card class="coming-soon-card">
+          <mat-card-content>
+            <div class="coming-soon">
+              <mat-icon class="coming-soon-icon">construction</mat-icon>
+              <h3>Button Components</h3>
+              <p>Button component demos will be added here</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Cards Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">view_agenda</mat-icon>
+        <span class="tab-label">Cards</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Card Components</h2>
+          <p class="section-description">
+            Card layouts and variations (Coming Soon)
+          </p>
+        </div>
+        
+        <mat-card class="coming-soon-card">
+          <mat-card-content>
+            <div class="coming-soon">
+              <mat-icon class="coming-soon-icon">construction</mat-icon>
+              <h3>Card Components</h3>
+              <p>Card component demos will be added here</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Forms Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">dynamic_form</mat-icon>
+        <span class="tab-label">Forms</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Form Components</h2>
+          <p class="section-description">
+            Form controls and validation patterns (Coming Soon)
+          </p>
+        </div>
+        
+        <mat-card class="coming-soon-card">
+          <mat-card-content>
+            <div class="coming-soon">
+              <mat-icon class="coming-soon-icon">construction</mat-icon>
+              <h3>Form Components</h3>
+              <p>Form component demos will be added here</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Navigation Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">menu</mat-icon>
+        <span class="tab-label">Navigation</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Navigation Components</h2>
+          <p class="section-description">
+            Navigation patterns and components (Coming Soon)
+          </p>
+        </div>
+        
+        <mat-card class="coming-soon-card">
+          <mat-card-content>
+            <div class="coming-soon">
+              <mat-icon class="coming-soon-icon">construction</mat-icon>
+              <h3>Navigation Components</h3>
+              <p>Navigation component demos will be added here</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Data Display Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">table_chart</mat-icon>
+        <span class="tab-label">Data Display</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="section-header">
+          <h2 class="section-title">Data Display Components</h2>
+          <p class="section-description">
+            Tables, charts, and data visualization (Coming Soon)
+          </p>
+        </div>
+        
+        <mat-card class="coming-soon-card">
+          <mat-card-content>
+            <div class="coming-soon">
+              <mat-icon class="coming-soon-icon">construction</mat-icon>
+              <h3>Data Display Components</h3>
+              <p>Data display component demos will be added here</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

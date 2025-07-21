@@ -9,5 +9,9 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
+  },
+  {
+    path: 'design',
+    loadComponent: () => import('./design-system/design-system.component').then(m => m.DesignSystemComponent)
   }
 ];
