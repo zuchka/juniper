@@ -761,8 +761,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     console.log('Generated', this.orders.length, 'orders total');
     this.ordersDataSource.data = this.orders;
 
-    // Re-setup the table with new data
-    this.setupOrdersTable();
+    // Re-setup the table with new data, use timeout to ensure ViewChild is ready
+    setTimeout(() => {
+      this.setupOrdersTable();
+    }, 0);
   }
 
   // Calculate real metrics from customer data
