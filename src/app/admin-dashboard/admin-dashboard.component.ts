@@ -463,6 +463,11 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
         this.updateChartData(customers);
         this.isLoadingCustomers.set(false);
         this.isLoadingMetrics.set(false);
+
+        // Setup table after loading is complete and DOM is updated
+        setTimeout(() => {
+          this.setupOrdersTable();
+        }, 100);
       },
       error: (error) => {
         console.error("Error loading customer data:", error);
