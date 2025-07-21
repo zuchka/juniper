@@ -752,9 +752,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.ordersDataSource.data = this.orders;
 
-    // Re-apply sorting if sort is available
+    // Re-apply sorting and pagination if available
     if (this.ordersSort) {
       this.ordersDataSource.sort = this.ordersSort;
+    }
+    if (this.ordersPaginator) {
+      this.ordersDataSource.paginator = this.ordersPaginator;
     }
   }
 
