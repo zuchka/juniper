@@ -1,7 +1,12 @@
 <div class="dashboard-container">
   <!-- Sidebar Navigation -->
   <mat-drawer-container class="drawer-container">
-    <mat-drawer mode="side" opened class="dashboard-sidebar">
+    <mat-drawer
+      #sidenav
+      [mode]="sidenavMode()"
+      [opened]="sidenavOpen() && !isMobile()"
+      class="dashboard-sidebar"
+    >
       <!-- Sidebar Header with macOS-style dots -->
       <div class="sidebar-header">
         <div class="macos-dots">
@@ -28,6 +33,16 @@
       <!-- Top Header -->
       <mat-toolbar class="dashboard-header">
         <div class="header-content">
+          <!-- Hamburger menu button for mobile -->
+          <button
+            *ngIf="isMobile()"
+            mat-icon-button
+            (click)="toggleSidenav()"
+            class="hamburger-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
           <!-- Search Bar -->
           <div class="search-container">
             <mat-form-field appearance="outline" class="search-field">
@@ -44,7 +59,12 @@
           <div class="header-actions">
             <!-- Notifications -->
             <button mat-icon-button class="notification-button">
-              <mat-icon matBadge="1" matBadgeColor="warn" matBadgeSize="small"
+              <mat-icon
+                matBadge="1"
+                matBadgeColor="warn"
+                matBadgeSize="small"
+                aria-hidden="false"
+                aria-label="Notifications with 1 unread"
                 >notifications</mat-icon
               >
             </button>
@@ -226,456 +246,7 @@
           </mat-card>
         </div>
 
-        <!-- Products & Customer Section -->
-        <div class="data-row">
-          <!-- Users -->
-          <mat-card class="users-card">
-            <mat-card-header>
-              <mat-card-title>Users</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <!-- User Search Filter -->
-              <div class="filter-container">
-                <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Search Users</mat-label>
-                  <input
-                    matInput
-                    [formControl]="userSearchFilter"
-                    placeholder="Search by name or email..."
-                  />
-                  <mat-icon matSuffix>search</mat-icon>
-                </mat-form-field>
-
-                <button
-                  mat-raised-button
-                  color="accent"
-                  (click)="clearUserFilter()"
-                  class="clear-filters-btn"
-                >
-                  <mat-icon>clear</mat-icon>
-                  Clear Filter
-                </button>
-              </div>
-
-              <!-- Users Table -->
-              <div class="table-container">
-                <table
-                  mat-table
-                  [dataSource]="usersDataSource"
-                  class="users-table"
-                  matSort
-                  #usersSort="matSort"
-                >
-                  <!-- ID Column -->
-                  <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      ID
-                    </th>
-                    <td mat-cell *matCellDef="let user">{{ user.id }}</td>
-                  </ng-container>
-
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Name
-                    </th>
-                    <td mat-cell *matCellDef="let user">
-                      {{ user.firstName }} {{ user.lastName }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Email Column -->
-                  <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Email
-                    </th>
-                    <td mat-cell *matCellDef="let user">
-                      {{ user.email }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Phone Column -->
-                  <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Phone
-                    </th>
-                    <td mat-cell *matCellDef="let user">
-                      {{ user.phone }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Age Column -->
-                  <ng-container matColumnDef="age">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Age
-                    </th>
-                    <td mat-cell *matCellDef="let user">
-                      <mat-chip [ngClass]="getAgeChipClass(user.age)">{{
-                        user.age
-                      }}</mat-chip>
-                    </td>
-                  </ng-container>
-
-                  <!-- City Column -->
-                  <ng-container matColumnDef="city">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      City
-                    </th>
-                    <td mat-cell *matCellDef="let user">
-                      {{ user.city }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Actions Column -->
-                  <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>
-                    <td mat-cell *matCellDef="let user">
-                      <button
-                        mat-icon-button
-                        color="primary"
-                        (click)="editUser(user)"
-                        matTooltip="Edit User"
-                      >
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button
-                        mat-icon-button
-                        color="warn"
-                        (click)="deleteUser(user.id)"
-                        matTooltip="Delete User"
-                      >
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-                  </ng-container>
-
-                  <tr
-                    mat-header-row
-                    *matHeaderRowDef="usersDisplayedColumns"
-                  ></tr>
-                  <tr
-                    mat-row
-                    *matRowDef="let row; columns: usersDisplayedColumns"
-                  ></tr>
-                </table>
-
-                <mat-paginator
-                  #usersPaginator="matPaginator"
-                  [pageSizeOptions]="[5, 10, 25, 100]"
-                  showFirstLastButtons
-                >
-                </mat-paginator>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <!-- Earnings & Visitor Section -->
-        <div class="insights-row">
-          <!-- Earnings -->
-          <mat-card class="earnings-card">
-            <mat-card-header>
-              <mat-card-title>Earnings</mat-card-title>
-              <mat-card-subtitle>Total Expense</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="earnings-amount">$6078.76</div>
-              <p class="earnings-subtitle">
-                Profit is 48% More than last Month
-              </p>
-
-              <!-- Semi-circle progress -->
-              <div class="progress-circle">
-                <svg class="circle-chart" viewBox="0 0 120 120">
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="50"
-                    stroke="var(--background-tertiary)"
-                    stroke-width="8"
-                    fill="none"
-                  />
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="50"
-                    stroke="var(--primary-color)"
-                    stroke-width="8"
-                    fill="none"
-                    stroke-dasharray="251"
-                    stroke-dashoffset="63"
-                    stroke-linecap="round"
-                    class="progress-arc"
-                  />
-                </svg>
-                <div class="progress-percentage">
-                  <span>80%</span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-
-          <!-- Visitor Insights -->
-          <mat-card class="visitor-card">
-            <mat-card-header class="visitor-header">
-              <mat-card-title>Visitor Insights</mat-card-title>
-              <mat-chip class="visitor-chip">
-                <div class="chip-indicator"></div>
-                New Visitors
-              </mat-chip>
-            </mat-card-header>
-            <mat-card-content>
-              <!-- Chart -->
-              <div class="visitor-chart">
-                <svg viewBox="0 0 421 133" class="insights-chart">
-                  <path
-                    d="M1.46582 127L5.96085 117L14.4515 127L18.447 120.5L24.4404 127L30.4338 120.5L39.9233 127H52.4095L68.8912 92.5L81.3774 24L89.868 79L103.353 86L111.844 79L122.332 90L134.818 86L143.309 57L149.802 66.5L161.289 1.00002L166.783 17L180.767 28L189.258 19.5L194.253 5.50001L200.246 19.5L212.732 28L226.217 74.5L235.707 35.5L246.695 24L258.182 35.5L266.672 17L272.166 28L287.15 38.5L304.131 35.5L316.617 19.5L334.597 79L347.083 86L357.572 66.5L363.565 79L376.551 86L382.045 104L390.036 82L403.521 66.5L411.512 86L419.004 57"
-                    stroke="#A9DFD8"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="gradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="0%"
-                      y2="100%"
-                    >
-                      <stop
-                        offset="0%"
-                        style="stop-color: #a9dfd8; stop-opacity: 0.3"
-                      />
-                      <stop
-                        offset="100%"
-                        style="stop-color: #a9dfd8; stop-opacity: 0"
-                      />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M6.46017 119.5L0.466797 131.5L420.502 132.5V57.5L412.012 90.5L403.022 69.5L391.534 82.5L382.045 107.5L375.552 87L362.566 80L357.572 69.5L347.583 87.5L333.099 80L316.118 22.5L305.13 36.5L286.65 40L271.167 29L266.672 20.5L258.681 38L246.694 26L237.205 36L226.717 79L211.234 29L199.247 20.5L194.252 9.49998L190.756 20L180.767 30L165.784 18L161.788 6.99998L150.801 70L143.808 60.5L135.817 87L121.833 91.5L111.844 81L103.852 87.5L88.869 80L81.3773 32.5L70.3895 93L53.4082 128.5H39.4237L30.4336 122L24.4403 128.5L18.4469 123L14.4513 129L6.46017 119.5Z"
-                    fill="url(#gradient)"
-                  />
-                </svg>
-              </div>
-
-              <!-- X-axis labels -->
-              <div class="chart-labels">
-                <span>Jan</span>
-                <span>Feb</span>
-                <span>Mar</span>
-                <span>Apr</span>
-                <span>May</span>
-                <span>Jun</span>
-                <span>Jul</span>
-                <span>Aug</span>
-                <span>Sep</span>
-                <span>Oct</span>
-                <span>Nov</span>
-                <span>Dec</span>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <!-- Customers Table Section -->
-        <div class="data-section">
-          <mat-card class="data-table-card">
-            <mat-card-header>
-              <mat-card-title>Customers</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <!-- Customer Filters -->
-              <div class="filter-container">
-                <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Search Customers</mat-label>
-                  <input
-                    matInput
-                    [formControl]="customerNameFilter"
-                    placeholder="Search by name..."
-                  />
-                  <mat-icon matSuffix>search</mat-icon>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="filter-field">
-                  <mat-label>Status</mat-label>
-                  <mat-select [formControl]="customerStatusFilter">
-                    <mat-option value="">All Status</mat-option>
-                    <mat-option
-                      *ngFor="let status of customerStatuses"
-                      [value]="status"
-                    >
-                      {{ status }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <button
-                  mat-raised-button
-                  color="accent"
-                  (click)="clearCustomerFilters()"
-                  class="clear-filters-btn"
-                >
-                  <mat-icon>clear</mat-icon>
-                  Clear Filters
-                </button>
-              </div>
-
-              <!-- Loading State for Customers -->
-              <div *ngIf="isLoadingCustomers()" class="loading-container">
-                <mat-spinner diameter="40"></mat-spinner>
-                <p>Loading customers...</p>
-              </div>
-
-              <!-- Customers Table -->
-              <div class="table-container" *ngIf="!isLoadingCustomers()">
-                <table
-                  mat-table
-                  [dataSource]="customersDataSource"
-                  class="customers-table"
-                  matSort
-                  #customersSort="matSort"
-                >
-                  <!-- ID Column -->
-                  <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      ID
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.id }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Name
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      <div class="customer-info">
-                        <div class="customer-avatar">{{ customer.avatar }}</div>
-                        <span>{{ customer.name }}</span>
-                      </div>
-                    </td>
-                  </ng-container>
-
-                  <!-- Email Column -->
-                  <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Email
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.email }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Phone Column -->
-                  <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Phone
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.phone }}
-                    </td>
-                  </ng-container>
-
-                  <!-- City Column -->
-                  <ng-container matColumnDef="city">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      City
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.city }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Total Orders Column -->
-                  <ng-container matColumnDef="totalOrders">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Orders
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.totalOrders }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Total Spent Column -->
-                  <ng-container matColumnDef="totalSpent">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Total Spent
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      ${{ customer.totalSpent | number: "1.2-2" }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Status Column -->
-                  <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Status
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      <mat-chip [ngClass]="getStatusColor(customer.status)">{{
-                        customer.status
-                      }}</mat-chip>
-                    </td>
-                  </ng-container>
-
-                  <!-- Last Order Column -->
-                  <ng-container matColumnDef="lastOrder">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Last Order
-                    </th>
-                    <td mat-cell *matCellDef="let customer">
-                      {{ customer.lastOrder | date: "short" }}
-                    </td>
-                  </ng-container>
-
-                  <!-- Actions Column -->
-                  <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>
-                    <td mat-cell *matCellDef="let customer">
-                      <button
-                        mat-icon-button
-                        color="primary"
-                        (click)="editCustomer(customer)"
-                        matTooltip="Edit Customer"
-                      >
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button
-                        mat-icon-button
-                        color="warn"
-                        (click)="deleteCustomer(customer.id)"
-                        matTooltip="Delete Customer"
-                      >
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-                  </ng-container>
-
-                  <tr
-                    mat-header-row
-                    *matHeaderRowDef="customersDisplayedColumns"
-                  ></tr>
-                  <tr
-                    mat-row
-                    *matRowDef="let row; columns: customersDisplayedColumns"
-                  ></tr>
-                </table>
-
-                <mat-paginator
-                  #customersPaginator="matPaginator"
-                  [pageSizeOptions]="[5, 10, 25, 100]"
-                  showFirstLastButtons
-                >
-                </mat-paginator>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <!-- Orders Table Section -->
+        <!-- Recent Orders Table Section -->
         <div class="data-section">
           <mat-card class="data-table-card">
             <mat-card-header>
@@ -840,6 +411,114 @@
                   showFirstLastButtons
                 >
                 </mat-paginator>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Earnings & Visitor Section -->
+        <div class="insights-row">
+          <!-- Earnings -->
+          <mat-card class="earnings-card">
+            <mat-card-header>
+              <mat-card-title>Earnings</mat-card-title>
+              <mat-card-subtitle>Total Expense</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="earnings-amount">$6078.76</div>
+              <p class="earnings-subtitle">
+                Profit is 48% More than last Month
+              </p>
+
+              <!-- Semi-circle progress -->
+              <div class="progress-circle">
+                <svg class="circle-chart" viewBox="0 0 120 120">
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="50"
+                    stroke="var(--background-tertiary)"
+                    stroke-width="8"
+                    fill="none"
+                  />
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="50"
+                    stroke="var(--primary-color)"
+                    stroke-width="8"
+                    fill="none"
+                    stroke-dasharray="251"
+                    stroke-dashoffset="63"
+                    stroke-linecap="round"
+                    class="progress-arc"
+                  />
+                </svg>
+                <div class="progress-percentage">
+                  <span>80%</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Visitor Insights -->
+          <mat-card class="visitor-card">
+            <mat-card-header class="visitor-header">
+              <mat-card-title>Visitor Insights</mat-card-title>
+              <mat-chip class="visitor-chip">
+                <div class="chip-indicator"></div>
+                New Visitors
+              </mat-chip>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- Chart -->
+              <div class="visitor-chart">
+                <svg viewBox="0 0 421 133" class="insights-chart">
+                  <path
+                    d="M1.46582 127L5.96085 117L14.4515 127L18.447 120.5L24.4404 127L30.4338 120.5L39.9233 127H52.4095L68.8912 92.5L81.3774 24L89.868 79L103.353 86L111.844 79L122.332 90L134.818 86L143.309 57L149.802 66.5L161.289 1.00002L166.783 17L180.767 28L189.258 19.5L194.253 5.50001L200.246 19.5L212.732 28L226.217 74.5L235.707 35.5L246.695 24L258.182 35.5L266.672 17L272.166 28L287.15 38.5L304.131 35.5L316.617 19.5L334.597 79L347.083 86L357.572 66.5L363.565 79L376.551 86L382.045 104L390.036 82L403.521 66.5L411.512 86L419.004 57"
+                    stroke="#A9DFD8"
+                    stroke-width="2"
+                    fill="none"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #a9dfd8; stop-opacity: 0.3"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #a9dfd8; stop-opacity: 0"
+                      />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M6.46017 119.5L0.466797 131.5L420.502 132.5V57.5L412.012 90.5L403.022 69.5L391.534 82.5L382.045 107.5L375.552 87L362.566 80L357.572 69.5L347.583 87.5L333.099 80L316.118 22.5L305.13 36.5L286.65 40L271.167 29L266.672 20.5L258.681 38L246.694 26L237.205 36L226.717 79L211.234 29L199.247 20.5L194.252 9.49998L190.756 20L180.767 30L165.784 18L161.788 6.99998L150.801 70L143.808 60.5L135.817 87L121.833 91.5L111.844 81L103.852 87.5L88.869 80L81.3773 32.5L70.3895 93L53.4082 128.5H39.4237L30.4336 122L24.4403 128.5L18.4469 123L14.4513 129L6.46017 119.5Z"
+                    fill="url(#gradient)"
+                  />
+                </svg>
+              </div>
+
+              <!-- X-axis labels -->
+              <div class="chart-labels">
+                <span>Jan</span>
+                <span>Feb</span>
+                <span>Mar</span>
+                <span>Apr</span>
+                <span>May</span>
+                <span>Jun</span>
+                <span>Jul</span>
+                <span>Aug</span>
+                <span>Sep</span>
+                <span>Oct</span>
+                <span>Nov</span>
+                <span>Dec</span>
               </div>
             </mat-card-content>
           </mat-card>

@@ -4,12 +4,14 @@ import {
   ViewChild,
   OnInit,
   AfterViewInit,
+  OnDestroy,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ApiService, Customer as ApiCustomer } from "../services/api.service";
 
 // Angular Material Imports
-import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSidenavModule, MatSidenav } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -40,12 +42,15 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatStepperModule } from "@angular/material/stepper";
+import { LayoutModule } from "@angular/cdk/layout";
 import {
   ReactiveFormsModule,
   FormBuilder,
   FormGroup,
   FormControl,
 } from "@angular/forms";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Customer {
   id: number;
@@ -113,6 +118,7 @@ interface SalesCard {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    LayoutModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
@@ -148,44 +154,39 @@ interface SalesCard {
   templateUrl: "./admin-dashboard.component.html",
   styleUrls: ["./admin-dashboard.component.css"],
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit {
+export class AdminDashboardComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   // Make Math available in template
   Math = Math;
 
   // Signals for reactive data
   sidenavOpen = signal(true);
   selectedTabIndex = signal(0);
+  isMobile = signal(false);
+  sidenavMode = signal<"side" | "over">("side");
+
+  private destroy$ = new Subject<void>();
 
   // Form groups
   userForm: FormGroup;
   settingsForm: FormGroup;
 
   // Table ViewChild references
-  @ViewChild("usersPaginator") usersPaginator!: MatPaginator;
-  @ViewChild("usersSort") usersSort!: MatSort;
-  @ViewChild("customersPaginator") customersPaginator!: MatPaginator;
-  @ViewChild("customersSort") customersSort!: MatSort;
   @ViewChild("ordersPaginator") ordersPaginator!: MatPaginator;
   @ViewChild("ordersSort") ordersSort!: MatSort;
+  @ViewChild("sidenav") sidenav!: MatSidenav;
 
   // Data sources for tables
-  usersDataSource!: MatTableDataSource<User>;
-  customersDataSource!: MatTableDataSource<Customer>;
   ordersDataSource!: MatTableDataSource<Order>;
 
   // Loading states
   isLoadingCustomers = signal(true);
   isLoadingMetrics = signal(true);
 
-  customerNameFilter = new FormControl("");
-  customerStatusFilter = new FormControl("");
-
   orderStatusFilter = new FormControl("");
   orderCustomerFilter = new FormControl("");
 
-  userSearchFilter = new FormControl("");
-
-  customerStatuses = ["VIP", "Premium", "Active", "New", "Inactive"];
   orderStatuses = [
     "Pending",
     "Processing",
@@ -225,8 +226,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       color: "text-orange-600",
     },
   ];
-
-  customers: Customer[] = [];
 
   chartData: ChartData[] = [
     { label: "Jan", value: 45000 },
@@ -276,27 +275,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   ];
 
   // Table columns
-  usersDisplayedColumns: string[] = [
-    "id",
-    "name",
-    "email",
-    "phone",
-    "age",
-    "city",
-    "actions",
-  ];
-  customersDisplayedColumns: string[] = [
-    "id",
-    "name",
-    "email",
-    "phone",
-    "city",
-    "totalOrders",
-    "totalSpent",
-    "status",
-    "lastOrder",
-    "actions",
-  ];
   ordersDisplayedColumns: string[] = [
     "id",
     "customer",
@@ -338,9 +316,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       type: "success",
     },
   ];
-
-  // Users data from API
-  users: User[] = [];
 
   // Sample orders data
   orders: Order[] = [
@@ -405,6 +380,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.userForm = this.fb.group({
       name: [""],
@@ -422,20 +398,42 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       dataRetention: [30],
     });
 
-    // Initialize data sources with empty arrays
-    this.usersDataSource = new MatTableDataSource<User>([]);
-    this.customersDataSource = new MatTableDataSource<Customer>([]);
-    this.ordersDataSource = new MatTableDataSource<Order>([]);
+    // Initialize data sources with sample orders
+    this.ordersDataSource = new MatTableDataSource<Order>(this.orders);
   }
 
   ngOnInit() {
+    // Set up responsive behavior
+    this.setupResponsiveBehavior();
+
     // Set up filter listeners
-    this.setupUserFilters();
-    this.setupCustomerFilters();
     this.setupOrderFilters();
 
     // Load real data
     this.loadUsersData();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  setupResponsiveBehavior() {
+    this.breakpointObserver
+      .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
+        const isMobile = result.matches;
+        this.isMobile.set(isMobile);
+
+        if (isMobile) {
+          this.sidenavMode.set("over");
+          this.sidenavOpen.set(false);
+        } else {
+          this.sidenavMode.set("side");
+          this.sidenavOpen.set(true);
+        }
+      });
   }
 
   loadUsersData() {
@@ -444,30 +442,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
     this.apiService.getUsers().subscribe({
       next: (response) => {
-        // Load raw users data for users table
-        this.users = response.users.map((user) => ({
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          phone: user.phone,
-          age: user.age,
-          gender: user.gender,
-          university: user.university,
-          department: user.company.department,
-          city: user.address.city,
-          country: user.address.country,
-          status: Math.random() > 0.8 ? "Inactive" : "Active",
-        }));
-
-        this.usersDataSource.data = this.users;
-
-        // Re-apply sorting if sort is available
-        if (this.usersSort) {
-          this.usersDataSource.sort = this.usersSort;
-        }
-
-        // Also load customers data
+        // Load customers data for orders generation
         this.loadCustomersData();
       },
       error: (error) => {
@@ -481,19 +456,16 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   loadCustomersData() {
     this.apiService.getUsersAsCustomers().subscribe({
       next: (customers: Customer[]) => {
-        this.customers = customers;
-        this.customersDataSource.data = customers;
-
-        // Re-apply sorting if sort is available
-        if (this.customersSort) {
-          this.customersDataSource.sort = this.customersSort;
-        }
-
         this.generateOrdersFromCustomers(customers);
         this.calculateMetricsFromData(customers);
         this.updateChartData(customers);
         this.isLoadingCustomers.set(false);
         this.isLoadingMetrics.set(false);
+
+        // Setup table after loading is complete and DOM is updated
+        setTimeout(() => {
+          this.setupOrdersTable();
+        }, 100);
       },
       error: (error) => {
         console.error("Error loading customer data:", error);
@@ -504,71 +476,16 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Set up pagination and sorting for users table
-    if (this.usersPaginator && this.usersSort) {
-      this.usersDataSource.paginator = this.usersPaginator;
-      this.usersDataSource.sort = this.usersSort;
-
-      // Custom sorting for computed name field
-      this.usersDataSource.sortingDataAccessor = (
-        data: User,
-        sortHeaderId: string,
-      ) => {
-        switch (sortHeaderId) {
-          case "name":
-            return `${data.firstName} ${data.lastName}`.toLowerCase();
-          case "id":
-            return data.id;
-          case "email":
-            return data.email.toLowerCase();
-          case "phone":
-            return data.phone;
-          case "age":
-            return data.age;
-          case "city":
-            return data.city.toLowerCase();
-          default:
-            return (data as any)[sortHeaderId];
-        }
-      };
-    }
-
-    // Set up pagination and sorting for customers table
-    if (this.customersPaginator && this.customersSort) {
-      this.customersDataSource.paginator = this.customersPaginator;
-      this.customersDataSource.sort = this.customersSort;
-
-      // Custom sorting for customers table
-      this.customersDataSource.sortingDataAccessor = (
-        data: Customer,
-        sortHeaderId: string,
-      ) => {
-        switch (sortHeaderId) {
-          case "name":
-            return data.name.toLowerCase();
-          case "email":
-            return data.email.toLowerCase();
-          case "phone":
-            return data.phone;
-          case "city":
-            return data.city.toLowerCase();
-          case "totalOrders":
-            return data.totalOrders;
-          case "totalSpent":
-            return data.totalSpent;
-          case "status":
-            return data.status.toLowerCase();
-          case "lastOrder":
-            return data.lastOrder.getTime();
-          default:
-            return (data as any)[sortHeaderId];
-        }
-      };
-    }
-
     // Set up pagination and sorting for orders table
-    if (this.ordersPaginator && this.ordersSort) {
+    this.setupOrdersTable();
+  }
+
+  private setupOrdersTable() {
+    if (this.ordersPaginator) {
       this.ordersDataSource.paginator = this.ordersPaginator;
+    }
+
+    if (this.ordersSort) {
       this.ordersDataSource.sort = this.ordersSort;
 
       // Custom sorting for orders table
@@ -595,21 +512,15 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   toggleSidenav() {
-    this.sidenavOpen.set(!this.sidenavOpen());
+    if (this.isMobile()) {
+      this.sidenav.toggle();
+    } else {
+      this.sidenavOpen.set(!this.sidenavOpen());
+    }
   }
 
   onTabChange(index: number) {
     this.selectedTabIndex.set(index);
-  }
-
-  editCustomer(customer: Customer) {
-    this.userForm.patchValue(customer);
-  }
-
-  deleteCustomer(customerId: number) {
-    this.customers = this.customers.filter(
-      (customer) => customer.id !== customerId,
-    );
   }
 
   onUserFormSubmit() {
@@ -653,22 +564,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   // Filter setup methods
 
-  setupUserFilters() {
-    this.userSearchFilter.valueChanges.subscribe(() => {
-      this.applyUserFilters();
-    });
-  }
-
-  setupCustomerFilters() {
-    this.customerNameFilter.valueChanges.subscribe(() => {
-      this.applyCustomerFilters();
-    });
-
-    this.customerStatusFilter.valueChanges.subscribe(() => {
-      this.applyCustomerFilters();
-    });
-  }
-
   setupOrderFilters() {
     this.orderStatusFilter.valueChanges.subscribe(() => {
       this.applyOrderFilters();
@@ -680,51 +575,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   // Filter application methods
-
-  applyUserFilters() {
-    this.usersDataSource.filterPredicate = (data: User, filter: string) => {
-      const searchTerm = this.userSearchFilter.value?.toLowerCase() || "";
-
-      if (!searchTerm) {
-        return true;
-      }
-
-      const fullName = `${data.firstName} ${data.lastName}`.toLowerCase();
-      const email = data.email.toLowerCase();
-      const phone = data.phone.toLowerCase();
-      const city = data.city.toLowerCase();
-
-      return (
-        fullName.includes(searchTerm) ||
-        email.includes(searchTerm) ||
-        phone.includes(searchTerm) ||
-        city.includes(searchTerm)
-      );
-    };
-
-    this.usersDataSource.filter = "trigger";
-  }
-
-  applyCustomerFilters() {
-    this.customersDataSource.filterPredicate = (
-      data: Customer,
-      filter: string,
-    ) => {
-      const nameMatch =
-        !this.customerNameFilter.value ||
-        data.name
-          .toLowerCase()
-          .includes(this.customerNameFilter.value.toLowerCase());
-
-      const statusMatch =
-        !this.customerStatusFilter.value ||
-        data.status === this.customerStatusFilter.value;
-
-      return nameMatch && statusMatch;
-    };
-
-    this.customersDataSource.filter = "trigger";
-  }
 
   applyOrderFilters() {
     this.ordersDataSource.filterPredicate = (data: Order, filter: string) => {
@@ -746,29 +596,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   // Clear filter methods
 
-  clearUserFilter() {
-    this.userSearchFilter.setValue("");
-  }
-
-  clearCustomerFilters() {
-    this.customerNameFilter.setValue("");
-    this.customerStatusFilter.setValue("");
-  }
-
   clearOrderFilters() {
     this.orderStatusFilter.setValue("");
     this.orderCustomerFilter.setValue("");
   }
 
   // Action methods
-  editUser(user: User) {
-    console.log("Edit user:", user);
-  }
-
-  deleteUser(userId: number) {
-    this.users = this.users.filter((u) => u.id !== userId);
-    this.usersDataSource.data = this.users;
-  }
 
   viewOrder(order: Order) {
     console.log("View order:", order);
@@ -868,23 +701,38 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     ];
     const productNames = [
       "MacBook Pro",
-      "iPhone 15",
+      "iPhone 15 Pro",
       "AirPods Pro",
       "iPad Air",
-      "Apple Watch",
-      "Samsung Galaxy",
-      "Dell Laptop",
-      "Sony Headphones",
-      "Nike Shoes",
-      "Adidas Jacket",
+      "Apple Watch Series 9",
+      "Samsung Galaxy S24",
+      "Dell XPS Laptop",
+      "Sony WH-1000XM5 Headphones",
+      "Nike Air Max 270",
+      "Adidas Ultraboost 22",
+      "Canon EOS R6 Camera",
+      "PlayStation 5",
+      "Nintendo Switch OLED",
+      "Microsoft Surface Pro",
+      "Dyson V15 Vacuum",
+      "Instant Pot Duo",
+      "KitchenAid Stand Mixer",
+      "Vitamix Blender",
+      "Fitbit Charge 6",
+      "Amazon Echo Dot",
+      "Google Nest Hub",
+      "Tesla Model Y Accessories",
+      "Patagonia Down Jacket",
+      "Lululemon Align Leggings",
+      "Yeti Rambler Tumbler",
     ];
 
     this.orders = [];
     let orderId = 12891;
 
     customers.forEach((customer) => {
-      // Generate 1-3 orders per customer
-      const numOrders = Math.floor(Math.random() * 3) + 1;
+      // Generate 3-8 orders per customer to ensure enough data for pagination
+      const numOrders = Math.floor(Math.random() * 6) + 3;
 
       for (let i = 0; i < numOrders; i++) {
         const randomProduct =
@@ -912,10 +760,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
     this.ordersDataSource.data = this.orders;
 
-    // Re-apply sorting if sort is available
-    if (this.ordersSort) {
-      this.ordersDataSource.sort = this.ordersSort;
-    }
+    // Re-setup the table with new data, use timeout to ensure ViewChild is ready
+    setTimeout(() => {
+      this.setupOrdersTable();
+    }, 0);
   }
 
   // Calculate real metrics from customer data
