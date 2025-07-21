@@ -475,6 +475,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   ngAfterViewInit() {
     console.log('ngAfterViewInit - ordersPaginator:', !!this.ordersPaginator, 'ordersSort:', !!this.ordersSort);
     // Set up pagination and sorting for orders table
+    this.setupOrdersTable();
+  }
+
+  private setupOrdersTable() {
     if (this.ordersPaginator && this.ordersSort) {
       this.ordersDataSource.paginator = this.ordersPaginator;
       this.ordersDataSource.sort = this.ordersSort;
@@ -499,6 +503,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
             return (data as any)[sortHeaderId];
         }
       };
+      console.log('Orders table setup complete with', this.ordersDataSource.data.length, 'items');
     }
   }
 
