@@ -154,7 +154,9 @@ interface SalesCard {
   templateUrl: "./admin-dashboard.component.html",
   styleUrls: ["./admin-dashboard.component.css"],
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminDashboardComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   // Make Math available in template
   Math = Math;
 
@@ -162,7 +164,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   sidenavOpen = signal(true);
   selectedTabIndex = signal(0);
   isMobile = signal(false);
-  sidenavMode = signal<'side' | 'over'>('side');
+  sidenavMode = signal<"side" | "over">("side");
 
   private destroy$ = new Subject<void>();
 
@@ -224,8 +226,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
       color: "text-orange-600",
     },
   ];
-
-
 
   chartData: ChartData[] = [
     { label: "Jan", value: 45000 },
@@ -316,8 +316,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
       type: "success",
     },
   ];
-
-
 
   // Sample orders data
   orders: Order[] = [
@@ -424,15 +422,15 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     this.breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
       .pipe(takeUntil(this.destroy$))
-      .subscribe(result => {
+      .subscribe((result) => {
         const isMobile = result.matches;
         this.isMobile.set(isMobile);
 
         if (isMobile) {
-          this.sidenavMode.set('over');
+          this.sidenavMode.set("over");
           this.sidenavOpen.set(false);
         } else {
-          this.sidenavMode.set('side');
+          this.sidenavMode.set("side");
           this.sidenavOpen.set(true);
         }
       });
@@ -524,8 +522,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   onTabChange(index: number) {
     this.selectedTabIndex.set(index);
   }
-
-
 
   onUserFormSubmit() {
     if (this.userForm.valid) {
