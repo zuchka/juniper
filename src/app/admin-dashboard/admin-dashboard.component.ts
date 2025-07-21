@@ -722,6 +722,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     this.orders = [];
     let orderId = 12891;
 
+    console.log('Generating orders for', customers.length, 'customers');
+
     customers.forEach((customer) => {
       // Generate 3-8 orders per customer to ensure enough data for pagination
       const numOrders = Math.floor(Math.random() * 6) + 3;
