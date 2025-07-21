@@ -225,7 +225,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     },
   ];
 
-  customers: Customer[] = [];
+
 
   chartData: ChartData[] = [
     { label: "Jan", value: 45000 },
@@ -317,8 +317,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     },
   ];
 
-  // Users data from API
-  users: User[] = [];
+
 
   // Sample orders data
   orders: Order[] = [
@@ -445,30 +444,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.apiService.getUsers().subscribe({
       next: (response) => {
-        // Load raw users data for users table
-        this.users = response.users.map((user) => ({
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          phone: user.phone,
-          age: user.age,
-          gender: user.gender,
-          university: user.university,
-          department: user.company.department,
-          city: user.address.city,
-          country: user.address.country,
-          status: Math.random() > 0.8 ? "Inactive" : "Active",
-        }));
-
-        this.usersDataSource.data = this.users;
-
-        // Re-apply sorting if sort is available
-        if (this.usersSort) {
-          this.usersDataSource.sort = this.usersSort;
-        }
-
-        // Also load customers data
+        // Load customers data for orders generation
         this.loadCustomersData();
       },
       error: (error) => {
@@ -482,14 +458,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
   loadCustomersData() {
     this.apiService.getUsersAsCustomers().subscribe({
       next: (customers: Customer[]) => {
-        this.customers = customers;
-        this.customersDataSource.data = customers;
-
-        // Re-apply sorting if sort is available
-        if (this.customersSort) {
-          this.customersDataSource.sort = this.customersSort;
-        }
-
         this.generateOrdersFromCustomers(customers);
         this.calculateMetricsFromData(customers);
         this.updateChartData(customers);
