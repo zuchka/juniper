@@ -1,21 +1,27 @@
 <!-- Juniper - Next-Generation Ecommerce Platform -->
 <div class="home-container">
-  <!-- Header -->
-  <mat-toolbar class="home-header">
-    <div class="header-content">
-      <div class="header-left">
-        <!-- Juniper Logo -->
-        <div class="logo-section">
-          <mat-icon class="logo-icon">layers</mat-icon>
-          <h1 class="logo-text">Juniper</h1>
-        </div>
+  <!-- Navigation Header -->
+  <header class="navigation-header">
+    <div class="nav-content">
+      <div class="logo-section">
+        <mat-icon class="logo-icon">layers</mat-icon>
+        <span class="logo-text">Juniper</span>
       </div>
-      <span class="header-subtitle">Next-Generation Ecommerce Platform</span>
-      <div class="header-right">
+
+      <nav class="nav-links">
+        <a class="nav-link" routerLink="/design">Features</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#company">Company</a>
+        <a class="nav-link" routerLink="/admin">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
         <app-theme-toggle></app-theme-toggle>
+        <button mat-stroked-button class="nav-button">Sign In</button>
+        <button mat-raised-button color="primary" class="nav-button-primary">Get Started</button>
       </div>
     </div>
-  </mat-toolbar>
+  </header>
 
   <!-- Main Content -->
   <main class="main-content">
