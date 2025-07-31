@@ -27,38 +27,47 @@
   <main class="main-content">
     <!-- Hero Section -->
     <section class="hero-section">
-      <h2 class="hero-title">Transform Your Business</h2>
+      <div class="hero-badge">
+        <mat-icon class="badge-icon">rocket_launch</mat-icon>
+        <span>New: AI-Powered Store Builder Now Available</span>
+      </div>
+
+      <h1 class="hero-title">
+        Build Your Dream
+        <span class="title-highlight">Ecommerce Store</span>
+        in Minutes
+      </h1>
+
       <p class="hero-description">
-        Juniper is the all-in-one ecommerce platform that empowers businesses to
-        create stunning online stores, manage inventory, process payments, and
-        scale globally with ease.
+        The most powerful, yet simple ecommerce platform designed for modern businesses.
+        Create beautiful stores, manage inventory, process payments, and scale globally
+        with our next-generation tools.
       </p>
+
       <div class="hero-actions">
-        <button
-          mat-raised-button
-          color="primary"
-          class="primary-button"
-          routerLink="/admin"
-        >
-          <mat-icon>dashboard</mat-icon>
-          Store Dashboard
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="secondary-button"
-          routerLink="/design"
-        >
-          <mat-icon>palette</mat-icon>
-          Design System
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="secondary-button"
-        >
+        <button mat-raised-button color="primary" class="cta-primary">
+          <mat-icon>rocket_launch</mat-icon>
           Start Free Trial
         </button>
+        <button mat-stroked-button color="primary" class="cta-secondary">
+          <mat-icon>play_arrow</mat-icon>
+          Watch Demo
+        </button>
+      </div>
+
+      <div class="hero-features">
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>14-day free trial</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>No credit card required</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>Cancel anytime</span>
+        </div>
       </div>
     </section>
 
