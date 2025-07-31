@@ -125,48 +125,115 @@
 /* Hero Section */
 .hero-section {
   text-align: center;
-  margin-bottom: 96px;
+  margin-bottom: 120px;
+  padding-top: 80px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: var(--background-primary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.badge-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .hero-title {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 16px 0;
+  margin: 0 0 24px 0;
   line-height: 1.1;
   transition: color 0.3s ease;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.title-highlight {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-description {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text-secondary);
-  margin: 0 auto 32px auto;
-  max-width: 768px;
+  margin: 0 auto 40px auto;
+  max-width: 800px;
   line-height: 1.6;
   transition: color 0.3s ease;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
 .hero-actions {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 
-.primary-button {
-  min-width: 180px;
-  height: 48px;
+.cta-primary {
+  min-width: 200px;
+  height: 56px;
   font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(169, 223, 216, 0.3);
+  transition: all 0.3s ease;
 }
 
-.primary-button mat-icon {
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(169, 223, 216, 0.4);
+}
+
+.cta-primary mat-icon {
   margin-right: 8px;
 }
 
-.secondary-button {
-  min-width: 160px;
-  height: 48px;
+.cta-secondary {
+  min-width: 180px;
+  height: 56px;
   font-weight: 600;
+  font-size: 16px;
+}
+
+.cta-secondary mat-icon {
+  margin-right: 8px;
+}
+
+.hero-features {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.feature-icon {
+  color: var(--primary-color);
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
 }
 
 /* Features Section */
