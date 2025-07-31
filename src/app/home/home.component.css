@@ -884,61 +884,143 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
   .demo-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .featured-plan {
+    transform: none;
+  }
+
+  .featured-plan:hover {
+    transform: translateY(-8px);
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
 }
 
 @media (max-width: 768px) {
-  .header-content {
+  .nav-content {
     padding: 0 16px;
-    flex-direction: column;
-    height: auto;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    gap: 8px;
+    height: 64px;
   }
-  
-  .header-right {
-    margin-left: 0;
-    margin-top: 8px;
+
+  .nav-actions {
+    gap: 12px;
   }
-  
+
+  .nav-button {
+    min-width: 70px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .nav-button-primary {
+    min-width: 100px;
+    height: 36px;
+    font-size: 14px;
+  }
+
   .main-content {
     padding: 32px 16px;
   }
-  
-  .hero-title {
-    font-size: 36px;
+
+  .hero-section {
+    padding-top: 48px;
+    margin-bottom: 80px;
   }
-  
+
+  .hero-title {
+    font-size: 40px;
+  }
+
   .hero-description {
     font-size: 18px;
   }
-  
+
   .hero-actions {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
-  
+
+  .hero-features {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .company-logos {
+    gap: 24px;
+  }
+
+  .company-logo {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
   .features-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
-  .footer-actions {
+
+  .pricing-section {
+    padding: 48px 16px;
+  }
+
+  .cta-title {
+    font-size: 32px;
+  }
+
+  .cta-description {
+    font-size: 18px;
+  }
+
+  .cta-actions {
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
   }
 }
 
