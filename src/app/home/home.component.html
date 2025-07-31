@@ -1,58 +1,87 @@
 <!-- Juniper - Next-Generation Ecommerce Platform -->
 <div class="home-container">
-  <!-- Header -->
-  <mat-toolbar class="home-header">
-    <div class="header-content">
-      <div class="header-left">
-        <!-- Juniper Logo -->
-        <div class="logo-section">
-          <mat-icon class="logo-icon">layers</mat-icon>
-          <h1 class="logo-text">Juniper</h1>
-        </div>
+  <!-- Navigation Header -->
+  <header class="navigation-header">
+    <div class="nav-content">
+      <div class="logo-section">
+        <mat-icon class="logo-icon">park</mat-icon>
+        <span class="logo-text">Juniper</span>
       </div>
-      <span class="header-subtitle">Next-Generation Ecommerce Platform</span>
-      <div class="header-right">
+
+      <nav class="nav-links">
+        <a class="nav-link" routerLink="/design">Features</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#company">Company</a>
+        <a class="nav-link" routerLink="/admin">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
         <app-theme-toggle></app-theme-toggle>
+        <button mat-stroked-button class="nav-button">Sign In</button>
+        <button mat-raised-button color="primary" class="nav-button-primary">
+          Get Started
+        </button>
       </div>
     </div>
-  </mat-toolbar>
+  </header>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Hero Section -->
     <section class="hero-section">
-      <h2 class="hero-title">Transform Your Business</h2>
+      <div class="hero-badge">
+        <mat-icon class="badge-icon">rocket_launch</mat-icon>
+        <span>New: AI-Powered Store Builder Now Available</span>
+      </div>
+
+      <h1 class="hero-title">
+        Build Your Dream
+        <span class="title-highlight">Ecommerce Store</span>
+        in Minutes
+      </h1>
+
       <p class="hero-description">
-        Juniper is the all-in-one ecommerce platform that empowers businesses to
-        create stunning online stores, manage inventory, process payments, and
-        scale globally with ease.
+        The most powerful, yet simple ecommerce platform designed for modern
+        businesses. Create beautiful stores, manage inventory, process payments,
+        and scale globally with our next-generation tools.
       </p>
+
       <div class="hero-actions">
-        <button
-          mat-raised-button
-          color="primary"
-          class="primary-button"
-          routerLink="/admin"
-        >
-          <mat-icon>dashboard</mat-icon>
-          Store Dashboard
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="secondary-button"
-          routerLink="/design"
-        >
-          <mat-icon>palette</mat-icon>
-          Design System
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="secondary-button"
-        >
+        <button mat-raised-button color="primary" class="cta-primary">
+          <mat-icon>rocket_launch</mat-icon>
           Start Free Trial
         </button>
+        <button mat-stroked-button color="primary" class="cta-secondary">
+          <mat-icon>play_arrow</mat-icon>
+          Watch Demo
+        </button>
+      </div>
+
+      <div class="hero-features">
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>14-day free trial</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>No credit card required</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">check_circle</mat-icon>
+          <span>Cancel anytime</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+      <p class="proof-text">Trusted by 50,000+ businesses worldwide</p>
+      <div class="company-logos">
+        <div class="company-logo">TechCorp</div>
+        <div class="company-logo">InnovateNow</div>
+        <div class="company-logo">GlobalTrade</div>
+        <div class="company-logo">FastGrow</div>
+        <div class="company-logo">NextGen</div>
       </div>
     </section>
 
@@ -63,7 +92,9 @@
         <!-- Feature 1: Easy Store Setup -->
         <mat-card class="feature-card">
           <mat-card-header class="feature-header">
-            <mat-icon mat-card-avatar class="feature-icon teal-icon">storefront</mat-icon>
+            <mat-icon mat-card-avatar class="feature-icon teal-icon"
+              >storefront</mat-icon
+            >
             <mat-card-title class="feature-title teal-text">
               Easy Store Setup
             </mat-card-title>
@@ -75,14 +106,18 @@
             </p>
           </mat-card-content>
           <mat-card-actions class="feature-actions">
-            <button mat-button class="feature-button teal-text">Get Started</button>
+            <button mat-button class="feature-button teal-text">
+              Get Started
+            </button>
           </mat-card-actions>
         </mat-card>
 
         <!-- Feature 2: Advanced Analytics -->
         <mat-card class="feature-card">
           <mat-card-header class="feature-header">
-            <mat-icon mat-card-avatar class="feature-icon green-icon">analytics</mat-icon>
+            <mat-icon mat-card-avatar class="feature-icon green-icon"
+              >analytics</mat-icon
+            >
             <mat-card-title class="feature-title green-text">
               Advanced Analytics
             </mat-card-title>
@@ -94,14 +129,18 @@
             </p>
           </mat-card-content>
           <mat-card-actions class="feature-actions">
-            <button mat-button class="feature-button green-text">View Demo</button>
+            <button mat-button class="feature-button green-text">
+              View Demo
+            </button>
           </mat-card-actions>
         </mat-card>
 
         <!-- Feature 3: Global Payments -->
         <mat-card class="feature-card">
           <mat-card-header class="feature-header">
-            <mat-icon mat-card-avatar class="feature-icon purple-icon">payment</mat-icon>
+            <mat-icon mat-card-avatar class="feature-icon purple-icon"
+              >payment</mat-icon
+            >
             <mat-card-title class="feature-title purple-text">
               Global Payments
             </mat-card-title>
@@ -113,7 +152,9 @@
             </p>
           </mat-card-content>
           <mat-card-actions class="feature-actions">
-            <button mat-button class="feature-button purple-text">Learn More</button>
+            <button mat-button class="feature-button purple-text">
+              Learn More
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
@@ -127,16 +168,15 @@
         <!-- Form Demo -->
         <mat-card class="demo-card">
           <mat-card-header>
-            <mat-card-title class="demo-title">Quick Store Setup</mat-card-title>
+            <mat-card-title class="demo-title"
+              >Quick Store Setup</mat-card-title
+            >
           </mat-card-header>
           <mat-card-content>
             <form class="demo-form">
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Store Name</mat-label>
-                <input
-                  matInput
-                  placeholder="Enter your store name"
-                />
+                <input matInput placeholder="Enter your store name" />
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-field">
@@ -158,12 +198,10 @@
               </mat-form-field>
 
               <div class="form-actions">
-                <mat-checkbox class="form-checkbox">Enable inventory management</mat-checkbox>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  class="form-submit"
+                <mat-checkbox class="form-checkbox"
+                  >Enable inventory management</mat-checkbox
                 >
+                <button mat-raised-button color="primary" class="form-submit">
                   Create Store
                 </button>
               </div>
@@ -209,6 +247,161 @@
       </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <h3 class="section-title">What Our Customers Say</h3>
+      <div class="testimonials-grid">
+        <mat-card class="testimonial-card">
+          <mat-card-content>
+            <div class="testimonial-quote">
+              "Juniper transformed our business. We went from zero to $1M in
+              sales in just 8 months. The platform is incredibly intuitive and
+              the support team is amazing."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <mat-icon>person</mat-icon>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Sarah Johnson</div>
+                <div class="author-title">CEO, BloomBox</div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="testimonial-card">
+          <mat-card-content>
+            <div class="testimonial-quote">
+              "The analytics and insights provided by Juniper helped us optimize
+              our conversion rate by 340%. It's not just an ecommerce platform,
+              it's a growth engine."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <mat-icon>person</mat-icon>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Marcus Chen</div>
+                <div class="author-title">Founder, TechGear</div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="testimonial-card">
+          <mat-card-content>
+            <div class="testimonial-quote">
+              "Setting up our store took less than 30 minutes. The templates are
+              beautiful and the customization options are endless. Highly
+              recommend!"
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <mat-icon>person</mat-icon>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Emma Rodriguez</div>
+                <div class="author-title">Creative Director, ArtSpace</div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <h3 class="section-title">Simple, Transparent Pricing</h3>
+      <p class="pricing-subtitle">
+        Choose the plan that's right for your business. Upgrade or downgrade at
+        any time.
+      </p>
+
+      <div class="pricing-grid">
+        <mat-card class="pricing-card">
+          <mat-card-header>
+            <mat-card-title class="plan-name">Starter</mat-card-title>
+            <mat-card-subtitle class="plan-description"
+              >Perfect for new businesses</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <div class="plan-price">
+              <span class="price-amount">$29</span>
+              <span class="price-period">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li><mat-icon>check</mat-icon>Up to 100 products</li>
+              <li><mat-icon>check</mat-icon>Unlimited bandwidth</li>
+              <li><mat-icon>check</mat-icon>Basic analytics</li>
+              <li><mat-icon>check</mat-icon>24/7 support</li>
+            </ul>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="primary" class="plan-button">
+              Get Started
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="pricing-card featured-plan">
+          <div class="popular-badge">Most Popular</div>
+          <mat-card-header>
+            <mat-card-title class="plan-name">Professional</mat-card-title>
+            <mat-card-subtitle class="plan-description"
+              >For growing businesses</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <div class="plan-price">
+              <span class="price-amount">$79</span>
+              <span class="price-period">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li><mat-icon>check</mat-icon>Unlimited products</li>
+              <li><mat-icon>check</mat-icon>Advanced analytics</li>
+              <li><mat-icon>check</mat-icon>Multi-channel selling</li>
+              <li><mat-icon>check</mat-icon>Priority support</li>
+              <li><mat-icon>check</mat-icon>Custom domain</li>
+            </ul>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="plan-button">
+              Get Started
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="pricing-card">
+          <mat-card-header>
+            <mat-card-title class="plan-name">Enterprise</mat-card-title>
+            <mat-card-subtitle class="plan-description"
+              >For large organizations</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <div class="plan-price">
+              <span class="price-amount">$199</span>
+              <span class="price-period">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li><mat-icon>check</mat-icon>Everything in Professional</li>
+              <li><mat-icon>check</mat-icon>Advanced integrations</li>
+              <li><mat-icon>check</mat-icon>Dedicated account manager</li>
+              <li><mat-icon>check</mat-icon>Custom development</li>
+              <li><mat-icon>check</mat-icon>SLA guarantee</li>
+            </ul>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="primary" class="plan-button">
+              Contact Sales
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </section>
+
     <!-- Stats Section -->
     <mat-card class="stats-section">
       <mat-card-content>
@@ -236,16 +429,97 @@
     </mat-card>
   </main>
 
+  <!-- Final CTA Section -->
+  <section class="final-cta">
+    <div class="cta-content">
+      <h3 class="cta-title">Ready to Transform Your Business?</h3>
+      <p class="cta-description">
+        Join thousands of successful businesses using Juniper to power their
+        online growth.
+      </p>
+      <div class="cta-actions">
+        <button mat-raised-button color="primary" class="cta-button-primary">
+          Start Your Free Trial
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="cta-button-secondary"
+          routerLink="/admin"
+        >
+          View Dashboard Demo
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="home-footer">
     <div class="footer-content">
-      <p class="footer-text">
-        Juniper - Empowering businesses to succeed online since 2024
-      </p>
-      <div class="footer-actions">
-        <button mat-button class="footer-button teal-text">Help Center</button>
-        <button mat-button class="footer-button green-text">API Docs</button>
-        <button mat-button class="footer-button purple-text">Contact Sales</button>
+      <div class="footer-main">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <mat-icon class="footer-logo-icon">park</mat-icon>
+            <span class="footer-logo-text">Juniper</span>
+          </div>
+          <p class="footer-description">
+            The next-generation ecommerce platform empowering businesses to
+            succeed online.
+          </p>
+          <div class="footer-social">
+            <button mat-icon-button>
+              <mat-icon>link</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>link</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>link</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a routerLink="/design">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a routerLink="/admin">Dashboard</a></li>
+            <li><a href="#">Templates</a></li>
+            <li><a href="#">Integrations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">API Docs</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2024 Juniper. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
       </div>
     </div>
   </footer>
