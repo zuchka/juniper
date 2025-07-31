@@ -452,6 +452,18 @@
   margin-bottom: 120px;
 }
 
+/* Simplified Testimonials Section */
+.testimonials-section-simplified {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 43.2px;
+  text-align: center;
+  transition: color 0.3s ease;
+  pointer-events: auto;
+  margin-bottom: 120px;
+  padding-bottom: 48px;
+}
+
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
