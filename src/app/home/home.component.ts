@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 // Components and Services
 import { ThemeToggleComponent } from '../components/theme-toggle/theme-toggle.component';
+import { TestimonialsCarouselComponent } from '../components/testimonials-carousel/testimonials-carousel.component';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
@@ -32,7 +33,8 @@ import { ThemeService } from '../services/theme.service';
     MatChipsModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    TestimonialsCarouselComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

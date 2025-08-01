@@ -1,0 +1,102 @@
+<section class="testimonials-section">
+  <div class="testimonials-container">
+    <!-- Header -->
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">What Our Customers Say</h2>
+      <p class="testimonials-subtitle">Trusted by thousands of businesses worldwide</p>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="carousel-container">
+      <!-- Navigation Arrows -->
+      <button 
+        mat-icon-button 
+        class="carousel-nav-button carousel-nav-left"
+        (click)="previousTestimonial()"
+        aria-label="Previous testimonial">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <!-- Testimonials Slider -->
+      <div class="testimonials-slider">
+        <div
+          class="testimonials-track"
+          [style.transform]="'translateX(-' + (currentIndex() * 100) + '%)'">
+
+          <div
+            *ngFor="let testimonial of testimonials; let i = index"
+            class="testimonial-slide">
+
+            <div class="testimonial-card">
+              <!-- Quote Icon -->
+              <div class="quote-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.6893 28V18.1453C18.6893 10.54 23.664 5.38533 30.6667 4L31.9933 6.868C28.7507 8.09067 26.6667 11.7187 26.6667 14.6667H32V28H18.6893ZM0 28V18.1453C0 10.54 4.99733 5.38533 12 4L13.328 6.868C10.084 8.09067 8 11.7187 8 14.6667H13.3333V28H0Z" fill="currentColor"/>
+                </svg>
+              </div>
+
+              <!-- Avatar -->
+              <div class="testimonial-avatar">
+                {{testimonial.avatar}}
+              </div>
+
+              <!-- Content -->
+              <div class="testimonial-content">
+                <blockquote class="testimonial-quote">
+                  "{{testimonial.quote}}"
+                </blockquote>
+
+                <div class="testimonial-divider"></div>
+
+                <div class="testimonial-author">
+                  <h4 class="author-name">{{testimonial.name}}</h4>
+                  <p class="author-title">{{testimonial.title}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button 
+        mat-icon-button 
+        class="carousel-nav-button carousel-nav-right"
+        (click)="nextTestimonial()"
+        aria-label="Next testimonial">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="carousel-pagination">
+      <button
+        *ngFor="let dot of dots; let i = index"
+        class="pagination-dot"
+        [class.active]="isActiveDot(i)"
+        (click)="goToTestimonial(i)"
+        [attr.aria-label]="'Go to testimonial ' + (i + 1)">
+      </button>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="testimonials-stats">
+      <div class="stat-badge rating-badge">
+        <div class="star-rating">
+          <mat-icon *ngFor="let star of [1,2,3,4,5]">star</mat-icon>
+        </div>
+        <span class="rating-text">4.9/5</span>
+      </div>
+
+      <div class="stat-badge reviews-badge">
+        <span class="stat-number">2,500+</span>
+        <span class="stat-label">Reviews</span>
+      </div>
+
+      <div class="stat-badge users-badge">
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Users</span>
+      </div>
+    </div>
+  </div>
+</section>

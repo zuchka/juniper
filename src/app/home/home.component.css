@@ -447,90 +447,7 @@
   transition: color 0.3s ease;
 }
 
-/* Testimonials Section */
-.testimonials-section {
-  margin-bottom: 120px;
-}
-
-/* Simplified Testimonials Section */
-.testimonials-section-simplified {
-  font-size: 36px;
-  font-weight: 400;
-  line-height: 43.2px;
-  text-align: center;
-  transition: color 0.3s ease;
-  pointer-events: auto;
-  margin-bottom: 120px;
-  padding-bottom: 48px;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 32px;
-  margin-top: 48px;
-}
-
-.testimonial-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  height: 100%;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px var(--shadow-color);
-}
-
-.testimonial-quote {
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-primary);
-  margin-bottom: 24px;
-  transition: color 0.3s ease;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.author-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.author-avatar mat-icon {
-  color: var(--background-primary);
-  font-size: 24px;
-  height: 24px;
-  width: 24px;
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.author-name {
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-.author-title {
-  color: var(--text-secondary);
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
+/* Testimonials Section - Now handled by testimonials-carousel component */
 
 /* Pricing Section */
 .pricing-section {
@@ -921,10 +838,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+
 
   .pricing-grid {
     grid-template-columns: 1fr;
